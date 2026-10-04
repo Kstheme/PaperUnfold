@@ -99,18 +99,56 @@ main{max-width:1000px;margin:auto;padding:48px 24px 80px}h1{font-size:clamp(30px
 section{scroll-margin-top:20px}a{color:var(--accent);text-underline-offset:3px}nav{border-block:1px solid #d5ded9;padding:18px 0}nav ul{display:flex;gap:12px 24px;flex-wrap:wrap;list-style:none;padding:0;margin:0}
 .coverage{border-left:4px solid var(--accent);padding:12px 20px;background:#eaf1ec}.coverage p{margin:6px 0}.muted{color:var(--muted)}
 .point{margin:18px 0}.point p{margin:5px 0}.kind{font-size:12px;letter-spacing:.03em;color:var(--muted);border:1px solid #cdd8d2;border-radius:4px;padding:2px 6px}.refs{font-size:13px;display:flex;gap:12px;flex-wrap:wrap}
+.katex-display{overflow-x:auto;overflow-y:hidden;padding:6px 0;max-width:100%}.math-content{overflow-wrap:anywhere}
 details{border:1px solid #d5ded9;border-radius:8px;padding:15px 20px;margin:14px 0;background:white}summary{cursor:pointer;font-weight:650}summary:focus-visible,a:focus-visible{outline:3px solid #db9234;outline-offset:4px}
 blockquote{margin:8px 0;padding:10px 18px;border-left:3px solid #b2c7bc;white-space:pre-wrap}pre{font:14px/1.7 ui-monospace,monospace;white-space:pre-wrap;overflow-wrap:anywhere}.term-original{font-weight:400;color:var(--muted)}
 @media print{body{background:white}main{padding:0}details{break-inside:avoid}details>summary{list-style:none}details>*{display:block!important}nav{display:none}}
 """
 
 
+MATH_INIT = r"""
+document.querySelectorAll('.math-content').forEach(element => {
+  renderMathInElement(element, {
+    delimiters: [
+      {left: '$$', right: '$$', display: true},
+      {left: '\\[', right: '\\]', display: true},
+      {left: '\\(', right: '\\)', display: false},
+      {left: '$', right: '$', display: false}
+    ],
+    throwOnError: false,
+    trust: false,
+    maxExpand: 1000,
+    maxSize: 20
+  });
+});
+"""
+
+
+def math_assets():
+    """Bundle pinned math code and fonts; the saved page never fetches a CDN."""
+    assets = Path(__file__).resolve().parents[1] / "assets" / "katex"
+    css = assets.joinpath("katex.min.css").read_text(encoding="utf-8")
+    license_text = assets.joinpath("LICENSE").read_text(encoding="utf-8")
+    scripts = ""
+    for name in ("katex.min.js", "auto-render.min.js"):
+        code = assets.joinpath(name).read_text(encoding="utf-8")
+        scripts += '<script>' + re.sub(r'</script', r'<\\/script', code, flags=re.I) + '</script>'
+    return '<style>' + css + '</style>', '<!-- ' + license_text + ' -->' + scripts + '<script>' + MATH_INIT + '</script>'
+
+
 def render(data, labels):
     esc = html.escape
+    math_needed = False
+
+    def math_text(value):
+        nonlocal math_needed
+        if re.search(r'\\[\[(]|\$\$|\$[^$\n]+\$', value):
+            math_needed = True
+        return f'<span class="math-content">{esc(value)}</span>'
 
     def point(item):
         refs = "".join(f'<a href="#evidence-{esc(ref)}">{esc(evidence_locations[ref])}</a>' for ref in item["evidence"])
-        return f'<div class="point"><span class="kind">{esc(labels[item["kind"]])}</span><p>{esc(item["text"])}</p><div class="refs">{refs}</div></div>'
+        return f'<div class="point"><span class="kind">{esc(labels[item["kind"]])}</span><p>{math_text(item["text"])}</p><div class="refs">{refs}</div></div>'
 
     evidence_locations = {item["id"]: item["location"] for item in data["evidence"]}
     navigation = [("thread", labels["thread"])] + [("section-" + s["id"], s["title"]) for s in data["sections"]]
@@ -126,21 +164,22 @@ def render(data, labels):
     thread = f'<section id="thread"><h2>{esc(labels["thread"])}</h2>' + "".join(point(item) for item in data["thread"]) + '</section>'
     sections = ""
     for section in data["sections"]:
-        sections += f'<section id="section-{esc(section["id"])}"><h2>{esc(section["title"])}</h2><p><span class="kind">{esc(labels["role"])}</span> {esc(section["role"])}</p><details open><summary>{esc(section["title"])}</summary>'
+        sections += f'<section id="section-{esc(section["id"])}"><h2>{esc(section["title"])}</h2><p><span class="kind">{esc(labels["role"])}</span> {math_text(section["role"])}</p><details open><summary>{esc(section["title"])}</summary>'
         sections += "".join(point(item) for item in section["points"]) + '</details></section>'
     terms = ""
     if data["terms"]:
         terms = f'<section id="terms"><h2>{esc(labels["terms"])}</h2>'
         for term in data["terms"]:
-            original = f' <span class="term-original">({esc(term["original"])})</span>' if term["original"] != term["name"] else ""
+            original = f' <span class="term-original">({math_text(term["original"])})</span>' if term["original"] != term["name"] else ""
             category = labels["essential" if term["essential"] else "optional"]
-            terms += f'<details{" open" if term["essential"] else ""}><summary>{esc(term["name"])}{original} · {esc(category)}</summary>{point(term["explanation"])}</details>'
+            terms += f'<details{" open" if term["essential"] else ""}><summary>{math_text(term["name"])}{original} · {esc(category)}</summary>{point(term["explanation"])}</details>'
         terms += '</section>'
     evidence = f'<section id="evidence"><h2>{esc(labels["evidence"])}</h2>'
     for item in data["evidence"]:
         evidence += f'<article id="evidence-{esc(item["id"])}"><h3>{esc(item["location"])}</h3><blockquote>{esc(item["quote"])}</blockquote></article>'
     evidence += f'<details><summary>{esc(labels["source"])}</summary><pre>{esc(data["source"]["text"])}</pre></details></section>'
-    return f'<!doctype html><html lang="{esc(data["language"])}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(data["title"])}</title><style>{CSS}</style></head><body><main><header><p class="muted">PaperUnfold</p><h1>{esc(data["title"])}</h1>{coverage}</header><nav aria-label="{esc(labels["contents"])}"><ul>{nav}</ul></nav>{thread}{sections}{terms}{evidence}</main></body></html>'
+    math_css, math_scripts = math_assets() if math_needed else ("", "")
+    return f'<!doctype html><html lang="{esc(data["language"])}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(data["title"])}</title><style>{CSS}</style>{math_css}</head><body><main><header><p class="muted">PaperUnfold</p><h1>{esc(data["title"])}</h1>{coverage}</header><nav aria-label="{esc(labels["contents"])}"><ul>{nav}</ul></nav>{thread}{sections}{terms}{evidence}</main></body>{math_scripts}</html>'
 
 
 def main():

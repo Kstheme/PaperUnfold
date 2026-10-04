@@ -16,6 +16,10 @@ and save HTML. It read the format reference, authored JSON, and invoked the
 renderer successfully. The actual output is preserved as
 [agent-invocation-zh.html](../../examples/paper-guide/agent-invocation-zh.html)
 and [agent-invocation-zh.json](../../examples/paper-guide/agent-invocation-zh.json).
+The original invocation is recorded in commit `9a6c41d`; the explanations in
+these files subsequently received mathematical markup and were re-rendered
+after the user requested formula rendering. Source text and evidence quotes
+were kept unchanged.
 The separately named `attention-excerpt-guide` files are manually authored
 renderer examples, not evidence of independent invocation.
 
@@ -42,7 +46,8 @@ All **9 details controls toggled**, all **23 fragment targets existed**, a
 directory click reached `#thread`, and a 390px viewport had no horizontal overflow.
 Desktop and mobile screenshots were inspected during evaluation. This tests the
 saved artifact's content and controls; it does not verify every browser's local
-file-opening policy. Native controls require no network or JavaScript.
+file-opening policy. Native expansion controls require no network or JavaScript;
+the subsequently added mathematical typesetting uses embedded JavaScript.
 
 Reproduce the public renderer checks from the repository root:
 
@@ -93,3 +98,22 @@ Standards: 0 findings against skill-creator, writing-for-agents, and the review
 skill's smell baseline. Spec: 0 findings against tickets01/02 and the relevant
 specification. The final six-test suite and both skill validators passed after
 implementation; the working tree was clean before recording this review.
+
+## Formula rendering fix
+
+After the user reported unrendered notation, the renderer gained embedded KaTeX
+0.19.0 with 20 embedded WOFF2 fonts. The published package integrity and MIT
+license are recorded under `skills/paper-guide/assets/katex/`. Pages containing
+only prose retain the small HTML output; mathematical pages embed the assets.
+Both examples were updated to use explicit math delimiters and re-rendered.
+This is a formatting change to the actual agent-generated example, not a new
+independent agent run. Source material and literal evidence quotes are unchanged.
+
+Checks after the fix: eight CLI tests passed. Edge, configured offline, rendered
+14 mathematical expressions in the actual guide, including a display equation
+with a fraction, square root, transpose, and accessible MathML. There were zero
+network requests and zero formula errors. All 9 expansion controls, 23 anchor
+targets, navigation, and the 390px mobile layout still passed. A targeted browser
+check also exercised all four delimiter forms, malformed-expression fallback,
+and rejection of trusted JavaScript links. A screenshot of the equation section
+was visually inspected. Both skill package validators passed.

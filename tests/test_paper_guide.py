@@ -121,6 +121,24 @@ class GuideCLI(unittest.TestCase):
         self.assertFalse(output.exists())
         self.assertIn("source.text", result.stderr)
 
+    def test_math_guide_embeds_offline_renderer_but_keeps_source_verbatim(self):
+        data = guide()
+        data["sections"][0]["points"][0]["text"] = r'Inline \(d_k\). Display \[\frac{QK^T}{\sqrt{d_k}}\].'
+        result, output = self.render(data)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        content = output.read_text(encoding="utf-8")
+        self.assertIn('renderMathInElement', content)
+        self.assertIn('data:font/woff2;base64,', content)
+        self.assertIn('class="math-content"', content)
+        self.assertNotIn('<script src=', content)
+        self.assertNotIn('url(fonts/', content)
+        self.assertIn('<pre>' + data["source"]["text"] + '</pre>', content)
+
+    def test_prose_only_guide_does_not_embed_math_assets(self):
+        result, output = self.render(guide())
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertNotIn('renderMathInElement', output.read_text(encoding="utf-8"))
+
 
 if __name__ == "__main__":
     unittest.main()

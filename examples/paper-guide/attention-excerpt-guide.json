@@ -5,37 +5,133 @@
     "name": "Vaswani et al. — Attention Is All You Need; https://arxiv.org/html/1706.03762v7",
     "text": "Title: Attention Is All You Need\nAuthors: Vaswani et al.\nSource: https://arxiv.org/html/1706.03762v7\nCoverage: Two short source excerpts and Equation (1) only. This is not the full paper.\nLocations: Section 3.2; Section 3.2.1, Equation (1) and final paragraph.\n\n[Section 3.2 — short excerpt]\nThe output is computed as a weighted sum of the values,\n\n[Section 3.2.1 — Equation (1), mathematical notation transcribed]\nAttention(Q, K, V) = softmax(QK^T / sqrt(d_k)) V\n\n[Section 3.2.1 — final paragraph, short excerpt]\nTo counteract this effect, we scale the dot products by 1/sqrt(d_k).\n\n[Coverage note written by the fixture author]\nThe surrounding discussion of the effect is omitted. The fixture supplies neither full-paper results nor the full argument for scaling. An explanation of omitted context must be marked as background, or the agent must obtain the missing source before attributing it to the authors. No paper page number is supplied.\n",
     "coverage": "仅阅读提供的两段短引文及公式 (1)。下面是这些片段的地图，不是全文导读；覆盖备注是示例整理者的说明。",
-    "missing": ["没有阅读论文其他章节、实验与结果。", "缩放句中 this effect 的前文未提供，不能把具体原因归为这份片段中的作者结论。", "没有原论文页码；证据位置沿用提供的章节与公式编号。"]
+    "missing": [
+      "没有阅读论文其他章节、实验与结果。",
+      "缩放句中 this effect 的前文未提供，不能把具体原因归为这份片段中的作者结论。",
+      "没有原论文页码；证据位置沿用提供的章节与公式编号。"
+    ]
   },
   "evidence": [
-    {"id": "weighted-sum", "location": "Section 3.2 — supplied short excerpt", "quote": "The output is computed as a weighted sum of the values,"},
-    {"id": "equation", "location": "Section 3.2.1 — Equation (1), supplied transcription", "quote": "Attention(Q, K, V) = softmax(QK^T / sqrt(d_k)) V"},
-    {"id": "scaling", "location": "Section 3.2.1 — supplied final-paragraph excerpt", "quote": "To counteract this effect, we scale the dot products by 1/sqrt(d_k)."}
+    {
+      "id": "weighted-sum",
+      "location": "Section 3.2 — supplied short excerpt",
+      "quote": "The output is computed as a weighted sum of the values,"
+    },
+    {
+      "id": "equation",
+      "location": "Section 3.2.1 — Equation (1), supplied transcription",
+      "quote": "Attention(Q, K, V) = softmax(QK^T / sqrt(d_k)) V"
+    },
+    {
+      "id": "scaling",
+      "location": "Section 3.2.1 — supplied final-paragraph excerpt",
+      "quote": "To counteract this effect, we scale the dot products by 1/sqrt(d_k)."
+    }
   ],
   "thread": [
-    {"kind": "author", "text": "提供的片段描述注意力如何形成输出：输出是 values 的加权和，公式 (1) 给出 softmax(QK^T / sqrt(d_k)) V。", "evidence": ["weighted-sum", "equation"]},
-    {"kind": "inference", "text": "可以把片段连成一条计算主线：计算 QK^T，除以 sqrt(d_k)，经 softmax 得到权重，再与 V 结合。这里是在拆解公式，尚不足以解释整篇论文为什么提出 Transformer。", "evidence": ["equation"]},
-    {"kind": "author", "text": "作者说要用 1/sqrt(d_k) 缩放点积以抵消 this effect；当前材料没有给出 effect 的具体内容。", "evidence": ["scaling"]}
-  ],
-  "sections": [
     {
-      "id": "weighted-output", "title": "Section 3.2：先看输出是什么", "role": "这句短引文提供输出的解释起点，与下一片段的具体公式相连接。",
-      "points": [
-        {"kind": "author", "text": "输出由 values 的加权和组成。短引文没有说明权重具体如何获得；这部分要结合下一处公式阅读。", "evidence": ["weighted-sum", "equation"]}
+      "kind": "author",
+      "text": "提供的片段描述注意力如何形成输出：输出是 values 的加权和，公式 (1) 给出 \\(\\operatorname{softmax}\\left(\\frac{QK^{\\top}}{\\sqrt{d_k}}\\right)V\\)。",
+      "evidence": [
+        "weighted-sum",
+        "equation"
       ]
     },
     {
-      "id": "scaled-dot-product", "title": "Section 3.2.1：权重如何进入输出", "role": "公式把加权和展开成可阅读的运算关系；缩放句进一步点明缩放因子。",
+      "kind": "inference",
+      "text": "可以把片段连成一条计算主线：计算 \\(QK^{\\top}\\)，除以 \\(\\sqrt{d_k}\\)，经 softmax 得到权重，再与 V 结合。这里是在拆解公式，尚不足以解释整篇论文为什么提出 Transformer。",
+      "evidence": [
+        "equation"
+      ]
+    },
+    {
+      "kind": "author",
+      "text": "作者说要用 \\(\\frac{1}{\\sqrt{d_k}}\\) 缩放点积以抵消 this effect；当前材料没有给出 effect 的具体内容。",
+      "evidence": [
+        "scaling"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "id": "weighted-output",
+      "title": "Section 3.2：先看输出是什么",
+      "role": "这句短引文提供输出的解释起点，与下一片段的具体公式相连接。",
       "points": [
-        {"kind": "author", "text": "公式中的缩放因子是 1/sqrt(d_k)，不是 1/d_k。缩放发生在 softmax 之前。", "evidence": ["equation", "scaling"]},
-        {"kind": "background", "text": "softmax 通常把一组分数变成非负且总和为 1 的权重。较大的分数差可能让权重集中。这里是数学背景，未提供的前文不能据此补写成作者论证。", "evidence": []},
-        {"kind": "analogy", "text": "可以把权重想成分配给不同资料的注意比例；这个类比只帮助理解加权，不代表论文里的实际实验结果。", "evidence": ["weighted-sum"]}
+        {
+          "kind": "author",
+          "text": "输出由 values 的加权和组成。短引文没有说明权重具体如何获得；这部分要结合下一处公式阅读。",
+          "evidence": [
+            "weighted-sum",
+            "equation"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "scaled-dot-product",
+      "title": "Section 3.2.1：权重如何进入输出",
+      "role": "公式把加权和展开成可阅读的运算关系；缩放句进一步点明缩放因子。",
+      "points": [
+        {
+          "kind": "author",
+          "text": "公式 (1)：\n\\[\\operatorname{Attention}(Q,K,V)=\\operatorname{softmax}\\left(\\frac{QK^{\\top}}{\\sqrt{d_k}}\\right)V\\]\n公式中的缩放因子是 \\(\\frac{1}{\\sqrt{d_k}}\\)，不是 \\(\\frac{1}{d_k}\\)。缩放发生在 softmax 之前。",
+          "evidence": [
+            "equation",
+            "scaling"
+          ]
+        },
+        {
+          "kind": "background",
+          "text": "softmax 通常把一组分数变成非负且总和为 1 的权重。较大的分数差可能让权重集中。这里是数学背景，未提供的前文不能据此补写成作者论证。",
+          "evidence": []
+        },
+        {
+          "kind": "analogy",
+          "text": "可以把权重想成分配给不同资料的注意比例；这个类比只帮助理解加权，不代表论文里的实际实验结果。",
+          "evidence": [
+            "weighted-sum"
+          ]
+        }
       ]
     }
   ],
   "terms": [
-    {"original": "weighted sum", "name": "加权和", "essential": true, "explanation": {"kind": "background", "text": "给每个值乘以对应权重，再相加。原文明确使用这个名称；这一数学释义属于补充背景。", "evidence": ["weighted-sum"]}},
-    {"original": "softmax", "name": "softmax", "essential": true, "explanation": {"kind": "background", "text": "把分数变成归一化权重的函数。公式展示它位于缩放点积与 V 相乘之间；一般定义是背景。", "evidence": ["equation"]}},
-    {"original": "Q, K, V", "name": "Q、K、V", "essential": false, "explanation": {"kind": "background", "text": "注意力的常见术语分别是 queries、keys、values。当前短引文未完整定义这些符号，因此这些名称作为领域背景补充，不能代替原文的具体定义与形状。", "evidence": ["equation"]}}
+    {
+      "original": "weighted sum",
+      "name": "加权和",
+      "essential": true,
+      "explanation": {
+        "kind": "background",
+        "text": "给每个值乘以对应权重，再相加。原文明确使用这个名称；这一数学释义属于补充背景。",
+        "evidence": [
+          "weighted-sum"
+        ]
+      }
+    },
+    {
+      "original": "softmax",
+      "name": "softmax",
+      "essential": true,
+      "explanation": {
+        "kind": "background",
+        "text": "把分数变成归一化权重的函数。公式展示它位于缩放点积与 V 相乘之间；一般定义是背景。",
+        "evidence": [
+          "equation"
+        ]
+      }
+    },
+    {
+      "original": "Q, K, V",
+      "name": "Q、K、V",
+      "essential": false,
+      "explanation": {
+        "kind": "background",
+        "text": "注意力的常见术语分别是 queries、keys、values。当前短引文未完整定义这些符号，因此这些名称作为领域背景补充，不能代替原文的具体定义与形状。",
+        "evidence": [
+          "equation"
+        ]
+      }
+    }
   ]
 }

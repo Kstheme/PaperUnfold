@@ -40,7 +40,7 @@
     },
     {
       "kind": "author",
-      "text": "作者明确说输出是 values 的加权和；公式 (1) 把 softmax(QK^T / sqrt(d_k)) 与 V 相乘。",
+      "text": "作者明确说输出是 values 的加权和；公式 (1) 把 \\(\\operatorname{softmax}\\left(\\frac{QK^{\\top}}{\\sqrt{d_k}}\\right)\\) 与 V 相乘。",
       "evidence": [
         "weighted",
         "equation"
@@ -48,7 +48,7 @@
     },
     {
       "kind": "author",
-      "text": "作者说以 1/sqrt(d_k) 缩放点积是为了抵消 this effect。片段未提供该效应的具体内容，不能把补充背景当作此处已读到的作者论证。",
+      "text": "作者说以 \\(\\frac{1}{\\sqrt{d_k}}\\) 缩放点积是为了抵消 this effect。片段未提供该效应的具体内容，不能把补充背景当作此处已读到的作者论证。",
       "evidence": [
         "scale"
       ]
@@ -69,7 +69,7 @@
         },
         {
           "kind": "inference",
-          "text": "结合公式读，左侧 Attention(Q, K, V) 是输出，右侧最后的 V 对应被加权组合的 values；这是对两处片段之间关系的解释。",
+          "text": "结合公式读，左侧 \\(\\operatorname{Attention}(Q,K,V)\\) 是输出，右侧最后的 V 对应被加权组合的 values；这是对两处片段之间关系的解释。",
           "evidence": [
             "weighted",
             "equation"
@@ -84,19 +84,19 @@
       "points": [
         {
           "kind": "author",
-          "text": "按公式顺序，先形成 QK^T，除以 sqrt(d_k)，再经过 softmax，最后乘 V。缩放因子位于 softmax 之前。",
+          "text": "公式 (1)：\n\\[\\operatorname{Attention}(Q,K,V)=\\operatorname{softmax}\\left(\\frac{QK^{\\top}}{\\sqrt{d_k}}\\right)V\\]\n按公式顺序，先形成 \\(QK^{\\top}\\)，除以 \\(\\sqrt{d_k}\\)，再经过 softmax，最后乘 V。缩放因子位于 softmax 之前。",
           "evidence": [
             "equation"
           ]
         },
         {
           "kind": "background",
-          "text": "常用记号中，Q、K、V 分别表示查询（query）、键（key）和值（value）；K^T 表示 K 的转置，d_k 表示键向量的维度。这些符号定义作为补充背景提供，当前摘录没有给出完整定义。",
+          "text": "常用记号中，Q、K、V 分别表示查询（query）、键（key）和值（value）；\\(K^{\\top}\\) 表示 K 的转置，\\(d_k\\) 表示键向量的维度。这些符号定义作为补充背景提供，当前摘录没有给出完整定义。",
           "evidence": []
         },
         {
           "kind": "inference",
-          "text": "可把 softmax(QK^T / sqrt(d_k)) 读作权重，再把与 V 的乘法联系到加权求和。片段没有给出矩阵尺寸或 softmax 的作用轴，不宜从摘录独立确定全部实现细节。",
+          "text": "可把 \\(\\operatorname{softmax}\\left(\\frac{QK^{\\top}}{\\sqrt{d_k}}\\right)\\) 读作权重，再把与 V 的乘法联系到加权求和。片段没有给出矩阵尺寸或 softmax 的作用轴，不宜从摘录独立确定全部实现细节。",
           "evidence": [
             "weighted",
             "equation"
@@ -111,7 +111,7 @@
       "points": [
         {
           "kind": "author",
-          "text": "缩放量是 1/sqrt(d_k)，与公式中的除以 sqrt(d_k) 一致。作者将此操作的目的表述为抵消 this effect。",
+          "text": "缩放量是 \\(\\frac{1}{\\sqrt{d_k}}\\)，与公式中的除以 \\(\\sqrt{d_k}\\) 一致。作者将此操作的目的表述为抵消 this effect。",
           "evidence": [
             "scale",
             "equation"
@@ -159,7 +159,7 @@
       }
     },
     {
-      "original": "1/sqrt(d_k)",
+      "original": "\\(\\frac{1}{\\sqrt{d_k}}\\)",
       "name": "点积缩放因子",
       "essential": true,
       "explanation": {
@@ -172,12 +172,12 @@
       }
     },
     {
-      "original": "K^T",
+      "original": "\\(K^{\\top}\\)",
       "name": "转置记号",
       "essential": false,
       "explanation": {
         "kind": "background",
-        "text": "上标 T 通常表示转置，即交换矩阵的行与列；这里帮助阅读 QK^T 这一乘法记号。",
+        "text": "上标 T 通常表示转置，即交换矩阵的行与列；这里帮助阅读 \\(QK^{\\top}\\) 这一乘法记号。",
         "evidence": []
       }
     }

@@ -1,6 +1,10 @@
 # Guide input
 
-The renderer consumes UTF-8 JSON. All content is plain text. Agent-authored explanations should follow the selected output language; the renderer does not translate them.
+The renderer consumes UTF-8 JSON. Content is escaped as text; explanations, section roles, and term names can also contain delimited LaTeX mathematics. Agent-authored explanations should follow the selected output language; the renderer does not translate them.
+
+Use `\(...\)` or `$...$` for inline math and `\[...\]` or `$$...$$` for display math. Prefer backslash delimiters in prose containing currency. Escape each backslash in JSON, for example `"text": "Scale by \\(1/\\sqrt{d_k}\\)."`. Raw `sqrt(d_k)` and undelimited LaTeX are ordinary text, so supply mathematical markup deliberately. A full equation can read `"text": "\\[\\operatorname{Attention}(Q,K,V)=\\operatorname{softmax}\\left(\\frac{QK^{\\top}}{\\sqrt{d_k}}\\right)V\\]"`.
+
+KaTeX 0.19.0, its CSS, and WOFF2 fonts are embedded in the saved HTML only when these delimiters occur. Rendering needs browser JavaScript, but no network. The page retains the underlying notation if JavaScript is disabled or an unsupported expression cannot render. Trusted HTML/URL commands are disabled. Source quotations and the source appendix remain verbatim and are excluded from math rendering.
 
 ```json
 {

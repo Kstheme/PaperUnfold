@@ -12,7 +12,23 @@ const { chromium } = require(path.resolve(modulePath));
   const browser = await chromium.launch({ executablePath, headless: true });
   try {
     const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
-    await page.setContent(fs.readFileSync(artifact, 'utf8'));
+    const content = fs.readFileSync(artifact, 'utf8');
+    const requests = [];
+    page.on('request', request => requests.push(request.url()));
+    await page.context().setOffline(true);
+    await page.setContent(content);
+    await page.evaluate(() => document.fonts.ready);
+    const mathCount = await page.locator('.katex').count();
+    if (content.includes('renderMathInElement')) {
+      if (!mathCount || !await page.locator('.katex-display').count()) {
+        throw new Error('Inline or display mathematics failed to render offline');
+      }
+      if (await page.locator('.katex-error').count()) throw new Error('Invalid example mathematics');
+      if (await page.locator('blockquote .katex, pre .katex').count()) {
+        throw new Error('Source text was altered by mathematics rendering');
+      }
+    }
+    if (requests.length) throw new Error('Saved guide attempted network requests');
     for (const details of await page.locator('details').all()) {
       const before = await details.evaluate(element => element.open);
       await details.locator('summary').click();
@@ -33,7 +49,7 @@ const { chromium } = require(path.resolve(modulePath));
       throw new Error('Guide overflows mobile viewport');
     }
     console.log(JSON.stringify({ controls: await page.locator('details').count(), anchors: links.length,
-      navigation: true, mobileOverflow: false }));
+      navigation: true, mobileOverflow: false, mathCount, networkRequests: requests.length }));
   } finally {
     await browser.close();
   }
