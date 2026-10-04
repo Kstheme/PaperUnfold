@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "source": {
+    "title": "Attention Is All You Need — Vaswani et al.（提供的片段）",
+    "path": null,
+    "coverage": "实际阅读仅限粘贴请求中的 Section 3.2 短句 The output is computed as a weighted sum of the values, 与 Section 3.2.1 公式 (1) 转写 Attention(Q, K, V) = softmax(QK^T / sqrt(d_k)) V。未读取单独论文材料文件，未访问网页，未阅读完整章节、末段、this effect 的上下文、其他章节或实验结果；无原论文页码。"
+  },
+  "position": {
+    "target": "3.2 片段：先看输出是什么",
+    "location": "输入标注 Section 3.2 — short excerpt；Section 3.2.1 — Equation (1)"
+  },
+  "explained": [
+    "Attention 输出是 values 的加权和；将公式写成 A = softmax(QK^T / sqrt(d_k))，输出 = AV。",
+    "对一个 query，输出展开为 o = Σ a_i v_i。",
+    "教学例子（非论文数据）：权重 0.75、0.25 与 values (2,0)、(0,4) 得到输出 (1.5,1)。",
+    "针对把输出称为注意力权重的误解，解释权重为 0.75、0.25，输出向量为 (1.5,1)。"
+  ],
+  "understanding": [
+    {
+      "point": "计算所给两个向量的加权和",
+      "status": "mastered",
+      "answer": "每个value的贡献分别是0.75×(2,0)=(1.5,0)，0.25×(0,4)=(0,1)，加起来是(1.5,1)。",
+      "reason": "回答正确给出每项贡献与求和，支持这个具体算例的加权和计算，不代表掌握整个章节。"
+    },
+    {
+      "point": "区分注意力权重与 attention 输出向量",
+      "status": "explained_unverified",
+      "answer": "所以(1.5,1)就是注意力权重。修正讲解后研究者说：懂了，先暂停，不回答新问题。不要把我说懂了当作对这个区别的验证。",
+      "reason": "实质回答曾把输出误称为权重；已解释修正，但后续迁移问题未回答，懂了不提供修正后的推理证据。"
+    }
+  ],
+  "gaps": [
+    "研究者尚未用实质回答验证权重与输出的区别。",
+    "未回答的教学检查：固定权重 0.75、0.25，把第二个 value 改为 (0,8)，说明输出如何变化以及为何权重与输出不同。"
+  ],
+  "next_entry": "恢复时请重新提供上述第 3.2 节短句与第 3.2.1 节公式 (1)，再从固定权重、改变 value 的例子检查权重与输出的区别；尊重研究者新的目标。当前已暂停，不要求现在作答。"
+}

@@ -1,0 +1,104 @@
+{
+  "title": "中文导读：样本较小时估计可能变化（局部合成材料）",
+  "language": "zh",
+  "source": {
+    "name": "synthetic-partial.pdf",
+    "text": "[PDF page 1 of 2]\nSynthetic research excerpt. The estimate may vary if the sample is small.",
+    "coverage": "仅阅读所供 PDF 第 1 页提取出的两句话；文件共 2 页，第 2 页无可用文字。页码是文件内从 1 起算的物理位置，未核实原文印刷页码。本导读只解释这段合成材料，无法建立整篇论文地图。",
+    "missing": [
+      "第 2 页未提取出可用文字；此次提取不能据此判断该页为空白、扫描件或损坏。",
+      "材料未提供具体研究问题、估计对象、样本大小、方法、证据或研究结论。",
+      "未进行原页面视觉检查；图表、公式、版面顺序及原文印刷页码均未核实。"
+    ]
+  },
+  "evidence": [
+    {
+      "id": "e1",
+      "location": "PDF 第 1 页（文件物理位置），第 1 句",
+      "quote": "Synthetic research excerpt."
+    },
+    {
+      "id": "e2",
+      "location": "PDF 第 1 页（文件物理位置），第 2 句",
+      "quote": "The estimate may vary if the sample is small."
+    }
+  ],
+  "thread": [
+    {
+      "kind": "author",
+      "text": "材料自称是一段合成的研究摘录。",
+      "evidence": [
+        "e1"
+      ]
+    },
+    {
+      "kind": "author",
+      "text": "这段话只提出一个有条件、带不确定性的表述：如果样本较小，估计可能发生变化。“可能”没有被写成必然，材料也未说明变化方向或幅度。",
+      "evidence": [
+        "e2"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "id": "passage",
+      "title": "条件与不确定性：读懂这一句话",
+      "role": "这段文字的作用是指出估计可能随小样本条件而变化；现有材料不足以确定它在一篇论文中的章节位置或论证作用。",
+      "points": [
+        {
+          "kind": "author",
+          "text": "原句把“样本较小”设为条件，使用 may 表达可能性，没有给出实际发生变化的数据。",
+          "evidence": [
+            "e2"
+          ]
+        },
+        {
+          "kind": "inference",
+          "text": "可以将这句话读成一项需要保留的条件限制；不能从中推出某种估计方法已被验证、样本确实很小，或某个具体结果已经成立。",
+          "evidence": [
+            "e2"
+          ]
+        }
+      ],
+      "learning_goal": "区分原句中的条件、可能性与尚未提供的研究证据"
+    }
+  ],
+  "terms": [
+    {
+      "original": "estimate",
+      "name": "估计",
+      "essential": true,
+      "explanation": {
+        "kind": "inference",
+        "text": "在本句中，这是“可能变化”的对象。摘录没有说明估计的具体量、计算方法或数值，因此只能识别它在句中的作用。",
+        "evidence": [
+          "e2"
+        ]
+      }
+    },
+    {
+      "original": "sample is small",
+      "name": "样本较小",
+      "essential": true,
+      "explanation": {
+        "kind": "inference",
+        "text": "在本句中，这是 if 引出的条件。材料没有给出样本量，也没有规定什么规模算“小”。",
+        "evidence": [
+          "e2"
+        ]
+      }
+    },
+    {
+      "original": "may vary",
+      "name": "可能发生变化",
+      "essential": false,
+      "explanation": {
+        "kind": "inference",
+        "text": "这里的 may 保留可能性；vary 没有指定增加、减少或变化幅度。解释时必须保留这些未确定之处。",
+        "evidence": [
+          "e2"
+        ]
+      }
+    }
+  ]
+}

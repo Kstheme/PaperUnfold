@@ -1,6 +1,6 @@
 # PaperUnfold: paper guides and guided learning
 
-Date: 2026-10-04. This specification synthesizes the confirmed product decisions. This is the design baseline. Tickets01/02 are now implemented; see [their validation record](validation/tickets-01-02.md). The user has confirmed the entrypoint-level testing boundary. The ten implementation tickets are published in the local Markdown tracker.
+Date: 2026-10-04. This specification synthesizes the confirmed product decisions. This is the design baseline. Tickets01/02/03/06/07 are now implemented; see [the latest validation record](validation/tickets-03-06-07.md). The user has confirmed the entrypoint-level testing boundary. The ten implementation tickets are published in the local Markdown tracker.
 
 ## Problem Statement
 
@@ -130,7 +130,7 @@ The default experience is a lightweight guide, necessary diagrams, and optional 
 
 Use one shared scenario-based acceptance approach at the actual skill-invocation boundary. Invoke either skill with source material and, for teaching, a sequence of researcher replies; inspect the user-visible artifact, dialogue, and progress record. A guide-to-teaching-to-resumption scenario exercises their combined behavior through the same external boundary.
 
-The user confirmed acceptance through actual inputs and visible results on 2026-10-04. No automated suite, evaluation runner, skill implementation, or existing test harness is present in the repository. There is no prior test infrastructure to reuse, and this specification does not invent an internal API to make testing convenient.
+The user confirmed acceptance through actual inputs and visible results on 2026-10-04. At specification time there was no implementation or test harness. The current implementation has public CLI/artifact checks plus actual agent-invocation validation; the confirmed boundary remains inputs and visible results rather than internal prompt wording.
 
 ### What makes a good test
 
@@ -181,8 +181,8 @@ A release should include real-paper guide evaluations across the chosen argument
 
 The confirmed design and domain vocabulary are documented in the [design](design.md) and [glossary](../CONTEXT.md). This specification organizes their implementation behavior and acceptance requirements. The [project review](project-review.md) records naming, positioning, and publication priorities.
 
-The current checkout contains design documents rather than runnable skills. The implementation order is guide and template, teaching and progress, representative examples, then verified release documentation and a comparison using the same source material.
+The current checkout contains runnable instruction packages for guides and teaching; local PDF reading, HTML teaching prompts, and progress save/resume are implemented. The implementation order is guide and template, teaching and progress, representative examples, then verified release documentation and a comparison using the same source material.
 
-Implementation work must establish and document the supported agent environment, reading dependencies, HTML resource choices, and license. Those concrete choices have not been made in this conversation; they must not be presented as existing capabilities.
+Implementation work must establish and document the supported agent environment, reading dependencies, HTML resource choices, and license. The validation records identify the concrete choices already exercised; broader host installation remains a later ticket.
 
-The user invoked to-spec, which includes publishing the specification to the project issue tracker with the ready-for-agent label. The checkout currently has no configured Git remote, and no project-tracker configuration or triage vocabulary was provided. Run `/setup-matt-pocock-skills` to establish the publication target. This local specification is saved for review; no issue has been published or labeled.
+The user invoked to-spec, which includes publishing the specification to the project issue tracker with the ready-for-agent label. The user subsequently selected local Markdown tracking, and the ten tickets were published under `.scratch/paperunfold/`. This checkout has no configured Git remote; no remote issue publication is claimed. Remaining optional tracker-label configuration is noted in the task index.

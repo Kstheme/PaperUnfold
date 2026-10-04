@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "source": {
+    "title": "Attention Is All You Need — selected excerpt",
+    "path": "../../tests/fixtures/attention-excerpt.txt",
+    "coverage": "Only the supplied section 3.2 and 3.2.1 excerpts; omitted scaling rationale unavailable."
+  },
+  "position": {
+    "target": "Distinguish attention weights from the weighted output",
+    "location": "Section 3.2.1, equation (1)"
+  },
+  "explained": [
+    "Weights multiply the values to produce the output.",
+    "Toy calculation with weights 0.75 and 0.25 and values (2,0) and (0,4)."
+  ],
+  "understanding": [
+    {
+      "point": "Weighted sum in the toy calculation",
+      "status": "mastered",
+      "answer": "0.75 times (2,0) plus 0.25 times (0,4) is (1.5,1), combining the V vectors.",
+      "reason": "The answer applies each weight to the corresponding value and adds coordinates correctly; this supports only this calculation."
+    },
+    {
+      "point": "Attention weights versus output",
+      "status": "partial",
+      "answer": "The result (1.5,1) is the attention weight.",
+      "reason": "The calculation is correct, but its result is misidentified as the weights."
+    }
+  ],
+  "gaps": ["Distinguishing the two weights from the resulting output vector remains unresolved."],
+  "next_entry": "Use equation (1) to distinguish the softmax weights from the result after multiplying V."
+}

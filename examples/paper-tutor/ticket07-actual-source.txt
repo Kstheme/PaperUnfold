@@ -1,0 +1,11 @@
+Title: Attention Is All You Need — Vaswani et al.
+Source: https://arxiv.org/html/1706.03762v7
+Coverage: Only the short Section 3.2 quotation and Equation (1) supplied in the copied chapter prompt. This is not the full paper.
+
+[Section 3.2 — supplied short excerpt]
+The output is computed as a weighted sum of the values,
+
+[Section 3.2.1 — Equation (1), mathematical notation transcribed]
+Attention(Q, K, V) = softmax(QK^T / sqrt(d_k)) V
+
+No original page number is supplied. The formula is the same supplied transcription used in the original teaching conversation.

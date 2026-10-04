@@ -1,0 +1,2 @@
+# Needed only for local PDF input; pasted-text rendering uses the standard library.
+pypdf>=6.0,<7

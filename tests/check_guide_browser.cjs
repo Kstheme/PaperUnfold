@@ -1,8 +1,8 @@
 // Optional artifact check. Supply an installed Playwright module and browser.
-// node tests/check_guide_browser.cjs <playwright-module> <browser-exe> <guide.html>
+// node tests/check_guide_browser.cjs <playwright-module> <browser-exe> <guide.html> [prompts.json]
 const fs = require('node:fs');
 const path = require('node:path');
-const [modulePath, executablePath, artifact] = process.argv.slice(2);
+const [modulePath, executablePath, artifact, promptOutput] = process.argv.slice(2);
 if (!modulePath || !executablePath || !artifact) {
   console.error('Supply Playwright module, browser executable, and saved HTML.');
   process.exit(1);
@@ -30,11 +30,46 @@ const { chromium } = require(path.resolve(modulePath));
     }
     if (requests.length) throw new Error('Saved guide attempted network requests');
     for (const details of await page.locator('details').all()) {
+      await details.evaluate(element => {
+        for (let ancestor = element.parentElement; ancestor; ancestor = ancestor.parentElement) {
+          if (ancestor.tagName === 'DETAILS') ancestor.open = true;
+        }
+      });
       const before = await details.evaluate(element => element.open);
-      await details.locator('summary').click();
+      await details.locator(':scope > summary').click();
       const after = await details.evaluate(element => element.open);
       if (before === after) throw new Error('Expansion control did not toggle');
+      await details.locator(':scope > summary').click();
     }
+    const handoffs = page.locator('.teaching-prompt');
+    if (!await handoffs.count()) throw new Error('No chapter/term teaching prompts');
+    const prompts = [];
+    for (const handoff of await handoffs.all()) {
+      await handoff.evaluate(element => {
+        element.open = true;
+        for (let ancestor = element.parentElement; ancestor; ancestor = ancestor.parentElement) {
+          if (ancestor.tagName === 'DETAILS') ancestor.open = true;
+        }
+      });
+      const textarea = handoff.locator('textarea');
+      const prompt = await textarea.inputValue();
+      if (!prompt.includes('$paper-tutor') || !prompt.trim()) throw new Error('Unusable teaching prompt');
+      prompts.push({ id: await textarea.getAttribute('id'), prompt });
+      await page.evaluate(() => Object.defineProperty(navigator, 'clipboard', { configurable: true, value: undefined }));
+      await handoff.locator('button').click();
+      const fallback = await handoff.getAttribute('data-fallback');
+      await handoff.locator('[role="status"]').getByText(fallback, { exact: true }).waitFor();
+      if (!await textarea.evaluate(element => document.activeElement === element && element.selectionStart === 0 && element.selectionEnd === element.value.length)) {
+        throw new Error('Clipboard fallback did not select the complete teaching prompt');
+      }
+      // Exercise the success branch with a stub, not a claim about OS clipboard support.
+      await page.evaluate(() => Object.defineProperty(navigator, 'clipboard', { configurable: true,
+        value: { writeText: async text => { window.testCopiedPrompt = text; } } }));
+      await handoff.locator('button').click();
+      await handoff.locator('[role="status"]').getByText(await handoff.getAttribute('data-success'), { exact: true }).waitFor();
+      if (await page.evaluate(() => window.testCopiedPrompt) !== prompt) throw new Error('Copy payload differs from visible prompt');
+    }
+    if (promptOutput) fs.writeFileSync(promptOutput, JSON.stringify(prompts, null, 2));
     const links = await page.locator('a[href^="#"]').evaluateAll(elements =>
       elements.map(element => element.getAttribute('href').slice(1)));
     for (const id of links) {
@@ -48,8 +83,22 @@ const { chromium } = require(path.resolve(modulePath));
     if (await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)) {
       throw new Error('Guide overflows mobile viewport');
     }
+    const noJsContext = await browser.newContext({ javaScriptEnabled: false });
+    const noJsPage = await noJsContext.newPage();
+    await noJsContext.setOffline(true);
+    await noJsPage.setContent(content);
+    const noJsPrompt = noJsPage.locator('.teaching-prompt').first();
+    await noJsPrompt.locator(':scope > summary').click();
+    await noJsPrompt.locator('textarea').focus();
+    await noJsPage.keyboard.press('Control+A');
+    if (!await noJsPrompt.locator('textarea').evaluate(element => element.selectionEnd === element.value.length && element.selectionStart === 0)) {
+      throw new Error('JavaScript-disabled guide has no selectable copy fallback');
+    }
+    await noJsContext.close();
     console.log(JSON.stringify({ controls: await page.locator('details').count(), anchors: links.length,
-      navigation: true, mobileOverflow: false, mathCount, networkRequests: requests.length }));
+      navigation: true, mobileOverflow: false, mathCount, networkRequests: requests.length,
+      teachingPrompts: prompts.length, clipboardFallback: true, noJavaScriptCopyFallback: true,
+      clipboardSuccessStub: true, actualClipboardTested: false }));
   } finally {
     await browser.close();
   }

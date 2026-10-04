@@ -6,11 +6,11 @@
 
 PaperUnfold 基于一套通用论文阅读方法，面向全球各学科研究人员，根据每篇论文的研究问题、论证、方法与证据调整讲解。阅读体验先提供轻量 HTML 导读，再按需通过对话深入学习。
 
-**前两个 ticket 已实现。** 当前支持粘贴原文生成 HTML 导读，以及从原文独立启动对话教学。PDF/链接读取、持久化学习进度与安装验收仍在后续计划中。见[验收记录](docs/validation/tickets-01-02.md)。
+**ticket01、02、03、06、07 已实现。** 支持粘贴原文或本地 PDF 生成 HTML 导读、复制章节与术语教学提示词，以及保存学习进度并结合原文续学。链接/DOI 获取与安装验收仍在后续计划中。见[本轮验收记录](docs/validation/tickets-03-06-07.md)。
 
 ## 阅读体验
 
-1. 粘贴论文章节；本地 PDF、链接与 DOI 读取将在后续实现。
+1. 粘贴论文章节或提供本地 PDF；链接与 DOI 获取将在后续实现。
 2. 获得单文件 HTML 导读：所提供材料的地图、章节解释、必需术语和必要图示。
 3. 根据原文位置核对关键解释。
 4. 选择一个章节、公式或问题，在 Agent 对话中深入学习。
@@ -24,20 +24,20 @@ PaperUnfold 基于一套通用论文阅读方法，面向全球各学科研究�
 | 能力 | 使用场景 | 输出 |
 | --- | --- | --- |
 | `paper-guide`：论文导读 | 先了解全貌，讲清从研究问题到结论的路径。 | 轻量 HTML 阅读页面。 |
-| `paper-tutor`：论文教学 | 深入理解一个概念、机制或论证。 | 当前对话中聚焦问题的教学。 |
+| `paper-tutor`：论文教学 | 深入理解一个概念、机制或论证。 | 聚焦问题的教学与可携带的学习进度文件。 |
 
-教学可以直接从原论文开始，也可以接续导读。教学在 Agent 对话中进行。HTML 教学提示词与跨会话进度文件将在后续实现。
+教学可以直接从原论文开始，也可以接续导读。教学在 Agent 对话中进行。可以复制 HTML 中的章节或术语提示词，也可以直接从原文开始。章节结束或暂停时保存进度；在新对话中提供进度和可读原文即可续学，进度记录不能代替论文证据。
 
 ## 使用当前版本
 
-在有文件读取与命令执行能力的 Agent 中，明确要求读取仓库里的 [paper-guide](skills/paper-guide/SKILL.md) 或 [paper-tutor](skills/paper-tutor/SKILL.md)，再提供可读原文。导读 renderer 需要 Python 3.10+，只使用标准库。Skill 是 Agent 的指令包，论文分析由 Agent 执行。
+在有文件读取与命令执行能力的 Agent 中，明确要求读取仓库里的 [paper-guide](skills/paper-guide/SKILL.md) 或 [paper-tutor](skills/paper-tutor/SKILL.md)，再提供可读原文。HTML renderer 与进度助手需要 Python 3.10+，只使用标准库。本地 PDF 提取另需 `pypdf` 6.x，可运行 `python -m pip install -r skills/paper-guide/requirements.txt`。已验证的 PDF 环境为 Python 3.12.14、pypdf 6.10.0。提取器不提供 OCR；涉及图表或公式时仍需查看原始 PDF 页面。Skill 是 Agent 的指令包，论文分析由 Agent 执行。
 
 示例请求：
 
-- “使用仓库里的 paper-guide，根据这段原文用中文讲解并保存 HTML 导读。”
+- “使用仓库里的 paper-guide，根据这段原文或本地 PDF 用中文讲解并保存 HTML 导读。”
 - “使用 paper-tutor，帮我理解这段论文的证据如何支持结论。”
 
-可以查看[实际 Agent 生成的中文导读](examples/paper-guide/agent-invocation-zh.html)、[原文与 renderer 输入](examples/paper-guide/agent-invocation-zh.json)及[教学对话验收片段](examples/paper-tutor/actual-session.md)。目前实际验收使用短篇 Attention 片段，跨学科代表性示例属于 ticket09；不同宿主的技能发现和安装流程属于 ticket10。
+可以查看[实际 Agent 生成的中文导读](examples/paper-guide/agent-invocation-zh.html)、[原文与 renderer 输入](examples/paper-guide/agent-invocation-zh.json)及[教学对话验收片段](examples/paper-tutor/actual-session.md)。另有[实际暂停记录](examples/paper-tutor/ticket07-actual-progress.json)和[导读到教学再到续学的验收对话](examples/paper-tutor/ticket06-07-actual-session.md)，完整本地 PDF 与不可读输入检查见本轮记录。跨学科代表性示例属于 ticket09；不同宿主的技能发现和安装流程属于 ticket10。
 
 ## 设计原则
 
@@ -52,7 +52,9 @@ PaperUnfold 基于一套通用论文阅读方法，面向全球各学科研究�
 - [x] 明确受众、阅读路径、语言策略与教学原则。
 - [x] 实现粘贴原文的 `paper-guide` 与 HTML renderer。
 - [x] 实现独立的 `paper-tutor` 对话教学。
-- [ ] 实现持久化学习进度与续学。
+- [x] 读取本地 PDF，保留页位置与提取缺口。
+- [x] 从 HTML 复制章节与术语教学提示词。
+- [x] 保存学习进度并结合原文续学。
 - [ ] 提供算法、实证研究、理论或人文论证的代表性示例，包含英文与中文输出。
 - [ ] 补齐真实截图、原文来源、经验证的安装步骤与许可证。
 - [ ] 使用相同原文材料，展示普通文字解释与 PaperUnfold 导读的差异。
