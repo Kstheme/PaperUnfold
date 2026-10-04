@@ -1,6 +1,6 @@
 # Actual tutor acceptance conversation — release09
 
-Researcher inputs below are scripted by the evaluator, not evidence of actual human learning. Tutor replies are actual conversation outputs. Entry used the first copied prompt (`teach-section-results`) from `copied-prompts.json`, supplied by the parent as actually copied with the keyboard from `empirical-en.html`. Source grounding used that prompt and the relevant original passages in `empirical-source.txt`; no guide JSON, build script, or old transcript was read.
+Researcher inputs below are scripted by the evaluator, not evidence of actual human learning. Tutor replies are actual conversation outputs. Entry used the first copied prompt (`teach-section-results`), supplied by the parent as actually copied with the keyboard from `empirical-en.html`. That historical payload is preserved in `session-input-prompts.json`; it was named `copied-prompts.json` during the session. The current `copied-prompts.json` was recaptured after the guide's locator and identifier cleanup. Source grounding used the historical prompt and the relevant original passages in `empirical-source.txt`; no guide JSON, build script, or old transcript was read.
 
 ## Round 1
 
