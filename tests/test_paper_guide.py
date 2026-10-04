@@ -53,6 +53,37 @@ def guide():
 
 
 class GuideCLI(unittest.TestCase):
+    def test_optional_softmax_has_teaching_provenance_and_worked_no_script_fallback(self):
+        data = guide(); claim = data["thread"][0]
+        data["visuals"] = [{"type": "softmax", "title": "How does temperature change weights?",
+            "purpose": claim, "reading": claim, "contribution": claim,
+            "source_evidence": ["e1"], "assumptions": "Fixed scalar values; constructed teaching inputs.",
+            "scores": [0, 0], "values": [2, 6]}]
+        result, output = self.render(data)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        content = output.read_text(encoding="utf-8")
+        self.assertIn("Teaching data and calculated examples", content)
+        self.assertIn("not paper results", content)
+        self.assertIn('type="range"', content)
+        self.assertIn("0.5000, 0.5000", content)
+        self.assertIn("4.0000", content)
+        self.assertIn("Fixed scalar values", content)
+
+    def test_mechanism_rejects_unusable_inputs_and_missing_source_relation(self):
+        data = guide(); claim = data["thread"][0]
+        visual = {"type": "softmax", "title": "Temperature", "purpose": claim, "reading": claim,
+            "contribution": claim, "source_evidence": ["e1"], "assumptions": "Fixed teaching data.",
+            "scores": [0, 1], "values": [2, 6]}
+        data["visuals"] = [visual]
+        for scores in ([0], [0, float("nan")], [True, 1], [0, 101], [0, "1"]):
+            with self.subTest(scores=scores):
+                visual["scores"] = scores
+                result, output = self.render(data)
+                self.assertNotEqual(result.returncode, 0); self.assertFalse(output.exists())
+        visual["scores"] = [0, 1]; visual["source_evidence"] = []
+        result, output = self.render(data)
+        self.assertNotEqual(result.returncode, 0); self.assertFalse(output.exists())
+
     def render(self, data, image_bytes=None):
         temp = tempfile.TemporaryDirectory()
         self.addCleanup(temp.cleanup)
@@ -61,7 +92,7 @@ class GuideCLI(unittest.TestCase):
         data_file.write_text(json.dumps(data), encoding="utf-8")
         if image_bytes is not None:
             (directory / "figure.png").write_bytes(image_bytes)
-        result = subprocess.run([sys.executable, str(SCRIPT), str(data_file), "--output", str(output)],
+        result = subprocess.run([sys.executable, "-X", "utf8", str(SCRIPT), str(data_file), "--output", str(output)],
                                 capture_output=True, text=True, encoding="utf-8")
         return result, output
 

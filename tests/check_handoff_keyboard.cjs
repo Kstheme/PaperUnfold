@@ -1,8 +1,8 @@
 // Actual keyboard clipboard check in an isolated browser page, not an API stub.
-// node tests/check_handoff_keyboard.cjs <playwright-module> <browser-exe> <guide.html> <prompts.json>
+// node tests/check_handoff_keyboard.cjs <playwright-module> <browser-exe> <guide.html> <prompts.json> [chapter-textarea-id]
 const fs = require('node:fs');
 const path = require('node:path');
-const [modulePath, executablePath, artifact, destination] = process.argv.slice(2);
+const [modulePath, executablePath, artifact, destination, chapterId] = process.argv.slice(2);
 if (!modulePath || !executablePath || !artifact || !destination) {
   console.error('Supply Playwright module, browser executable, guide HTML, and prompt output.');
   process.exit(1);
@@ -19,7 +19,8 @@ const { chromium } = require(path.resolve(modulePath));
     await page.context().setOffline(true);
     await page.setContent(fs.readFileSync(artifact, 'utf8'));
     const prompts = [];
-    for (const selector of ['textarea[id^="teach-section-"]', 'textarea[id^="teach-term-"]']) {
+    const chapterSelector = chapterId ? `textarea[id="${chapterId}"]` : 'textarea[id^="teach-section-"]';
+    for (const selector of [chapterSelector, 'textarea[id^="teach-term-"]']) {
       const text = page.locator(selector).first();
       await text.evaluate(element => {
         for (let parent = element.parentElement; parent; parent = parent.parentElement) {

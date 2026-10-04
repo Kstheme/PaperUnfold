@@ -1,0 +1,187 @@
+{
+  "title": "Attention 短节选导读：分清权重与加权输出",
+  "language": "zh",
+  "source": {
+    "name": "Attention Is All You Need — Vaswani et al.（所给节选）",
+    "text": "Title: Attention Is All You Need\nAuthors: Vaswani et al.\nSource: https://arxiv.org/html/1706.03762v7\nCoverage: Two short source excerpts and Equation (1) only. This is not the full paper.\nLocations: Section 3.2; Section 3.2.1, Equation (1) and final paragraph.\n\n[Section 3.2 — short excerpt]\nThe output is computed as a weighted sum of the values,\n\n[Section 3.2.1 — Equation (1), mathematical notation transcribed]\nAttention(Q, K, V) = softmax(QK^T / sqrt(d_k)) V\n\n[Section 3.2.1 — final paragraph, short excerpt]\nTo counteract this effect, we scale the dot products by 1/sqrt(d_k).\n\n[Coverage note written by the fixture author]\nThe surrounding discussion of the effect is omitted. The fixture supplies neither full-paper results nor the full argument for scaling. An explanation of omitted context must be marked as background, or the agent must obtain the missing source before attributing it to the authors. No paper page number is supplied.\n",
+    "coverage": "仅阅读给定文本中的 Section 3.2 短句、Section 3.2.1 转写的 Equation (1) 和末段短句。定位采用所给章节标签，不补造页码。",
+    "missing": [
+      "完整论文、实验结果及性能证据未提供。",
+      "“this effect”的前文被省略，无法从这份节选确定作者所指的现象和完整缩放动机。",
+      "公式为给定文本中的数学转写；未查看原始版面。"
+    ]
+  },
+  "evidence": [
+    {
+      "id": "sum",
+      "location": "Section 3.2 — short excerpt",
+      "quote": "The output is computed as a weighted sum of the values,"
+    },
+    {
+      "id": "eq1",
+      "location": "Section 3.2.1 — Equation (1), mathematical notation transcribed",
+      "quote": "Attention(Q, K, V) = softmax(QK^T / sqrt(d_k)) V"
+    },
+    {
+      "id": "scale",
+      "location": "Section 3.2.1 — final paragraph, short excerpt",
+      "quote": "To counteract this effect, we scale the dot products by 1/sqrt(d_k)."
+    }
+  ],
+  "thread": [
+    {
+      "kind": "author",
+      "text": "这段方法用 softmax 得到权重，再对 values 做加权求和；权重分布与最终输出是两个不同对象。",
+      "evidence": [
+        "sum",
+        "eq1"
+      ]
+    },
+    {
+      "kind": "author",
+      "text": "Equation (1) 在 softmax 前把点积分数除以 \\(\\sqrt{d_k}\\)。",
+      "evidence": [
+        "eq1",
+        "scale"
+      ]
+    },
+    {
+      "kind": "inference",
+      "text": "节选说缩放是为了抵消“this effect”，但未给出该现象的前文，因此这里不归因其具体设计动机，也不推断实验效果。",
+      "evidence": [
+        "scale"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "id": "attention-flow",
+      "title": "先读公式：分数 → 权重 → 输出",
+      "role": "把给定 Equation (1) 拆成可辨认的操作，帮助区分中间权重和最后的加权结果。",
+      "points": [
+        {
+          "kind": "author",
+          "text": "\\[\\operatorname{Attention}(Q,K,V)=\\operatorname{softmax}\\left(\\frac{QK^{\\top}}{\\sqrt{d_k}}\\right)V\\]",
+          "evidence": [
+            "eq1"
+          ]
+        },
+        {
+          "kind": "inference",
+          "text": "按这条公式读：先算缩放后的点积分数，再由 softmax 转成权重，最后乘 V；Section 3.2 的短句明确把最后一步称为 values 的加权和。",
+          "evidence": [
+            "eq1",
+            "sum"
+          ]
+        },
+        {
+          "kind": "background",
+          "text": "通用记号背景：Q、K、V 通常表示 query、key、value；\\(d_k\\) 是 key 的维度。这些名称与维度释义在给定短节选中未展开。",
+          "evidence": []
+        }
+      ],
+      "learning_goal": "从给定 Equation (1) 区分分数、softmax 权重与加权输出。"
+    },
+    {
+      "id": "softmax-teaching",
+      "title": "轻量实验：分布变尖时，输出怎样变化？",
+      "role": "借助固定的教学输入，隔离 softmax 权重变化，避免把示例当成训练或论文结果。",
+      "points": [
+        {
+          "kind": "analogy",
+          "text": "教学数值固定为分数 \\(s=[0,\\ln 3]\\) 和标量 values \\(v=[2,6]\\)。在 \\(T=1\\) 时，指数比例为 1:3，权重为 [0.25, 0.75]，加权输出为 5。这是独立构造的算例。",
+          "evidence": []
+        },
+        {
+          "kind": "analogy",
+          "text": "降低 T 会让较高分数对应的权重更集中：T=0.25 时权重为 [1/82, 81/82]，输出约 5.9512；T=4 时权重约 [0.4318, 0.5682]，输出约 4.2729。此处较高分数恰好配较大的 value，所以输出随变尖而上升；换一组 values，输出方向可能不同。",
+          "evidence": []
+        },
+        {
+          "kind": "analogy",
+          "text": "温度 T 是本教学实验添加的控制量，不是该节选定义的训练参数。固定 \\(1/\\sqrt{d_k}\\) 与教学 T 必须分开；移动 T 不等于改变模型维度或训练 attention。",
+          "evidence": []
+        }
+      ],
+      "visuals": [
+        {
+          "type": "softmax",
+          "title": "改变教学温度 T：分别观察权重与加权输出",
+          "purpose": {
+            "kind": "inference",
+            "text": "Equation (1) 支持 softmax 权重再乘 values 的关系；这里用标量例子分别显示这两个对象。",
+            "evidence": [
+              "eq1",
+              "sum"
+            ]
+          },
+          "reading": {
+            "kind": "analogy",
+            "text": "固定分数和 values，只移动 T。先读两项权重，再读它们加权后的单个输出；三个静态算例无需操作滑块也能阅读。",
+            "evidence": []
+          },
+          "contribution": {
+            "kind": "analogy",
+            "text": "教学实验说明固定输入下分布的尖锐程度怎样影响加权结果，不模拟训练、不预测性能、不复现论文实验。",
+            "evidence": []
+          },
+          "source_evidence": [
+            "eq1",
+            "sum"
+          ],
+          "scores": [
+            0,
+            1.0986122886681098
+          ],
+          "values": [
+            2,
+            6
+          ],
+          "assumptions": "构造的教学数据：s=[0, ln 3]，标量 v=[2, 6]；s 作为已经确定的 softmax 前分数。T∈[0.25,4] 仅为教学干预，不是论文定义的训练参数；论文固定的 1/√d_k 缩放不随滑块改变。标量 values 简化了通常的向量加权关系。"
+        }
+      ],
+      "learning_goal": "解释为什么权重变尖不自动确定加权输出的变化方向，并区分教学 T 与论文缩放。"
+    }
+  ],
+  "terms": [
+    {
+      "original": "softmax",
+      "name": "归一化指数权重",
+      "essential": true,
+      "explanation": {
+        "kind": "background",
+        "text": "背景定义：\\(w_i=\\exp(s_i)/\\sum_j\\exp(s_j)\\)。权重为正、总和为 1；教学实验另用 \\(s_i/T\\) 替代 \\(s_i\\)。",
+        "evidence": []
+      },
+      "source_evidence": [
+        "eq1"
+      ]
+    },
+    {
+      "original": "weighted sum",
+      "name": "加权求和",
+      "essential": true,
+      "explanation": {
+        "kind": "author",
+        "text": "给定短句把输出定义为 values 的加权和。权重表达各项贡献比例，输出还取决于 values 本身。",
+        "evidence": [
+          "sum",
+          "eq1"
+        ]
+      }
+    },
+    {
+      "original": "temperature T",
+      "name": "教学温度",
+      "essential": false,
+      "explanation": {
+        "kind": "analogy",
+        "text": "本页添加的教学变量，用来缩放固定分数；不是所给论文节选的训练参数。",
+        "evidence": []
+      },
+      "source_evidence": [
+        "eq1"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,468 @@
+{
+  "title": "Attention Is All You Need：从注意力运算到翻译证据",
+  "language": "zh",
+  "source": {
+    "name": "Vaswani et al., Attention Is All You Need — arXiv 1706.03762v7",
+    "text": "inherently\n\nauto-regressive\n\noffset\n\nweighted\n\nsoftmax\n\nconcatenated\n\ninject\n\nsmaller\n\n4.5\n\n28.428.4\n\n41.8\n\n41.041.0\n\n0.9\n\n4-layer\n\ngeneration\n\naveraging\n\nFigure 2: (left) Scaled Dot-Product Attention. (right) Multi-Head Attention consists of several attention layers running in parallel.\n\nidentically\n\nembeddings\n\nP100\n\nAdam\n\nDropout\n\nsmoothing",
+    "coverage": "已阅读 arXiv 1706.03762v7 HTML 的摘要、1–7节、致谢、参考文献及附录图注；另核对同版本 PDF 第4页 Figure 2 与公式(1)。这是正文研究线索导读；下方原文附录只保存核验短摘录。 原文：https://arxiv.org/html/1706.03762v7 发布说明：实际阅读覆盖上述正文；此离线文件只保留最小原文检索锚点与经论文明确允许学术引用的Figure 2图注。短锚点不能单独证明整句解释，核验时须打开原文URL并按所给章节与段落语境阅读；复制教学提示后也需获取完整相关段落再深入讲解。",
+    "missing": [
+      "未逐图审查附录 Figure 3–5 的注意力连线；不据此推断头的普遍语言学功能。",
+      "未运行原始代码或复现实验；HTML数学提取含重复符号，公式(1)以原PDF核对。"
+    ]
+  },
+  "evidence": [
+    {
+      "id": "a1",
+      "location": "§1 Introduction；讨论按位置递推隐藏状态所造成的样本内并行限制的段落（仅保留检索锚点；完整语境请查原文URL）",
+      "quote": "inherently"
+    },
+    {
+      "id": "a2",
+      "location": "§3 Model Architecture；介绍编码器连续表示与逐个生成输出符号的段落（仅保留检索锚点；完整语境请查原文URL）",
+      "quote": "auto-regressive"
+    },
+    {
+      "id": "a3",
+      "location": "§3.1 Decoder；说明因果掩码结合输出嵌入右移如何限制预测可见信息的段落（仅保留检索锚点；完整语境请查原文URL）",
+      "quote": "offset"
+    },
+    {
+      "id": "a4",
+      "location": "§3.2 Attention；定义查询、键值对以及值的加权求和的段落（仅保留检索锚点；完整语境请查原文URL）",
+      "quote": "weighted"
+    },
+    {
+      "id": "a5",
+      "location": "§3.2.1 Scaled Dot-Product Attention；在公式(1)之前解释点积、缩放和权重的段落；同版本PDF第4页公式(1)（仅保留检索锚点；完整语境请查原文URL）",
+      "quote": "softmax"
+    },
+    {
+      "id": "a6",
+      "location": "§3.2.2 Multi-Head Attention；解释不同学习投影、并行注意力、输出拼接与再次投影的段落（仅保留检索锚点；完整语境请查原文URL）",
+      "quote": "concatenated"
+    },
+    {
+      "id": "a7",
+      "location": "§3.5 Positional Encoding；说明缺少循环/卷积时如何注入位置并加到嵌入的首段（仅保留检索锚点；完整语境请查原文URL）",
+      "quote": "inject"
+    },
+    {
+      "id": "a8",
+      "location": "§4 Why Self-Attention；Table1之后比较n与d，并说明长序列限制的段落（仅保留检索锚点；完整语境请查原文URL）",
+      "quote": "smaller"
+    },
+    {
+      "id": "a9",
+      "location": "§5.1 Training Data and Batching；英德450万句对和英法3600万句的训练数据段落（仅保留检索锚点；完整语境请查原文URL）",
+      "quote": "4.5"
+    },
+    {
+      "id": "a10",
+      "location": "§6.1 Machine Translation；描述WMT2014英德测试28.4 BLEU的第一段；重复数字是HTML抽取痕迹（仅保留检索锚点；完整语境请查原文URL）",
+      "quote": "28.428.4"
+    },
+    {
+      "id": "a11",
+      "location": "Abstract；英法单模型BLEU的摘要句；Table2同列为41.8（仅保留检索锚点；完整语境请查原文URL）",
+      "quote": "41.8"
+    },
+    {
+      "id": "a12",
+      "location": "§6.1 Machine Translation；英法任务正文段；该版本写41.0，HTML抽取重复数字（仅保留检索锚点；完整语境请查原文URL）",
+      "quote": "41.041.0"
+    },
+    {
+      "id": "a13",
+      "location": "§6.2 Model Variations；介绍Table3(A)头数变体与开发集性能差异的段落（仅保留检索锚点；完整语境请查原文URL）",
+      "quote": "0.9"
+    },
+    {
+      "id": "a14",
+      "location": "§6.3 English Constituency Parsing；四层模型、WSJ约4万句和半监督语料约1700万句的训练设置段落（仅保留检索锚点；完整语境请查原文URL）",
+      "quote": "4-layer"
+    },
+    {
+      "id": "a15",
+      "location": "§7 Conclusion；未来工作段末关于减少生成顺序性的句子（仅保留检索锚点；完整语境请查原文URL）",
+      "quote": "generation"
+    },
+    {
+      "id": "a16",
+      "location": "§2 Background；比较卷积路径长度，并指出加权平均有效分辨率代价的段落（仅保留检索锚点；完整语境请查原文URL）",
+      "quote": "averaging"
+    },
+    {
+      "id": "a17",
+      "location": "§3.2.2 Figure 2 caption; same-version PDF page 4; reproduced under the paper’s Google scholarly figure permission, attribution: Vaswani et al., arXiv 1706.03762v7",
+      "quote": "Figure 2: (left) Scaled Dot-Product Attention. (right) Multi-Head Attention consists of several attention layers running in parallel."
+    },
+    {
+      "id": "a18",
+      "location": "§3.3 Position-wise Feed-Forward Networks；介绍各位置独立共享变换的首段（仅保留检索锚点；完整语境请查原文URL）",
+      "quote": "identically"
+    },
+    {
+      "id": "a19",
+      "location": "§3.4 Embeddings and Softmax；输入/输出词到向量的嵌入首句（仅保留检索锚点；完整语境请查原文URL）",
+      "quote": "embeddings"
+    },
+    {
+      "id": "a20",
+      "location": "§5.2 Hardware and Schedule；训练硬件与每步耗时的首段（仅保留检索锚点；完整语境请查原文URL）",
+      "quote": "P100"
+    },
+    {
+      "id": "a21",
+      "location": "§5.3 Optimizer；优化器及参数的首句（仅保留检索锚点；完整语境请查原文URL）",
+      "quote": "Adam"
+    },
+    {
+      "id": "a22",
+      "location": "§5.4 Regularization；Residual Dropout小节及其使用位置（仅保留检索锚点；完整语境请查原文URL）",
+      "quote": "Dropout"
+    },
+    {
+      "id": "a23",
+      "location": "§5.4 Regularization；Label Smoothing小节及训练时使用的描述（仅保留检索锚点；完整语境请查原文URL）",
+      "quote": "smoothing"
+    }
+  ],
+  "thread": [
+    {
+      "kind": "author",
+      "text": "问题：循环模型把序列位置绑在连续计算步骤上，限制单个训练样本内部的并行化。",
+      "evidence": [
+        "a1"
+      ]
+    },
+    {
+      "kind": "author",
+      "text": "方法：编码器与解码器用注意力及逐位置前馈层组成；Q与K决定权重，V被加权汇总，多头把多个表示子空间的输出连接再投影。",
+      "evidence": [
+        "a4",
+        "a6",
+        "a18"
+      ]
+    },
+    {
+      "kind": "author",
+      "text": "证据与边界：WMT2014英德报告28.4 BLEU，并做结构变体与成分句法实验；这些结果属于指定任务。解码仍逐词生成，未来工作包括减少生成的顺序性。",
+      "evidence": [
+        "a2",
+        "a10",
+        "a13",
+        "a14",
+        "a15"
+      ]
+    },
+    {
+      "kind": "inference",
+      "text": "版本内不一致：英法BLEU摘要及Table2为41.8，§6.1正文为41.0；本导读保留差异，不自行裁定哪一处正确。",
+      "evidence": [
+        "a11",
+        "a12"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "id": "motivation",
+      "title": "1–2：为什么替换循环层",
+      "role": "引言提出计算瓶颈；背景比较卷积与注意力如何连接远距离位置。",
+      "points": [
+        {
+          "kind": "author",
+          "text": "并行化是训练动机；注意力加权平均可能降低有效分辨率，作者以多头应对。",
+          "evidence": [
+            "a1",
+            "a16"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "attention",
+      "title": "3.1–3.2：权重怎样变成输出",
+      "role": "把核心运算拆开，再放回编码器、解码器及交叉注意力。",
+      "points": [
+        {
+          "kind": "author",
+          "text": "先计算Q与各K的点积并除以键维度的平方根，再用softmax得到权重；权重乘V才得到输出。",
+          "evidence": [
+            "a4",
+            "a5"
+          ]
+        },
+        {
+          "kind": "author",
+          "text": "多头不是复制同一个结果：每头采用不同学习投影，分别注意、拼接、再投影。",
+          "evidence": [
+            "a6"
+          ]
+        },
+        {
+          "kind": "inference",
+          "text": "解码器掩码与输出右移共同保证预测位置只依赖已知的先前输出。训练并行化不等于推理同时生成所有词。",
+          "evidence": [
+            "a2",
+            "a3"
+          ]
+        }
+      ],
+      "learning_goal": "解释注意力权重与加权输出的区别，以及解码掩码的作用",
+      "visuals": [
+        {
+          "type": "formula",
+          "title": "公式(1)：从匹配分数到内容汇总",
+          "purpose": {
+            "kind": "inference",
+            "text": "理解乘V之前与之后分别是什么。",
+            "evidence": [
+              "a4",
+              "a5"
+            ]
+          },
+          "reading": {
+            "kind": "background",
+            "text": "按等式从内向外读；Q和K是查询与键矩阵，V是值矩阵；dk是每个键的维度。",
+            "evidence": []
+          },
+          "contribution": {
+            "kind": "inference",
+            "text": "这是原公式的教学拆解；具体张量形状取决于查询及键的数量。",
+            "evidence": [
+              "a4",
+              "a5"
+            ]
+          },
+          "steps": [
+            {
+              "kind": "author",
+              "text": "\\[\\operatorname{Attention}(Q,K,V)=\\operatorname{softmax}(QK^T/\\sqrt{d_k})V\\]",
+              "evidence": [
+                "a5"
+              ]
+            },
+            {
+              "kind": "inference",
+              "text": "QKᵀ产生查询与键的兼容分数；缩放后的softmax产生权重矩阵，不是最终内容表示。",
+              "evidence": [
+                "a4",
+                "a5"
+              ]
+            },
+            {
+              "kind": "author",
+              "text": "乘V执行加权求和：返回每个查询位置的内容向量。",
+              "evidence": [
+                "a4"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "source_figure",
+          "title": "Figure 2：单头与多头的连接",
+          "purpose": {
+            "kind": "inference",
+            "text": "对照运算和多头组合。",
+            "evidence": [
+              "a5",
+              "a6",
+              "a17"
+            ]
+          },
+          "reading": {
+            "kind": "background",
+            "text": "已在同版本PDF第4页观察：左图自下向上是MatMul、Scale、可选Mask、SoftMax、与V的MatMul；右图先线性投影，各头并行，再Concat和Linear。",
+            "evidence": []
+          },
+          "contribution": {
+            "kind": "inference",
+            "text": "原图解释结构，不是效果或因果证据；此页不复制图像。",
+            "evidence": [
+              "a5",
+              "a6",
+              "a17"
+            ]
+          },
+          "original_label": "Figure 2 (arXiv v7 PDF page 4)",
+          "source_evidence": [
+            "a17"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "components",
+      "title": "3.3–3.5：内容与位置信息",
+      "role": "注意力以外的组件让各位置具有局部变换、词表示和顺序信息。",
+      "points": [
+        {
+          "kind": "inference",
+          "text": "前馈网络对每个位置分别应用；词嵌入转换输入/输出词；位置编码加到嵌入上，因为架构没有循环或卷积。",
+          "evidence": [
+            "a7",
+            "a18",
+            "a19"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "complexity",
+      "title": "4：并行收益的条件",
+      "role": "用复杂度、顺序操作数和路径长度解释选择。",
+      "points": [
+        {
+          "kind": "author",
+          "text": "文中的速度比较条件是序列长度n小于表示维度d；不能把注意力概括为对任意长序列都更便宜。",
+          "evidence": [
+            "a8"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "training",
+      "title": "5：实验如何实施",
+      "role": "固定数据、优化与训练条件，使性能比较有上下文。",
+      "points": [
+        {
+          "kind": "inference",
+          "text": "英德约450万句对，英法3600万句；正文另报告8块P100、Adam、dropout与标签平滑。这里不是复现实验。",
+          "evidence": [
+            "a9",
+            "a20",
+            "a21",
+            "a22",
+            "a23"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "results",
+      "title": "6：结果、变体与迁移",
+      "role": "区别测试集性能、开发集结构比较和另一任务证据。",
+      "points": [
+        {
+          "kind": "author",
+          "text": "英德WMT2014测试结果报告28.4 BLEU；单头比最佳头数配置低0.9 BLEU的变体结果在开发集，不能混用评价范围。",
+          "evidence": [
+            "a10",
+            "a13"
+          ]
+        },
+        {
+          "kind": "inference",
+          "text": "成分句法实验采用4层模型，WSJ约4万训练句，并另做约1700万句半监督设置；这支持所测试迁移任务，不证明普遍泛化。",
+          "evidence": [
+            "a14"
+          ]
+        },
+        {
+          "kind": "inference",
+          "text": "英法指标在该版本内有41.8与41.0两处写法；报告差异比抹平差异更能保留原文。",
+          "evidence": [
+            "a11",
+            "a12"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "conclusion",
+      "title": "7及附录：结论与下一步",
+      "role": "总结已测任务，并把未来方向与证据分开。",
+      "points": [
+        {
+          "kind": "inference",
+          "text": "减少生成顺序性仍被列为未来目标。附录展示注意力分布例子，但本次只读其图注，不据未审查图像作解释。",
+          "evidence": [
+            "a15"
+          ]
+        }
+      ]
+    }
+  ],
+  "terms": [
+    {
+      "original": "Attention",
+      "name": "注意力",
+      "essential": true,
+      "explanation": {
+        "kind": "background",
+        "text": "由查询与键的兼容关系确定权重，再对值求加权和；权重与输出是不同对象。",
+        "evidence": [
+          "a4"
+        ]
+      },
+      "source_evidence": [
+        "a4"
+      ]
+    },
+    {
+      "original": "Q, K, V",
+      "name": "查询、键、值",
+      "essential": true,
+      "explanation": {
+        "kind": "background",
+        "text": "查询表达当前检索位置，键参与匹配，值提供被汇总内容；这是帮助读公式的背景释义。",
+        "evidence": [
+          "a4",
+          "a5"
+        ]
+      },
+      "source_evidence": [
+        "a4",
+        "a5"
+      ]
+    },
+    {
+      "original": "Multi-Head Attention",
+      "name": "多头注意力",
+      "essential": true,
+      "explanation": {
+        "kind": "background",
+        "text": "不同学习投影产生多组注意力输出，拼接并投影为最终表示。",
+        "evidence": [
+          "a6"
+        ]
+      },
+      "source_evidence": [
+        "a6"
+      ]
+    },
+    {
+      "original": "Positional Encoding",
+      "name": "位置编码",
+      "essential": true,
+      "explanation": {
+        "kind": "background",
+        "text": "给缺少循环及卷积的架构提供位置信息，与词嵌入相加。",
+        "evidence": [
+          "a7"
+        ]
+      },
+      "source_evidence": [
+        "a7"
+      ]
+    },
+    {
+      "original": "BLEU",
+      "name": "BLEU",
+      "essential": false,
+      "explanation": {
+        "kind": "background",
+        "text": "机器翻译评价指标；本文分测试与开发集报告，不能等同于所有任务质量。",
+        "evidence": [
+          "a10"
+        ]
+      },
+      "source_evidence": [
+        "a10"
+      ]
+    }
+  ]
+}

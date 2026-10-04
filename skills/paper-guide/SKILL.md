@@ -32,6 +32,12 @@ the explanation language. Keep the main thread concise and details expandable.
 
 ## Produce the artifact
 
+When a researcher requests a mechanism interaction, or one variable would answer
+a specific understanding question, read [references/mechanism-interaction.md](references/mechanism-interaction.md).
+Finish the basic guide first. Add the bounded supported example only when the
+source relationship and teaching assumptions are clear; otherwise provide a
+static diagram or worked example and explain the limit.
+
 Read [references/guide-format.md](references/guide-format.md) before preparing renderer input. Write a JSON guide containing the supplied source text and your explanations, then run:
 
 ```text

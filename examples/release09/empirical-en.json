@@ -1,0 +1,374 @@
+{
+  "title": "Challenging the N-Heuristic: read the diagnostic claim with its conditions",
+  "language": "en",
+  "source": {
+    "name": "Li, Liu, Gao & Cohen (2024), Challenging the N-Heuristic: Effect size, not sample size, predicts the replicability of psychological science — DOI 10.1371/journal.pone.0306911",
+    "text": "Critically, our goal is not to test whether large N causes greater replicability. Clearly, for a\ngiven study, larger N will increase statistical power and thus the likelihood of identifying a true\neffect. Our goal is diagnostic: Is large N a useful diagnostic for assessing the likely replicability\nof a research study? In this way, our research is akin to an epidemiological study. An epidemi-\nologist might be interested in a problem, such as suicide, and look for correlates of the problem\n(e.g., living in urban vs. rural regions). If living in a rural rather than an urban setting predicted\nhigher rates of suicide, this would provide useful information regarding where the problem\ntends to occur—and where resources and attention should be allocated. \n\nIn total, 307\nstudies were included in our analyses for sample size and 284 in our analysis of effect size (due\nto the absence of data needed to calculate effect size). \n\nWe defined effect size in terms of Cohen’s d of the original effect: the mean difference\nbetween the key treatment and control conditions, divided by the standard deviation.\n\nAll replication attempts offered a binary indicator of whether the original effect was deemed\nreplicated.\n\nsample size did not\ncorrelate with replication success (r\ns\n= -0.02, p = 0.741). \n\nsuch\nthat studies with larger effect sizes were more likely to be replicated (r\ns\n= 0.21, p < 0.001).\n\n\nOnce again, sample size did not predict replicability (B = 0.20,\nSE = 0.16, p = 0.214) but effect size did (B = 0.64, SE = 0.23, p = 0.006). \n\nConsistent with a suppression effect, sample size,\nas well as effect size, now significantly predicted replicability (B = 0.56, SE = 0.20, p = 0.005\nFig 2. Comparisons of predictors of replicabilit y. Coefficient estimat es from separate logistic regressio ns predicting replication success from the sample size\nand effect size of the original study, control ling for study design. Error bars represent 95% confiden ce intervals.\nhttps://do i.org/10.1371/j ournal.pone .0306911.g00 2\nPLOS ONE\nEffect Size Predict s the Replicabil ity of Psychologi cal Science\nPLOS ONE | https://doi.or g/10.137 1/journal.po ne.03069 11 August 23, 2024 7 / 15\n\n[PDF page 8 of 15]\nand B = 1.03, SE = 0.28, p = 0.0002, respectively). \n\nLarge N studies investigated smaller effects (rs = -0.49, p < 0.001; Fig 4),\na relationship uncovered in our analysis post-hoc. \n\na final sample size of 215 psychological scientists.\n\nRespondents rated “large sample size” as the most important criterion (M = 3.84), judging\nit to be significantly more important than the second most important factor, “large effect size”\n(M = 3.61), t(214) = 3.21, p = 0.002. \n\nFirst, the studies subjected to replication and\nour surveyed respondents were not representative samples. Thus, further attempts to assess\nthe generality of our findings are needed. \n\nSecond, we do not, by necessity, know the causal\nimpact of policies that encourage large N or effect sizes. Our results do not suggest that large\nPLOS ONE\nEffect Size Predict s the Replicabil ity of Psychologi cal Science\nPLOS ONE | https://doi.or g/10.137 1/journal.po ne.03069 11 August 23, 2024 12 / 15\n\n[PDF page 13 of 15]\nsample sizes are unimportant. \n\nFig 2. Comparisons of predictors of replicabilit y. Coefficient estimat es from separate logistic regressio ns predicting replication success from the sample size\nand effect size of the original study, control ling for study design. Error bars represent 95% confiden ce intervals.\n\n\npotential publication bias [32, 33].\nThis bias may contribute to the patterns observed, particularly the inverse relationship\nbetween sample size and effect size. Publication bias favors studies that achieve statistically\n\n\nany rigid heuristic should be avoided, as it can become a stifling basis for\nexclusion.\n\n\nSecond, we defined replication success as whether the\nreplication study passed the Bayesian analysis, available for 54 studies. Results showed that\nagain, effect size predicted replicability (r\ns\n= 0.27, p = 0.057). Sample size did not, and as with\nthe meta-analysis analysis, if anything, the association was negative (r\ns\n= -0.23, p = 0.119).",
+    "coverage": "Read all 15 physical PDF pages: abstract, introduction, Method, Results, Survey study, Discussion, supporting-information inventory, acknowledgments, contributions and references. Inspected original Fig 2 on PDF page 7. Source appendix contains selected exact extracts; a separate CC-BY text file retains the acquired full main-paper text. Original source: https://doi.org/10.1371/journal.pone.0306911",
+    "missing": [
+      "Supporting-information files and OSF data/code were not retrieved or reanalyzed.",
+      "Replication studies and survey respondents are nonrepresentative; this example cannot establish all-discipline validity."
+    ]
+  },
+  "evidence": [
+    {
+      "id": "e1",
+      "location": "PDF page3, Introduction",
+      "quote": "Critically, our goal is not to test whether large N causes greater replicability. Clearly, for a\ngiven study, larger N will increase statistical power and thus the likelihood of identifying a true\neffect. Our goal is diagnostic: Is large N a useful diagnostic for assessing the likely replicability\nof a research study? In this way, our research is akin to an epidemiological study. An epidemi-\nologist might be interested in a problem, such as suicide, and look for correlates of the problem\n(e.g., living in urban vs. rural regions). If living in a rural rather than an urban setting predicted\nhigher rates of suicide, this would provide useful information regarding where the problem\ntends to occur—and where resources and attention should be allocated. "
+    },
+    {
+      "id": "e2",
+      "location": "PDF page5, Method",
+      "quote": "In total, 307\nstudies were included in our analyses for sample size and 284 in our analysis of effect size (due\nto the absence of data needed to calculate effect size). "
+    },
+    {
+      "id": "e3",
+      "location": "PDF page5, Method",
+      "quote": "We defined effect size in terms of Cohen’s d of the original effect: the mean difference\nbetween the key treatment and control conditions, divided by the standard deviation."
+    },
+    {
+      "id": "e4",
+      "location": "PDF page5, Method",
+      "quote": "All replication attempts offered a binary indicator of whether the original effect was deemed\nreplicated."
+    },
+    {
+      "id": "e5",
+      "location": "PDF page6, Results",
+      "quote": "sample size did not\ncorrelate with replication success (r\ns\n= -0.02, p = 0.741). "
+    },
+    {
+      "id": "e6",
+      "location": "PDF page6, Results",
+      "quote": "such\nthat studies with larger effect sizes were more likely to be replicated (r\ns\n= 0.21, p < 0.001).\n"
+    },
+    {
+      "id": "e7",
+      "location": "PDF page6, Results",
+      "quote": "Once again, sample size did not predict replicability (B = 0.20,\nSE = 0.16, p = 0.214) but effect size did (B = 0.64, SE = 0.23, p = 0.006). "
+    },
+    {
+      "id": "e8",
+      "location": "PDF pages7–8, Results",
+      "quote": "Consistent with a suppression effect, sample size,\nas well as effect size, now significantly predicted replicability (B = 0.56, SE = 0.20, p = 0.005\nFig 2. Comparisons of predictors of replicabilit y. Coefficient estimat es from separate logistic regressio ns predicting replication success from the sample size\nand effect size of the original study, control ling for study design. Error bars represent 95% confiden ce intervals.\nhttps://do i.org/10.1371/j ournal.pone .0306911.g00 2\nPLOS ONE\nEffect Size Predict s the Replicabil ity of Psychologi cal Science\nPLOS ONE | https://doi.or g/10.137 1/journal.po ne.03069 11 August 23, 2024 7 / 15\n\n[PDF page 8 of 15]\nand B = 1.03, SE = 0.28, p = 0.0002, respectively). "
+    },
+    {
+      "id": "e9",
+      "location": "PDF page6, Results",
+      "quote": "Large N studies investigated smaller effects (rs = -0.49, p < 0.001; Fig 4),\na relationship uncovered in our analysis post-hoc. "
+    },
+    {
+      "id": "e10",
+      "location": "PDF page10, Survey study",
+      "quote": "a final sample size of 215 psychological scientists."
+    },
+    {
+      "id": "e11",
+      "location": "PDF page10, Survey study",
+      "quote": "Respondents rated “large sample size” as the most important criterion (M = 3.84), judging\nit to be significantly more important than the second most important factor, “large effect size”\n(M = 3.61), t(214) = 3.21, p = 0.002. "
+    },
+    {
+      "id": "e12",
+      "location": "PDF page12, Discussion",
+      "quote": "First, the studies subjected to replication and\nour surveyed respondents were not representative samples. Thus, further attempts to assess\nthe generality of our findings are needed. "
+    },
+    {
+      "id": "e13",
+      "location": "PDF pages12–13, Discussion",
+      "quote": "Second, we do not, by necessity, know the causal\nimpact of policies that encourage large N or effect sizes. Our results do not suggest that large\nPLOS ONE\nEffect Size Predict s the Replicabil ity of Psychologi cal Science\nPLOS ONE | https://doi.or g/10.137 1/journal.po ne.03069 11 August 23, 2024 12 / 15\n\n[PDF page 13 of 15]\nsample sizes are unimportant. "
+    },
+    {
+      "id": "e14",
+      "location": "PDF page7, Fig2 caption",
+      "quote": "Fig 2. Comparisons of predictors of replicabilit y. Coefficient estimat es from separate logistic regressio ns predicting replication success from the sample size\nand effect size of the original study, control ling for study design. Error bars represent 95% confiden ce intervals.\n"
+    },
+    {
+      "id": "e15",
+      "location": "PDF page9, Results",
+      "quote": "potential publication bias [32, 33].\nThis bias may contribute to the patterns observed, particularly the inverse relationship\nbetween sample size and effect size. Publication bias favors studies that achieve statistically\n"
+    },
+    {
+      "id": "e16",
+      "location": "PDF page13, Discussion",
+      "quote": "any rigid heuristic should be avoided, as it can become a stifling basis for\nexclusion.\n"
+    },
+    {
+      "id": "e17",
+      "location": "PDF page 5, Method: alternative replication definition (Bayesian analysis)",
+      "quote": "Second, we defined replication success as whether the\nreplication study passed the Bayesian analysis, available for 54 studies. Results showed that\nagain, effect size predicted replicability (r\ns\n= 0.27, p = 0.057). Sample size did not, and as with\nthe meta-analysis analysis, if anything, the association was negative (r\ns\n= -0.23, p = 0.119)."
+    }
+  ],
+  "thread": [
+    {
+      "kind": "author",
+      "text": "Question: Does original sample size work as a diagnostic of which psychological effects replicate? This is a cross-study predictive question, not an intervention increasing N within a fixed study.",
+      "evidence": [
+        "e1"
+      ]
+    },
+    {
+      "kind": "author",
+      "text": "Design: pooled replication records supply 307 studies for sample-size analyses and 284 for effect-size analyses. Original effect size is converted to Cohen’s d; the main outcome is binary replication success.",
+      "evidence": [
+        "e2",
+        "e3",
+        "e4"
+      ]
+    },
+    {
+      "kind": "author",
+      "text": "Finding with qualification: separately, N is not a significant predictor and effect size is. When log N and log effect size enter together, both significantly predict replication, consistent with suppression.",
+      "evidence": [
+        "e7",
+        "e8"
+      ]
+    },
+    {
+      "kind": "author",
+      "text": "A separate survey of 215 scientists rates N above effect size. Neither dataset is representative, and the study does not identify causal effects of editorial policies.",
+      "evidence": [
+        "e10",
+        "e11",
+        "e12",
+        "e13"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "id": "question",
+      "title": "Introduction: distinguish diagnosis from causation",
+      "role": "Frames why a theoretically beneficial N increase need not identify more replicable studies across a varied literature.",
+      "points": [
+        {
+          "kind": "inference",
+          "text": "Holding a study’s other attributes fixed is a different comparison from comparing studies that differ in N, effect size and design.",
+          "evidence": [
+            "e1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "method",
+      "title": "Method: define the unit and outcome",
+      "role": "Connects pooled study records, original-study predictors, exclusions and replication criteria.",
+      "points": [
+        {
+          "kind": "inference",
+          "text": "The analysis counts differ: 307 for N, 284 for d. Missing effect-size information prevents treating all models as the same complete sample.",
+          "evidence": [
+            "e2"
+          ]
+        },
+        {
+          "kind": "author",
+          "text": "Cohen’s d is the treatment-control mean difference divided by a standard deviation; diverse project measures are reduced to a binary common outcome.",
+          "evidence": [
+            "e3",
+            "e4"
+          ]
+        },
+        {
+          "kind": "author",
+          "text": "Robustness is not uniform statistical significance: using the Bayesian replication definition available for 54 studies, the effect-size association was rs=.27, p=.057; sample size was rs=-.23, p=.119. The direction is compatible with the main pattern, but the effect-size result does not cross the conventional .05 threshold.",
+          "evidence": [
+            "e17"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "results",
+      "title": "Results: the suppressor qualification matters",
+      "role": "Keeps simple associations, separate adjusted models and a joint model distinct.",
+      "points": [
+        {
+          "kind": "author",
+          "text": "Across effects, the N association is rs = -0.02, p = .741; the d association is rs = .21, p < .001. These are correlations with observed replication success.",
+          "evidence": [
+            "e5",
+            "e6"
+          ]
+        },
+        {
+          "kind": "author",
+          "text": "Separate design-adjusted logistic models report N B=.20, SE=.16, p=.214 and d B=.64, SE=.23, p=.006; these are not effect sizes on a common standardized scale.",
+          "evidence": [
+            "e7"
+          ]
+        },
+        {
+          "kind": "inference",
+          "text": "Large N studies investigated smaller effects (rs=-.49, p<.001), found post hoc. In the joint log-predictor model, N B=.56, SE=.20, p=.005 and d B=1.03, SE=.28, p=.0002. Thus the paper does not show N is irrelevant.",
+          "evidence": [
+            "e8",
+            "e9"
+          ]
+        }
+      ],
+      "learning_goal": "Distinguish the separate and joint predictor models, and explain why these diagnostic associations do not show N is causally irrelevant",
+      "visuals": [
+        {
+          "type": "source_figure",
+          "title": "Fig 2: separate models with uncertainty",
+          "purpose": {
+            "kind": "inference",
+            "text": "See what the plotted comparison actually estimates.",
+            "evidence": [
+              "e7",
+              "e8",
+              "e14"
+            ]
+          },
+          "reading": {
+            "kind": "background",
+            "text": "Original PDF page7: x-axis names sample size and effect size; y-axis is Coefficient Estimate. Points come from separate logistic regressions controlling design; bars are 95% confidence intervals, not ±1 SE. Predictors were log-transformed in Results.",
+            "evidence": []
+          },
+          "contribution": {
+            "kind": "inference",
+            "text": "The N interval crosses zero and the d interval does not. This plot does not display the joint model, whose N coefficient is significant. Coefficients for different predictors should not be read as comparable standardized effect sizes.",
+            "evidence": [
+              "e7",
+              "e8",
+              "e14"
+            ]
+          },
+          "original_label": "Fig 2 (PDF page 7)",
+          "source_evidence": [
+            "e14"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "survey",
+      "title": "Survey study: researchers’ judgments",
+      "role": "Supplies separate evidence that the proposed heuristic is endorsed.",
+      "points": [
+        {
+          "kind": "author",
+          "text": "215 scientists rated nine criteria; N M=3.84 versus effect size M=3.61, paired t(214)=3.21, p=.002. This is a rating comparison, not a replication outcome.",
+          "evidence": [
+            "e10",
+            "e11"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "discussion",
+      "title": "Discussion: scope and alternatives",
+      "role": "Limits policy interpretation and returns to comprehensive study assessment.",
+      "points": [
+        {
+          "kind": "inference",
+          "text": "Studies selected for replication and survey respondents are not representative; publication bias may contribute to the observed N–d relationship. Supporting files were listed but not read here.",
+          "evidence": [
+            "e12",
+            "e15"
+          ]
+        },
+        {
+          "kind": "author",
+          "text": "The authors do not know causal policy effects and explicitly retain the importance of large samples; any rigid heuristic should be avoided.",
+          "evidence": [
+            "e13",
+            "e16"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "backmatter",
+      "title": "Supporting information and back matter",
+      "role": "Points to further materials without treating their listing as access.",
+      "points": [
+        {
+          "kind": "inference",
+          "text": "The main-paper findings are readable, but robustness analyses in linked supplements and OSF data need independent retrieval before detailed verification.",
+          "evidence": [
+            "e2"
+          ]
+        }
+      ]
+    }
+  ],
+  "terms": [
+    {
+      "original": "N-Heuristic",
+      "name": "N-Heuristic",
+      "essential": true,
+      "explanation": {
+        "kind": "background",
+        "text": "Judging likely replication primarily by sample size; a diagnostic shortcut tested here, not a randomized policy.",
+        "evidence": [
+          "e1"
+        ]
+      },
+      "source_evidence": [
+        "e1"
+      ]
+    },
+    {
+      "original": "Cohen’s d",
+      "name": "Cohen’s d",
+      "essential": true,
+      "explanation": {
+        "kind": "background",
+        "text": "A standardized mean difference; the paper harmonizes original effects into this unit.",
+        "evidence": [
+          "e3"
+        ]
+      },
+      "source_evidence": [
+        "e3"
+      ]
+    },
+    {
+      "original": "replication success",
+      "name": "Replication success",
+      "essential": true,
+      "explanation": {
+        "kind": "background",
+        "text": "Main outcome is a binary project-provided success indicator; its operationalization varies across replication projects.",
+        "evidence": [
+          "e4"
+        ]
+      },
+      "source_evidence": [
+        "e4"
+      ]
+    },
+    {
+      "original": "suppressor effect",
+      "name": "Suppressor effect",
+      "essential": true,
+      "explanation": {
+        "kind": "background",
+        "text": "An associated predictor can hide another predictor’s conditional relationship; here N becomes significant when effect size is included. This statistical description does not identify a causal mechanism.",
+        "evidence": [
+          "e8"
+        ]
+      },
+      "source_evidence": [
+        "e8"
+      ]
+    },
+    {
+      "original": "95% confidence interval",
+      "name": "95% confidence interval",
+      "essential": false,
+      "explanation": {
+        "kind": "background",
+        "text": "Uncertainty interval for a coefficient; not the fraction of studies that replicated.",
+        "evidence": [
+          "e14"
+        ]
+      },
+      "source_evidence": [
+        "e14"
+      ]
+    }
+  ]
+}

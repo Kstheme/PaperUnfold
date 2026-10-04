@@ -6,7 +6,7 @@
 
 PaperUnfold 基于一套通用论文阅读方法，面向全球各学科研究人员，根据每篇论文的研究问题、论证、方法与证据调整讲解。阅读体验先提供轻量 HTML 导读，再按需通过对话深入学习。
 
-**ticket01–07 已实现。** 支持粘贴原文、本地 PDF、可访问网页、在线 PDF 与 DOI 定位材料生成 HTML 导读，说明来源覆盖范围并提供可复制的教学提示词。讲解与按需图示适应论文的方法、实证证据或论证。独立教学支持保存学习进度并结合原文续学。代表性发布示例与安装验收仍在后续计划中。见[本轮验收记录](docs/validation/tickets-04-05.md)。
+**ticket01–09 已实现。** 支持粘贴原文、本地 PDF、可访问网页、在线 PDF 与 DOI 定位材料生成 HTML 导读，说明来源覆盖范围并提供可复制的教学提示词。讲解与按需图示适应论文的方法、实证证据或论证。独立教学支持保存学习进度并结合原文续学。已提供按需的限定范围 softmax 演示与代表性发布示例。安装、平台支持与许可证验收仍属于 ticket10。见[本轮验收记录](docs/validation/tickets-08-09.md)。
 
 ## 阅读体验
 
@@ -39,7 +39,9 @@ PaperUnfold 基于一套通用论文阅读方法，面向全球各学科研究�
 
 可以查看[实际 Agent 生成的中文导读](examples/paper-guide/agent-invocation-zh.html)、[原文与 renderer 输入](examples/paper-guide/agent-invocation-zh.json)及[教学对话验收片段](examples/paper-tutor/actual-session.md)。另有[实际暂停记录](examples/paper-tutor/ticket07-actual-progress.json)和[导读到教学再到续学的验收对话](examples/paper-tutor/ticket06-07-actual-session.md)。
 
-内容自适应验收采用选取的原文片段：[Attention 计算步骤](examples/paper-guide/adaptive-method-zh.html)、[实证调查证据](examples/paper-guide/adaptive-empirical-zh.html)，以及同一理论模型的[中文](examples/paper-guide/adaptive-theory-zh.html)与[英文](examples/paper-guide/adaptive-theory-en.html)导读。[来源记录](examples/paper-guide/adaptive-source-notes.md)说明覆盖范围与归属。这些示例验证不同推理结构，不代表已验证所有学科。串联导读、教学与续学的代表性发布示例仍属于 ticket09；不同宿主的技能发现和安装流程属于 ticket10。
+内容自适应验收采用选取的原文片段：[Attention 计算步骤](examples/paper-guide/adaptive-method-zh.html)、[实证调查证据](examples/paper-guide/adaptive-empirical-zh.html)，以及同一理论模型的[中文](examples/paper-guide/adaptive-theory-zh.html)与[英文](examples/paper-guide/adaptive-theory-en.html)导读。[来源记录](examples/paper-guide/adaptive-source-notes.md)说明覆盖范围与归属。这些片段示例验证不同推理结构。[发布示例](examples/release09/README.md)进一步提供完整主文阅读后的导读：中文算法论文、英文实证研究，以及同一理论论证的英文与中文版本。包括真实截图、原文对照评审、脚本化研究者回答驱动的实际教学、保存进度后新会话续学，以及[相同段落的表达对照](examples/release09/conventional-comparison.md)。这些案例不代表所有学科的质量验证，也未测量学习效果。不同宿主的技能发现和安装流程属于 ticket10。
+
+[可选机制示例](examples/mechanism08/run.md)提供使用明确教学数值的[限定范围 softmax 温度实验](examples/mechanism08/attention-guide.html)；当原文不足以支持所请求的单篇论文复现概率预测时，提供[静态实证解释](examples/mechanism08/empirical-guide.html)。其他机制按原文提供静态讲解，尚未实现任意机制的交互模拟。
 
 ## 设计原则
 
@@ -59,9 +61,11 @@ PaperUnfold 基于一套通用论文阅读方法，面向全球各学科研究�
 - [x] 根据方法、实证证据与理论论证调整研究逻辑讲解和按需图示。
 - [x] 从 HTML 复制章节与术语教学提示词。
 - [x] 保存学习进度并结合原文续学。
-- [ ] 发布串联导读、教学与续学的算法、实证研究、理论或人文论证代表性示例，包含英文与中文输出。
-- [ ] 补齐真实截图、原文来源、经验证的安装步骤与许可证。
-- [ ] 使用相同原文材料，展示普通文字解释与 PaperUnfold 导读的差异。
+- [x] 发布串联导读、教学与续学的算法、实证研究、理论或人文论证代表性示例，包含英文与中文输出。
+- [x] 提供真实截图与原文来源。
+- [x] 提供可选的限定机制演示与静态替代。
+- [ ] 验证安装步骤、平台支持与许可证，完成首次使用发布体验（ticket10）。
+- [x] 使用相同原文材料，展示普通文字解释与 PaperUnfold 导读的差异。
 
 ## 灵感来源
 

@@ -1,0 +1,348 @@
+{
+  "title": "Why significance need not imply truth: Ioannidis 2005",
+  "language": "en",
+  "source": {
+    "name": "Ioannidis (2005), Why Most Published Research Findings Are False — DOI 10.1371/journal.pmed.0020124",
+    "text": "Research ﬁ ndings are deﬁ ned \nhere as any relationship reaching \nformal statistical signiﬁ cance, e.g., \neffective interventions, informative \npredictors, risk factors, or associations. \n\n\nLet R \nbe the ratio of the number of “true \nrelationships” to “no relationships” \namong those tested in the ﬁ eld. \n\nfor computational simplicity, \ncircumscribed ﬁ elds where either there \nis only one true relationship (among \nmany that can be hypothesized) or \nthe power is similar to ﬁ nd any of the \nseveral existing true relationships. \n\nPPV = (1 − β)R⁄( R \n− βR + α). \n\nLet u be the proportion of probed \nanalyses that would not have been \n“research ﬁ  ndings,” but nevertheless \nend up presented and reported as \nsuch, because of bias.\n\nWe may \nassume that u does not depend on \nwhether a true relationship exists \nor not. \n\nFor n independent studies of \nequal power, the 2 × 2 table is shown in \nTable 3: PPV = R(1 − β\nn)⁄( R + 1 − [1 − \nα] n − Rβn) (not considering bias). \n\nThese corollaries consider each \nfactor separately, but these factors often \ninﬂ uence each other. For example, \ninvestigators working in ﬁ elds where \ntrue effect sizes are perceived to be \nsmall may be more likely to perform \nlarge studies than investigators working \nin ﬁ elds where true effect sizes are \nperceived to be large. Or prejudice \nmay prevail in a hot scientiﬁ c ﬁ eld, \nfurther undermining the predictive \nvalue of its research ﬁ ndings. Highly \nprejudiced stakeholders may even \ncreate a barrier that aborts efforts at \nobtaining and disseminating opposing \nresults. Conversely, the fact that a ﬁ eld \nis hot or has strong invested interests \nmay sometimes promote larger studies \nand improved standards of research, \nenhancing the predictive value of its \nresearch ﬁ ndings. Or massive discovery-\noriented testing may result in such a \nlarge yield of signiﬁ cant relationships \nthat investigators have enough to \nreport and search further and thus \nrefrain from data dredging and \nmanipulation. \n\n\nTable 4 provides the results \nof simulations using the formulas \ndeveloped for the inﬂ uence of power, \nratio of true to non-true relationships, \nand bias, for various types of situations \nthat may be characteristic of speciﬁ c \nstudy designs and settings. \n\nLet us suppose that in a research ﬁ eld \nthere are no true ﬁ ndings at all to be \ndiscovered. \n\nBetter powered evidence, e.g., large \nstudies or low-bias meta-analyses, \nmay help, as it comes closer to the \nunknown “gold” standard. However, \nlarge studies may still have biases \nand these should be acknowledged \nand avoided. \n\ntotality of the evidence.\n\nthese \nassumptions would be considerably \nsubjective, they would still be very \nuseful in interpreting research claims \nand putting them in context.\n\nIn this framework, a research ﬁ nding \nis less likely to be true when the studies \nconducted in a ﬁ eld are smaller; when \neffect sizes are smaller; when there is a \ngreater number and lesser preselection \nof tested relationships; where there is \ngreater ﬂ exibility in designs, deﬁ nitions, \noutcomes, and analytical modes; when \nthere is greater ﬁ nancial and other \ninterest and prejudice; and when more \nteams are involved in a scientiﬁ c ﬁ eld \nin chase of statistical signiﬁ cance. \n",
+    "coverage": "Read all six PDF pages: framework, bias, multiple-team testing, six corollaries, model scenarios, null-field thought experiment, improvement proposals and references. Verified Tables 1/2 on PDF page 2. Appendix contains selected extracts; full CC-BY extracted text is stored separately. Version: original 2005 PDF, not replaced with a corrected file. The 2022 correction identifies a missing set of parentheses only in the Table 2 cell Research Finding=Yes / True Relationship=No; it does not announce changes to all tables or illustrative numbers. This guide breaks down the Table 1 base PPV formula. Original: https://doi.org/10.1371/journal.pmed.0020124; correction: https://doi.org/10.1371/journal.pmed.1004085",
+    "missing": [
+      "Did not recompute all simulations; this framework is not an observed error census of all published papers."
+    ]
+  },
+  "evidence": [
+    {
+      "id": "t1",
+      "location": "PDF page1, Modeling the Framework",
+      "quote": "Research ﬁ ndings are deﬁ ned \nhere as any relationship reaching \nformal statistical signiﬁ cance, e.g., \neffective interventions, informative \npredictors, risk factors, or associations. \n"
+    },
+    {
+      "id": "t2",
+      "location": "PDF page1, Modeling the Framework",
+      "quote": "Let R \nbe the ratio of the number of “true \nrelationships” to “no relationships” \namong those tested in the ﬁ eld. "
+    },
+    {
+      "id": "t3",
+      "location": "PDF page1, Modeling the Framework",
+      "quote": "for computational simplicity, \ncircumscribed ﬁ elds where either there \nis only one true relationship (among \nmany that can be hypothesized) or \nthe power is similar to ﬁ nd any of the \nseveral existing true relationships. "
+    },
+    {
+      "id": "t4",
+      "location": "PDF page1, PPV equation; Table1 PDF page2",
+      "quote": "PPV = (1 − β)R⁄( R \n− βR + α). "
+    },
+    {
+      "id": "t5",
+      "location": "PDF page2, Bias",
+      "quote": "Let u be the proportion of probed \nanalyses that would not have been \n“research ﬁ  ndings,” but nevertheless \nend up presented and reported as \nsuch, because of bias."
+    },
+    {
+      "id": "t6",
+      "location": "PDF page2, Bias",
+      "quote": "We may \nassume that u does not depend on \nwhether a true relationship exists \nor not. "
+    },
+    {
+      "id": "t7",
+      "location": "PDF page2, Testing by Several Independent Teams",
+      "quote": "For n independent studies of \nequal power, the 2 × 2 table is shown in \nTable 3: PPV = R(1 − β\nn)⁄( R + 1 − [1 − \nα] n − Rβn) (not considering bias). "
+    },
+    {
+      "id": "t8",
+      "location": "PDF page4, Corollaries",
+      "quote": "These corollaries consider each \nfactor separately, but these factors often \ninﬂ uence each other. For example, \ninvestigators working in ﬁ elds where \ntrue effect sizes are perceived to be \nsmall may be more likely to perform \nlarge studies than investigators working \nin ﬁ elds where true effect sizes are \nperceived to be large. Or prejudice \nmay prevail in a hot scientiﬁ c ﬁ eld, \nfurther undermining the predictive \nvalue of its research ﬁ ndings. Highly \nprejudiced stakeholders may even \ncreate a barrier that aborts efforts at \nobtaining and disseminating opposing \nresults. Conversely, the fact that a ﬁ eld \nis hot or has strong invested interests \nmay sometimes promote larger studies \nand improved standards of research, \nenhancing the predictive value of its \nresearch ﬁ ndings. Or massive discovery-\noriented testing may result in such a \nlarge yield of signiﬁ cant relationships \nthat investigators have enough to \nreport and search further and thus \nrefrain from data dredging and \nmanipulation. \n"
+    },
+    {
+      "id": "t9",
+      "location": "PDF page4, Most Research Findings",
+      "quote": "Table 4 provides the results \nof simulations using the formulas \ndeveloped for the inﬂ uence of power, \nratio of true to non-true relationships, \nand bias, for various types of situations \nthat may be characteristic of speciﬁ c \nstudy designs and settings. "
+    },
+    {
+      "id": "t10",
+      "location": "PDF page5, Null field argument",
+      "quote": "Let us suppose that in a research ﬁ eld \nthere are no true ﬁ ndings at all to be \ndiscovered. "
+    },
+    {
+      "id": "t11",
+      "location": "PDF page5, Improve",
+      "quote": "Better powered evidence, e.g., large \nstudies or low-bias meta-analyses, \nmay help, as it comes closer to the \nunknown “gold” standard. However, \nlarge studies may still have biases \nand these should be acknowledged \nand avoided. "
+    },
+    {
+      "id": "t12",
+      "location": "PDF page 6, How Can We Improve the Situation? (sentence continued from PDF page 5)",
+      "quote": "totality of the evidence."
+    },
+    {
+      "id": "t13",
+      "location": "PDF page6, Improve",
+      "quote": "these \nassumptions would be considerably \nsubjective, they would still be very \nuseful in interpreting research claims \nand putting them in context."
+    },
+    {
+      "id": "t14",
+      "location": "PDF page1 Summary",
+      "quote": "In this framework, a research ﬁ nding \nis less likely to be true when the studies \nconducted in a ﬁ eld are smaller; when \neffect sizes are smaller; when there is a \ngreater number and lesser preselection \nof tested relationships; where there is \ngreater ﬂ exibility in designs, deﬁ nitions, \noutcomes, and analytical modes; when \nthere is greater ﬁ nancial and other \ninterest and prejudice; and when more \nteams are involved in a scientiﬁ c ﬁ eld \nin chase of statistical signiﬁ cance. \n"
+    }
+  ],
+  "thread": [
+    {
+      "kind": "author",
+      "text": "The question is the modeled probability a claimed significant relationship is true. “Finding” here means a relationship reaching formal statistical significance.",
+      "evidence": [
+        "t1",
+        "t4"
+      ]
+    },
+    {
+      "kind": "author",
+      "text": "The base framework combines prior true-to-null odds R, power 1−β and Type I error α into PPV, then extends to bias u and testing by multiple teams.",
+      "evidence": [
+        "t2",
+        "t4",
+        "t5",
+        "t7"
+      ]
+    },
+    {
+      "kind": "inference",
+      "text": "Corollaries are conditional; Table 4 contains model scenarios, and the null-field argument is a thought experiment, not a diagnosis of every real field.",
+      "evidence": [
+        "t8",
+        "t9",
+        "t10"
+      ]
+    },
+    {
+      "kind": "author",
+      "text": "Proposals include stronger evidence and less bias; large studies may retain bias, and assumptions about R may be subjective.",
+      "evidence": [
+        "t11",
+        "t12",
+        "t13"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "id": "framework",
+      "title": "Framework: from true-positive counts to PPV",
+      "role": "Defines tested relationships and power, then asks what fraction of claimed findings are true.",
+      "points": [
+        {
+          "kind": "author",
+          "text": "R is the ratio of true to null relationships, not itself a probability; prior probability is R/(1+R). For simplicity the author considers one true relationship or similar power across true relationships.",
+          "evidence": [
+            "t2",
+            "t3"
+          ]
+        }
+      ],
+      "learning_goal": "Derive PPV from Table 1 and distinguish prior odds, power and probability of truth after significance",
+      "visuals": [
+        {
+          "type": "formula",
+          "title": "Table 1 and the base PPV formula",
+          "purpose": {
+            "kind": "inference",
+            "text": "Explain why α=.05 does not mean a finding has a 95% probability of truth.",
+            "evidence": [
+              "t2",
+              "t3",
+              "t4"
+            ]
+          },
+          "reading": {
+            "kind": "background",
+            "text": "Verified Table 1 on PDF page2: rows indicate claimed finding, columns truth. PPV is computed along the finding=Yes row.",
+            "evidence": []
+          },
+          "contribution": {
+            "kind": "inference",
+            "text": "In the unbiased single-testing framework, PPV exceeds one half when (1−β)R>α; this is not an observed frequency for all fields.",
+            "evidence": [
+              "t2",
+              "t3",
+              "t4"
+            ]
+          },
+          "steps": [
+            {
+              "kind": "author",
+              "text": "\\[PPV=\\frac{(1-\\beta)R}{(1-\\beta)R+\\alpha}\\]",
+              "evidence": [
+                "t4"
+              ]
+            },
+            {
+              "kind": "inference",
+              "text": "The numerator weights true positives; the denominator adds false positives. Common factor c/(R+1) cancels.",
+              "evidence": [
+                "t4"
+              ]
+            },
+            {
+              "kind": "inference",
+              "text": "With low R, false positives can occupy a large share of significant findings even with substantial power.",
+              "evidence": [
+                "t2",
+                "t4"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bias",
+      "title": "Bias: turning non-findings into claims",
+      "role": "Extends the counting framework and separates bias from chance.",
+      "points": [
+        {
+          "kind": "author",
+          "text": "u is the proportion of analyses that would not be findings but are presented as such through bias; the model assumes u does not depend on truth, not that u was measured for each real study.",
+          "evidence": [
+            "t5",
+            "t6"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "teams",
+      "title": "Multiple teams: selecting at least one significant result",
+      "role": "Changes the event being selected; this is distinct from combining all evidence.",
+      "points": [
+        {
+          "kind": "inference",
+          "text": "The model concerns at least one significant result among n independent equal-power tests; it does not claim that consistent independent confirmation lowers credibility.",
+          "evidence": [
+            "t7",
+            "t12"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "corollaries",
+      "title": "Six corollaries and their interactions",
+      "role": "Links power, prior odds and bias changes to research practices.",
+      "points": [
+        {
+          "kind": "inference",
+          "text": "The author discusses small studies, small effects, broad unselected testing, flexible analyses, interests and hot fields. Factors interact: a hot field can also promote larger studies and improved standards.",
+          "evidence": [
+            "t8",
+            "t14"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "scenarios",
+      "title": "Model scenarios and null-field thought experiment",
+      "role": "Distinguishes parameter-based predictions from empirical surveys.",
+      "points": [
+        {
+          "kind": "inference",
+          "text": "Table 4 computes PPV from stipulated power, R and u. The null-field passage assumes no true relationships before discussing deviations; it cannot directly establish that a real field is entirely false.",
+          "evidence": [
+            "t9",
+            "t10"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "improve",
+      "title": "Improvement and references: contextualize isolated findings",
+      "role": "Turns critique into conditional proposals; cited works were not independently read.",
+      "points": [
+        {
+          "kind": "author",
+          "text": "Better-powered, low-bias evidence may help, but large studies can retain bias. The totality of evidence matters more than one team’s significant result; estimating prior odds still involves subjective assumptions.",
+          "evidence": [
+            "t11",
+            "t12",
+            "t13"
+          ]
+        }
+      ]
+    }
+  ],
+  "terms": [
+    {
+      "original": "PPV",
+      "name": "Positive predictive value",
+      "essential": true,
+      "explanation": {
+        "kind": "background",
+        "text": "Here, probability a relationship is true conditional on a claimed finding; neither power nor 1−p.",
+        "evidence": [
+          "t4"
+        ]
+      },
+      "source_evidence": [
+        "t4"
+      ]
+    },
+    {
+      "original": "R",
+      "name": "Pre-study true-to-null odds",
+      "essential": true,
+      "explanation": {
+        "kind": "background",
+        "text": "True relationships divided by null relationships; prior probability is R/(1+R).",
+        "evidence": [
+          "t2"
+        ]
+      },
+      "source_evidence": [
+        "t2"
+      ]
+    },
+    {
+      "original": "1 − β",
+      "name": "Statistical power",
+      "essential": true,
+      "explanation": {
+        "kind": "background",
+        "text": "Probability of detection when a relationship is true; reverses the conditioning direction compared with PPV.",
+        "evidence": [
+          "t3",
+          "t4"
+        ]
+      },
+      "source_evidence": [
+        "t3",
+        "t4"
+      ]
+    },
+    {
+      "original": "u",
+      "name": "Bias conversion proportion",
+      "essential": true,
+      "explanation": {
+        "kind": "background",
+        "text": "Proportion of otherwise non-findings presented as findings; a model parameter, not a universal bias measurement.",
+        "evidence": [
+          "t5"
+        ]
+      },
+      "source_evidence": [
+        "t5"
+      ]
+    },
+    {
+      "original": "null field",
+      "name": "Null field",
+      "essential": false,
+      "explanation": {
+        "kind": "background",
+        "text": "Thought experiment assuming no true relationships; cannot simply be imposed on an actual field.",
+        "evidence": [
+          "t10"
+        ]
+      },
+      "source_evidence": [
+        "t10"
+      ]
+    }
+  ]
+}

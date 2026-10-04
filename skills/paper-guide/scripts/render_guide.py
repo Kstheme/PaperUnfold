@@ -3,6 +3,7 @@ import argparse
 import base64
 import html
 import json
+import math
 from pathlib import Path
 import re
 import sys
@@ -34,6 +35,12 @@ VISUAL_LABELS_EN = dict(teaching_visual="Teaching diagram / editorial reconstruc
 VISUAL_LABELS_ZH = dict(teaching_visual="教学图示 / 讲解者重组", source_visual="原文图表解读", purpose="目的",
                        reading="读法", contribution="贡献与限制", relation="关系",
                        source_not_reproduced="此处未复现原图，请按所链接的位置对照提供的原文。")
+MECHANISM_LABELS_EN = dict(teaching_data="Teaching data and calculated examples; not paper results or a reproduction.",
+    assumptions="Teaching assumptions", temperature="Temperature T (0.25–4)", scores="Fixed scores",
+    values="Fixed scalar values", weights="Weights", weighted_output="Weighted output", static_examples="Worked examples (also usable without JavaScript)")
+MECHANISM_LABELS_ZH = dict(teaching_data="教学数值与计算示例，不是论文实验结果或复现证明。",
+    assumptions="教学假设", temperature="温度 T（0.25–4）", scores="固定分数",
+    values="固定标量值", weights="权重", weighted_output="加权输出", static_examples="分步数值示例（无 JavaScript 时仍可阅读）")
 
 
 def require(condition, message):
@@ -83,15 +90,16 @@ def validate(data):
     for item in listing(data.get("thread"), "thread", True):
         point(item)
     has_visuals = False
+    has_mechanisms = False
 
     def visuals(items):
-        nonlocal has_visuals
+        nonlocal has_visuals, has_mechanisms
         for visual in listing(items, "visuals"):
             has_visuals = True
             require(isinstance(visual, dict), "visual must be an object")
             string(visual.get("title"), "visual.title")
             kind = visual.get("type")
-            require(kind in {"map", "process", "concepts", "table", "formula", "source_figure"}, "unsupported visual type")
+            require(kind in {"map", "process", "concepts", "table", "formula", "source_figure", "softmax"}, "unsupported visual type")
             for key in ("purpose", "reading", "contribution"):
                 point(visual.get(key))
             if kind in {"map", "process", "concepts"}:
@@ -117,6 +125,17 @@ def validate(data):
             elif kind == "formula":
                 for step in listing(visual.get("steps"), "visual.steps", True):
                     point(step)
+            elif kind == "softmax":
+                has_mechanisms = True
+                string(visual.get("assumptions"), "visual.assumptions")
+                scores = listing(visual.get("scores"), "visual.scores", True)
+                values = listing(visual.get("values"), "visual.values", True)
+                require(2 <= len(scores) <= 6 and len(scores) == len(values), "softmax needs 2–6 matching scores and scalar values")
+                for value in scores + values:
+                    require(type(value) in {int, float} and abs(value) <= 100 and math.isfinite(value),
+                            "softmax inputs must be finite numbers within -100..100")
+                for reference in listing(visual.get("source_evidence"), "visual.source_evidence", True):
+                    require(isinstance(reference, str) and reference in evidence_ids, "mechanism source references must name supplied excerpts")
             else:
                 string(visual.get("original_label"), "visual.original_label")
                 for reference in listing(visual.get("source_evidence"), "visual.source_evidence", True):
@@ -158,10 +177,14 @@ def validate(data):
         if has_visuals and primary_language not in {"en", "zh"}:
             for key in VISUAL_LABELS_EN:
                 string(labels.get(key), f"labels.{key}")
+        if has_mechanisms and primary_language not in {"en", "zh"}:
+            for key in MECHANISM_LABELS_EN:
+                string(labels.get(key), f"labels.{key}")
     else:
         require(primary_language in {"en", "zh"}, "provide translated labels for this language")
     result = dict(LABELS_ZH if primary_language == "zh" else LABELS_EN)
     result.update(VISUAL_LABELS_ZH if primary_language == "zh" else VISUAL_LABELS_EN)
+    result.update(MECHANISM_LABELS_ZH if primary_language == "zh" else MECHANISM_LABELS_EN)
     result.update(labels or {})
     return result
 
@@ -218,6 +241,30 @@ document.querySelectorAll('.teaching-prompt').forEach(container => {
 });
 """
 
+MECHANISM_INIT = """
+document.querySelectorAll('.softmax-demo').forEach(container => {
+  const scores = JSON.parse(container.dataset.scores);
+  const values = JSON.parse(container.dataset.values);
+  const controls = container.querySelector('.mechanism-controls');
+  const slider = controls.querySelector('input');
+  const status = controls.querySelector('[role="status"]');
+  function update() {
+    const temperature = Number(slider.value);
+    const maximum = Math.max(...scores);
+    const exponents = scores.map(score => Math.exp((score - maximum) / temperature));
+    const total = exponents.reduce((a, b) => a + b, 0);
+    const weights = exponents.map(value => value / total);
+    controls.querySelector('.temperature-value').textContent = temperature.toFixed(2);
+    const output = weights.reduce((sum, weight, index) => sum + weight * values[index], 0);
+    status.textContent = container.dataset.weightsLabel + ': ' + weights.map(value => value.toFixed(4)).join(', ') +
+      ' · ' + container.dataset.outputLabel + ': ' + output.toFixed(4);
+  }
+  slider.addEventListener('input', update);
+  update();
+  controls.hidden = false;
+});
+"""
+
 # Keep unlinked background-term prompts proportionate to long source documents.
 MAX_FALLBACK_SOURCE_CHARS = 12000
 
@@ -237,6 +284,8 @@ def math_assets():
 def render(data, labels, base_dir=None):
     esc = html.escape
     math_needed = False
+    mechanism_needed = False
+    mechanism_index = 0
 
     def math_text(value):
         nonlocal math_needed
@@ -251,6 +300,7 @@ def render(data, labels, base_dir=None):
     evidence_locations = {item["id"]: item["location"] for item in data["evidence"]}
 
     def visuals(items):
+        nonlocal mechanism_needed, mechanism_index
         output = ""
         for visual in items:
             kind = visual["type"]
@@ -269,6 +319,29 @@ def render(data, labels, base_dir=None):
                 output += ''.join('<tr>' + ''.join('<td>' + point(cell) + '</td>' for cell in row) + '</tr>' for row in visual["rows"]) + '</tbody></table></div>'
             elif kind == "formula":
                 output += '<ol>' + ''.join('<li>' + point(step) + '</li>' for step in visual["steps"]) + '</ol>'
+            elif kind == "softmax":
+                mechanism_needed = True
+                mechanism_index += 1
+                scores, values = visual["scores"], visual["values"]
+                ident = f'mechanism-temperature-{mechanism_index}'
+                output += (f'<div class="softmax-demo" data-scores="{esc(json.dumps(scores))}" data-values="{esc(json.dumps(values))}" '
+                           f'data-weights-label="{esc(labels["weights"])}" data-output-label="{esc(labels["weighted_output"])}">')
+                output += '<p><strong>' + esc(labels["teaching_data"]) + '</strong></p>'
+                output += '<p>' + esc(labels["assumptions"]) + ': ' + esc(visual["assumptions"]) + '</p>'
+                output += '<p>' + esc(labels["scores"]) + ': ' + esc(str(scores)) + ' · ' + esc(labels["values"]) + ': ' + esc(str(values)) + '</p>'
+                output += '<p>wᵢ = exp(sᵢ/T) / Σⱼ exp(sⱼ/T); y = Σᵢ wᵢ vᵢ</p>'
+                output += (f'<div class="mechanism-controls" hidden><label for="{ident}">{esc(labels["temperature"])}</label> '
+                           f'<output class="temperature-value" for="{ident}">1.00</output>'
+                           f'<input style="display:block;width:100%" id="{ident}" type="range" min="0.25" max="4" step="0.25" value="1">'
+                           '<p role="status" aria-live="polite"></p></div>')
+                output += '<strong>' + esc(labels["static_examples"]) + '</strong><div class="table-scroll"><table><thead><tr>'
+                output += ''.join('<th scope="col">' + esc(labels[key]) + '</th>' for key in ("temperature", "weights", "weighted_output")) + '</tr></thead><tbody>'
+                for temperature in (0.25, 1, 4):
+                    exponents = [math.exp((score - max(scores)) / temperature) for score in scores]
+                    weights = [value / sum(exponents) for value in exponents]
+                    weighted = sum(weight * value for weight, value in zip(weights, values))
+                    output += f'<tr><td>{temperature:g}</td><td>' + ', '.join(f'{weight:.4f}' for weight in weights) + f'</td><td>{weighted:.4f}</td></tr>'
+                output += '</tbody></table></div><div class="refs">' + ''.join(f'<a href="#evidence-{esc(ref)}">{esc(evidence_locations[ref])}</a>' for ref in visual["source_evidence"]) + '</div></div>'
             else:
                 output += '<p><strong>' + esc(visual["original_label"]) + '</strong></p>'
                 if "image_path" in visual:
@@ -360,7 +433,8 @@ def render(data, labels, base_dir=None):
         evidence += f'<article id="evidence-{esc(item["id"])}"><h3>{esc(item["location"])}</h3><blockquote>{esc(item["quote"])}</blockquote></article>'
     evidence += f'<details><summary>{esc(labels["source"])}</summary><pre>{esc(data["source"]["text"])}</pre></details></section>'
     math_css, math_scripts = math_assets() if math_needed else ("", "")
-    return f'<!doctype html><html lang="{esc(data["language"])}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(data["title"])}</title><style>{CSS}</style>{math_css}</head><body><main><header><p class="muted">PaperUnfold</p><h1>{esc(data["title"])}</h1>{coverage}</header><nav aria-label="{esc(labels["contents"])}"><ul>{nav}</ul></nav>{thread}{sections}{terms}{evidence}</main></body>{math_scripts}<script>{COPY_INIT}</script></html>'
+    mechanism_script = '<script>' + MECHANISM_INIT + '</script>' if mechanism_needed else ''
+    return f'<!doctype html><html lang="{esc(data["language"])}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(data["title"])}</title><style>{CSS}</style>{math_css}</head><body><main><header><p class="muted">PaperUnfold</p><h1>{esc(data["title"])}</h1>{coverage}</header><nav aria-label="{esc(labels["contents"])}"><ul>{nav}</ul></nav>{thread}{sections}{terms}{evidence}</main></body>{math_scripts}<script>{COPY_INIT}</script>{mechanism_script}</html>'
 
 
 def main():

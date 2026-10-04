@@ -6,7 +6,7 @@
 
 PaperUnfold develops a shared paper-reading methodology for researchers in all disciplines worldwide. It adapts explanations to each paper's research question, argument, methods, and evidence. The experience starts with a lightweight HTML guide, then offers focused teaching when you want to go deeper.
 
-**Status: tickets01–07 implemented.** Pasted text, local PDFs, accessible webpages, online PDFs, and DOI locators can produce HTML guides with source coverage and copyable teaching prompts. Explanations and optional visuals adapt to the paper's method, empirical evidence, or argument. The independent tutor can save and resume learning progress with readable source material. Representative release examples and verified installation remain on the roadmap. See [the latest validation record](docs/validation/tickets-04-05.md).
+**Status: tickets01–09 implemented.** Pasted text, local PDFs, accessible webpages, online PDFs, and DOI locators can produce HTML guides with source coverage and copyable teaching prompts. Explanations and optional visuals adapt to the paper's method, empirical evidence, or argument. The independent tutor can save and resume learning progress with readable source material. An optional bounded softmax demonstration and representative release examples are available. Verified installation, platform support, and licensing remain in ticket10. See [the latest validation record](docs/validation/tickets-08-09.md).
 
 ## Reading experience
 
@@ -39,7 +39,9 @@ Example requests:
 
 Open the [actual Chinese agent-generated guide](examples/paper-guide/agent-invocation-zh.html), inspect its [source and renderer input](examples/paper-guide/agent-invocation-zh.json), or read the [recorded tutor checks](examples/paper-tutor/actual-session.md). See the [actual paused progress](examples/paper-tutor/ticket07-actual-progress.json) and [guide-to-teaching-to-resumption record](examples/paper-tutor/ticket06-07-actual-session.md).
 
-Adaptive validation examples use selected source excerpts: [Attention calculation steps](examples/paper-guide/adaptive-method-zh.html), [empirical survey evidence](examples/paper-guide/adaptive-empirical-zh.html), and a theoretical model in [Chinese](examples/paper-guide/adaptive-theory-zh.html) and [English](examples/paper-guide/adaptive-theory-en.html). Their [source notes](examples/paper-guide/adaptive-source-notes.md) record coverage and attribution. These examples validate different reasoning structures; they do not establish support across every discipline. Ticket09 still covers representative release examples combining guides, teaching, and resumption. Agent discovery and installation differ by host and remain to be verified in ticket10.
+Adaptive validation examples use selected source excerpts: [Attention calculation steps](examples/paper-guide/adaptive-method-zh.html), [empirical survey evidence](examples/paper-guide/adaptive-empirical-zh.html), and a theoretical model in [Chinese](examples/paper-guide/adaptive-theory-zh.html) and [English](examples/paper-guide/adaptive-theory-en.html). Their [source notes](examples/paper-guide/adaptive-source-notes.md) record coverage and attribution. These excerpt examples validate different reasoning structures. The [release examples](examples/release09/README.md) add whole-main-paper reading guides: an algorithm paper in Chinese, an empirical study in English, and a theoretical argument in English and Chinese. They include real screenshots, source audits, scripted researcher inputs to actual tutor sessions, saved progress and fresh-session resumption, and a [same-passage comparison](examples/release09/conventional-comparison.md). These cases do not establish quality across every discipline or measure learning gains. Agent discovery and installation differ by host and remain to be verified in ticket10.
+
+The [optional mechanism examples](examples/mechanism08/run.md) show a [bounded softmax temperature experiment](examples/mechanism08/attention-guide.html) with explicit teaching values and a [static empirical explanation](examples/mechanism08/empirical-guide.html) where a requested probability predictor is unsupported by the source. Other mechanisms receive source-guided static explanations; arbitrary interactive simulations are not implemented.
 
 ## Design principles
 
@@ -59,9 +61,11 @@ Adaptive validation examples use selected source excerpts: [Attention calculatio
 - [x] Adapt research-logic explanations and optional visuals to methods, empirical evidence, and theoretical arguments.
 - [x] Copy chapter/term teaching prompts from HTML.
 - [x] Save learning progress and resume with source material.
-- [ ] Publish representative release examples combining guides, teaching, and resumption across an algorithm paper, an empirical study, and a theoretical or humanities argument, including English and Chinese outputs.
-- [ ] Add real output screenshots, source references, verified installation steps, and a license.
-- [ ] Publish a short comparison of a conventional text explanation and a PaperUnfold guide using the same source material.
+- [x] Publish representative release examples combining guides, teaching, and resumption across an algorithm paper, an empirical study, and a theoretical or humanities argument, including English and Chinese outputs.
+- [x] Add real output screenshots and source references.
+- [x] Provide an optional bounded mechanism demonstration with a static fallback.
+- [ ] Verify installation steps, platform support, and licensing for first use (ticket10).
+- [x] Publish a short comparison of a conventional text explanation and a PaperUnfold guide using the same source material.
 
 ## Inspiration
 

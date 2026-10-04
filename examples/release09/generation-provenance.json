@@ -1,0 +1,108 @@
+{
+  "generated_date": "2026-10-04",
+  "entry": "skills/paper-guide/SKILL.md",
+  "references_read": [
+    "remote-input.md",
+    "pdf-input.md",
+    "visual-explanations.md",
+    "guide-format.md"
+  ],
+  "authoring": "Fresh agent explanations; no prior guide JSON, HTML or expected answers read. Actual source bodies read through acquisition text; relevant original object pages inspected separately. Temporary authoring helper retained at C:/Users/34220/AppData/Local/Temp/release09-build-guides.py; public guide JSON inputs can be rerendered with the repository render_guide.py script.",
+  "environment": "Codex desktop Windows PowerShell; bundled Python3.12; repository standard-library render_guide.py; Poppler original-page rendering. Model settings inherited; no sampling seed or temperature exposed.",
+  "sources": {
+    "algorithm": {
+      "acquisition": {
+        "requested_url": "https://arxiv.org/html/1706.03762v7",
+        "resolved_url": "https://arxiv.org/html/1706.03762v7",
+        "retrieved_at": "2026-10-04T07:59:42.515423+00:00",
+        "content_type": "text/html",
+        "locator": "Web heading/paragraph and literal excerpt at resolved_url",
+        "landing_url": "https://arxiv.org/html/1706.03762v7",
+        "pdf_attempts": []
+      },
+      "sha256_extracted_text": "a42e15cb118face676c9d47b9edf72b0b7f5bda7df6dd2db0be8de1ab7bb2e19",
+      "local_acquisition_file": "C:\\Users\\34220\\AppData\\Local\\Temp\\release09-attention-source.json"
+    },
+    "empirical": {
+      "acquisition": {
+        "requested_url": "https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0306911&type=printable",
+        "resolved_url": "https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0306911&type=printable",
+        "retrieved_at": "2026-10-04T07:41:15.343550+00:00",
+        "content_type": "application/pdf",
+        "locator": "1-based physical PDF page; inspect cached PDF before explaining visuals",
+        "downloaded_pdf": "C:\\Users\\34220\\AppData\\Local\\Temp\\paperunfold-04-actual\\pdf-source.source.pdf"
+      },
+      "sha256_extracted_text": "e66b547543eee24d54cd252262e16fe6c6b84316b857c04d32ffccc583dfc4ec",
+      "local_acquisition_file": "C:\\Users\\34220\\AppData\\Local\\Temp\\paperunfold-04-actual\\pdf-source.json"
+    },
+    "theory": {
+      "acquisition": {
+        "requested_url": "https://doi.org/10.1371/journal.pmed.0020124",
+        "resolved_url": "https://journals.plos.org/plosmedicine/article/file?id=10.1371/journal.pmed.0020124&type=printable",
+        "retrieved_at": "2026-10-04T07:41:18.156076+00:00",
+        "content_type": "application/pdf",
+        "locator": "1-based physical PDF page; inspect cached PDF before explaining visuals",
+        "landing_url": "https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.0020124",
+        "pdf_attempts": [
+          {
+            "url": "https://journals.plos.org/plosmedicine/article/file?id=10.1371/journal.pmed.0020124&type=printable",
+            "status": "readable"
+          }
+        ],
+        "downloaded_pdf": "C:\\Users\\34220\\AppData\\Local\\Temp\\paperunfold-04-actual\\doi-source.source.pdf"
+      },
+      "sha256_extracted_text": "f2ed31b58ed3d053687866309189d752f7cc84afd5565b048e3fd04cba66292e",
+      "local_acquisition_file": "C:\\Users\\34220\\AppData\\Local\\Temp\\paperunfold-04-actual\\doi-source.json"
+    }
+  },
+  "objects_reviewed": [
+    "Attention arXivv7 PDF page4 Figure2 and equation1",
+    "Li2024 PDF page7 Fig2 (95% CIs, separate models)",
+    "Ioannidis2005 PDF page2 Tables1/2 and base PPV notation"
+  ],
+  "licenses": {
+    "empirical": "Li et al.2024, DOI10.1371/journal.pone.0306911, CC-BY per PDF page1. Attribution retained in source.",
+    "theory": "John P.A. Ioannidis2005, DOI10.1371/journal.pmed.0020124, CC-BY per PDF page1. Attribution retained in source.",
+    "algorithm": "Vaswani et al., Attention Is All You Need, arXiv1706.03762v7. Full extracted text/PDF not committed; only necessary evidence excerpts. Google permission sentence concerns tables/figures for journalistic/scholarly work; no original figure image reproduced."
+  },
+  "artifacts": [
+    {
+      "artifact": "algorithm-zh",
+      "language": "zh",
+      "source_key": "algorithm",
+      "evidence_count": 23,
+      "sections": 7
+    },
+    {
+      "artifact": "empirical-en",
+      "language": "en",
+      "source_key": "empirical",
+      "evidence_count": 17,
+      "sections": 6
+    },
+    {
+      "artifact": "theory-zh",
+      "language": "zh",
+      "source_key": "theory",
+      "evidence_count": 14,
+      "sections": 6
+    },
+    {
+      "artifact": "theory-en",
+      "language": "en",
+      "source_key": "theory",
+      "evidence_count": 14,
+      "sections": 6
+    }
+  ],
+  "verification_limits": "Renderer success checks schema and literal evidence matches; independent factual audit and browser/tutor sessions recorded by parent separately. No mastery or time savings measured.",
+  "post_generation_source_audit": {
+    "fixes": "Narrowed empirical e3 and theory t5 to accurate named pages; narrowed theory t12 to PDF page6 continuation; retained parent-fixed binary indicator e4; added visible Bayesian robustness p=.057 qualification and recognized source titles/DOIs/arXiv versions in every guide.",
+    "correction_checked": "Official PLOS correction 10.1371/journal.pmed.1004085 read 2026-10-04: missing parentheses in Table2 ResearchFinding=Yes/TrueRelationship=No cell only. Both theory guides retain original2005PDF identity and narrow correction scope."
+  },
+  "publication_source_retention": {
+    "algorithm": "Whole v7 body actually read; released source appendix now retains only minimal technical retrieval anchors and the Figure2 caption under the paper’s explicit scholarly figure reproduction permission. No full unlicensed paragraphs or full paper are committed. Section locators add agent-written paragraph context. Short anchors require original-page inspection for scientific verification and additional readable passages before detailed tutoring.",
+    "ordinary_prose_budget": "Across all non-caption anchors, at most25 whitespace-delimited words even when technical terms and numeric anchors are included; licensed Figure2 caption counted separately.",
+    "plos": "CC-BY extracts and complete acquired text unchanged."
+  }
+}

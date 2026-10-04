@@ -119,6 +119,7 @@ payload are visible; reading and contribution details can be expanded.
 | `table` | `columns: [text]`, `rows: [[explanation, ...]]` | Nonempty comparison/evidence table; every row matches the column count. |
 | `formula` | `steps: [explanation]` | Nonempty sequence of formula-reading or derivation steps; use the supported LaTeX delimiters. |
 | `source_figure` | `original_label`, `source_evidence: [evidence ID]`; optional `image_path`, `image_alt` | Interpretation of a figure or table actually observed in the supplied source. Original label and nonempty evidence references are required. |
+| `softmax` | `scores: [number, ...]`, `values: [number, ...]`, `assumptions: text`, `source_evidence: [evidence ID]` | Optional temperature control with static numerical fallback; see below. |
 
 Example of an argument relationship, with source-supported conditions retained:
 
@@ -152,6 +153,48 @@ page says the source image is not reproduced and links its observed source
 location; never invent an image or imply that an unavailable figure was read.
 The renderer validates file signature, not scientific provenance: check the
 actual crop, caption, legend, axes, units, and claim against the original.
+
+## Optional softmax interaction
+
+Read [mechanism-interaction.md](mechanism-interaction.md) before choosing this
+enhancement. It uses the same title/purpose/reading/contribution contract. Scores
+and scalar values must have the same length, 2–6 entries, each a finite number
+within −100..100. `assumptions` explains the fixed inputs, scope and teaching
+intervention in the output language. Nonempty `source_evidence` links the actual
+softmax weighting relationship and is included in the section teaching prompt.
+The renderer fixes the temperature range and computes both interactive and static
+examples. JSON cannot provide executable code or configure another mechanism.
+
+```json
+{
+  "type": "softmax", "title": "How does temperature change attention weights?",
+  "purpose": {"kind": "inference", "text": "Isolate softmax weighting from the rest of attention.", "evidence": ["attention"]},
+  "reading": {"kind": "analogy", "text": "Move T while fixed scores and scalar values stay unchanged.", "evidence": []},
+  "contribution": {"kind": "analogy", "text": "Teaching example only; changing T is not changing model dimension or training.", "evidence": []},
+  "source_evidence": ["attention"],
+  "assumptions": "Constructed scores and scalar values; T is a teaching intervention, not a claimed paper parameter.",
+  "scores": [0, 1.0986122886681098], "values": [2, 6]
+}
+```
+
+Replace the example evidence ID with a real supplied passage. At T=1 these
+scores have exponent ratio 1:3, weights 0.25 and 0.75, and weighted output 5.
+The page labels all input values and computed outcomes as teaching data, distinct
+from paper experiments or replication evidence. Controls appear only after their
+script initializes; without JavaScript the static worked table remains visible.
+
+For another output language, also translate these mechanism `labels` when a
+softmax visual is present:
+
+```json
+{
+  "teaching_data": "Teaching data and calculated examples; not paper results or a reproduction.",
+  "assumptions": "Teaching assumptions", "temperature": "Temperature T (0.25–4)",
+  "scores": "Fixed scores", "values": "Fixed scalar values", "weights": "Weights",
+  "weighted_output": "Weighted output",
+  "static_examples": "Worked examples (also usable without JavaScript)"
+}
+```
 
 When visuals use a language other than English or Chinese, include these extra
 translated `labels` alongside the existing controls:

@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "source": {
+    "title": "Challenging the N-Heuristic: Effect size, not sample size, predicts the replicability of psychological science",
+    "path": "empirical-source.txt",
+    "coverage": "First copied chapter prompt (teach-section-results) plus relevant original extracted text: Introduction PDF page 3, Method pages 4–5, Results pages 6–8, Discussion pages 12–13. Full text file available; full-paper reading not claimed. Supporting-information files and OSF data/code were not retrieved or reanalyzed. Studies and survey respondents are nonrepresentative."
+  },
+  "position": {
+    "target": "Distinguish separate and joint predictor models, and explain why diagnostic associations do not show N is causally irrelevant",
+    "location": "Stopped after direct explanation of diagnostic versus causal inference and joint model, Results PDF pages 7–8; no subsequent understanding check answered. Researcher inputs were scripted by evaluator, not evidence of actual human learning."
+  },
+  "explained": [
+    "Original-study N covers the original conditions later retested, not replication-study sample size.",
+    "Separate study-design-controlled models: log N B=0.20, p=0.214; log effect size B=0.64, p=0.006.",
+    "Joint model: N B=0.56, p=0.005; effect size B=1.03, p=0.0002. Positive conditional associations and N/effect-size r_s=-0.49 are consistent with suppression, not causal identification.",
+    "Nonsignificance does not establish no role; significance does not establish causation. Authors retain all-else-equal benefit of larger N for power.",
+    "A runner/load analogy was explicitly supplementary explanation, not paper evidence."
+  ],
+  "understanding": [
+    {
+      "point": "Across-study comparison differs from increasing N within the same study",
+      "status": "mastered",
+      "answer": "The model compares different studies, so it is not a same-study increase in N.",
+      "reason": "The scripted answer accurately identifies the unit of comparison. Credit is restricted to this distinction, not the causal conclusion or the chapter."
+    },
+    {
+      "point": "Diagnostic association versus causal effect",
+      "status": "partial",
+      "answer": "But since N was not significant and effect size was, the paper proves that a large effect causes replication and sample size never matters.",
+      "reason": "The same answer recognized the across-study comparison but incorrectly inferred effect-size causation and universal N irrelevance. Correction was explained; no subsequent answer demonstrated the repaired inference."
+    },
+    {
+      "point": "Why the separate and joint models give different N results",
+      "status": "explained_unverified",
+      "answer": "I do not know how N can be nonsignificant in one model but significant in the joint model. Please help me.",
+      "reason": "Suppression and conditional association were explained. The smaller check was unanswered; direct explanation and stopping do not establish understanding."
+    }
+  ],
+  "gaps": [
+    "An answer-supported explanation of the joint model's conditional association and the pattern consistent with suppression.",
+    "An answer-supported correction of claims that effect size causes replication or N never matters.",
+    "No chapter-level mastery established; no empirical reanalysis or generalization beyond the source scope."
+  ],
+  "next_entry": "If the researcher resumes this target, reread Results pages 6–8 and Introduction page 3; offer a focused explanation or reasoning check distinguishing conditional diagnostic associations from intervention claims, respecting their requested mode."
+}
