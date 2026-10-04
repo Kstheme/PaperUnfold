@@ -1,0 +1,4 @@
+interface:
+  display_name: "Paper Tutor"
+  short_description: "Focused paper teaching grounded in your source"
+  default_prompt: "Use $paper-tutor to help me understand my selected question from this paper excerpt."

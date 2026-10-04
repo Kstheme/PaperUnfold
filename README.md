@@ -4,14 +4,14 @@
 
 [English](README.md) · [简体中文](README.zh-CN.md)
 
-PaperUnfold develops a shared paper-reading methodology for researchers in all disciplines worldwide. It adapts explanations to each paper's research question, argument, methods, and evidence. The planned experience starts with a lightweight HTML guide, then offers focused teaching when you want to go deeper.
+PaperUnfold develops a shared paper-reading methodology for researchers in all disciplines worldwide. It adapts explanations to each paper's research question, argument, methods, and evidence. The experience starts with a lightweight HTML guide, then offers focused teaching when you want to go deeper.
 
-**Status: design stage.** The design is documented. The skills, HTML template, installation instructions, and real-paper demos have not been implemented yet.
+**Status: first two tickets implemented.** Pasted-text HTML guides and independent conversational teaching are available. PDF/URL ingestion, persistent learning progress, and verified installation remain on the roadmap. See the [validation record](docs/validation/tickets-01-02.md).
 
-## The planned reading experience
+## Reading experience
 
-1. Provide a local PDF, paper URL, DOI, webpage, or pasted section.
-2. Get a single-file HTML guide with a paper map, chapter explanations, essential terms, and relevant diagrams.
+1. Provide a pasted paper section. Local PDFs, URLs, and DOI retrieval are planned.
+2. Get a single-file HTML guide with a map of the supplied material, section explanations, essential terms, and relevant diagrams.
 3. Check key explanations against locations in the source paper.
 4. Choose a chapter, formula, or question for guided learning in your agent chat.
 
@@ -21,12 +21,23 @@ The guide starts with the paper's main thread and adds background where it helps
 
 ## Two independent skills
 
-| Planned skill | When to use it | Output |
+| Skill | When to use it | Output |
 | --- | --- | --- |
 | `paper-guide` | You need the big picture and the path from question to conclusion. | A lightweight HTML reading guide. |
-| `paper-tutor` | You want to understand a specific concept, mechanism, or argument. | Focused teaching and a resumable learning-progress file. |
+| `paper-tutor` | You want to understand a specific concept, mechanism, or argument. | Focused teaching in the current conversation. |
 
-You can start teaching directly from a paper. Generating a guide first is optional. The HTML page provides copyable teaching prompts; teaching happens in your agent chat.
+You can start teaching directly from a paper. Generating a guide first is optional. Teaching happens in your agent chat. HTML teaching prompts and cross-session progress files are planned.
+
+## Try the current skills
+
+In an agent with filesystem and command access, explicitly ask it to read [paper-guide](skills/paper-guide/SKILL.md) or [paper-tutor](skills/paper-tutor/SKILL.md), then supply readable paper text. The guide renderer requires Python 3.10+; it uses only the standard library. A skill is an instruction package for your agent, not a standalone paper-analysis command.
+
+Example requests:
+
+- “Use the paper-guide skill in this repository. Explain this pasted section in English and save the HTML guide.”
+- “Use paper-tutor with this pasted section. Help me understand how the evidence supports the conclusion.”
+
+Open the [actual Chinese agent-generated guide](examples/paper-guide/agent-invocation-zh.html), inspect its [source and renderer input](examples/paper-guide/agent-invocation-zh.json), or read the [recorded tutor checks](examples/paper-tutor/actual-session.md). These are checks on a short attention excerpt; broader discipline examples belong to ticket09. Agent discovery and installation differ by host and remain to be verified in ticket10.
 
 ## Design principles
 
@@ -39,8 +50,9 @@ You can start teaching directly from a paper. Generating a guide first is option
 ## Roadmap
 
 - [x] Define the audience, reading workflow, language policy, and teaching principles.
-- [ ] Implement `paper-guide` and its HTML template.
-- [ ] Implement `paper-tutor` and the learning-progress format.
+- [x] Implement `paper-guide` for pasted text and its HTML renderer.
+- [x] Implement independent `paper-tutor` teaching.
+- [ ] Implement persistent learning progress and resumption.
 - [ ] Publish examples covering an algorithm paper, an empirical study, and a theoretical or humanities argument, including English and Chinese outputs.
 - [ ] Add real output screenshots, source references, verified installation steps, and a license.
 - [ ] Publish a short comparison of a conventional text explanation and a PaperUnfold guide using the same source material.

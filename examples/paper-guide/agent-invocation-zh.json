@@ -1,0 +1,185 @@
+{
+  "title": "Attention Is All You Need：注意力片段轻量导读",
+  "language": "zh-CN",
+  "source": {
+    "name": "Attention Is All You Need — Vaswani et al.（提供的片段）",
+    "text": "Title: Attention Is All You Need\nAuthors: Vaswani et al.\nSource: https://arxiv.org/html/1706.03762v7\nCoverage: Two short source excerpts and Equation (1) only. This is not the full paper.\nLocations: Section 3.2; Section 3.2.1, Equation (1) and final paragraph.\n\n[Section 3.2 — short excerpt]\nThe output is computed as a weighted sum of the values,\n\n[Section 3.2.1 — Equation (1), mathematical notation transcribed]\nAttention(Q, K, V) = softmax(QK^T / sqrt(d_k)) V\n\n[Section 3.2.1 — final paragraph, short excerpt]\nTo counteract this effect, we scale the dot products by 1/sqrt(d_k).\n\n[Coverage note written by the fixture author]\nThe surrounding discussion of the effect is omitted. The fixture supplies neither full-paper results nor the full argument for scaling. An explanation of omitted context must be marked as background, or the agent must obtain the missing source before attributing it to the authors. No paper page number is supplied.\n",
+    "coverage": "仅阅读用户提供的两个短原文片段与公式 (1) 的转写，位置标注来自输入材料：第 3.2 节、第 3.2.1 节公式 (1) 与末段。未访问输入中列出的网页。本文是片段导读，不是整篇论文地图。",
+    "missing": [
+      "第 3.2 与第 3.2.1 节的完整上下文，特别是 this effect 的前文指代。",
+      "论文其他章节、完整论证与实验结果。",
+      "原论文页码；本页仅使用输入所提供的节号与公式号。"
+    ]
+  },
+  "evidence": [
+    {
+      "id": "weighted",
+      "location": "输入标注：Section 3.2 — short excerpt",
+      "quote": "The output is computed as a weighted sum of the values,"
+    },
+    {
+      "id": "equation",
+      "location": "输入标注：Section 3.2.1 — Equation (1)，数学记号转写",
+      "quote": "Attention(Q, K, V) = softmax(QK^T / sqrt(d_k)) V"
+    },
+    {
+      "id": "scale",
+      "location": "输入标注：Section 3.2.1 — final paragraph, short excerpt",
+      "quote": "To counteract this effect, we scale the dot products by 1/sqrt(d_k)."
+    }
+  ],
+  "thread": [
+    {
+      "kind": "inference",
+      "text": "这段材料可围绕一个局部问题阅读：注意力怎样把 values 汇成输出，公式中又怎样处理点积？它展示了“加权求和 → 权重计算公式 → 点积缩放”这一条线索；无法据此还原整篇论文的研究问题或结果。",
+      "evidence": [
+        "weighted",
+        "equation",
+        "scale"
+      ]
+    },
+    {
+      "kind": "author",
+      "text": "作者明确说输出是 values 的加权和；公式 (1) 把 softmax(QK^T / sqrt(d_k)) 与 V 相乘。",
+      "evidence": [
+        "weighted",
+        "equation"
+      ]
+    },
+    {
+      "kind": "author",
+      "text": "作者说以 1/sqrt(d_k) 缩放点积是为了抵消 this effect。片段未提供该效应的具体内容，不能把补充背景当作此处已读到的作者论证。",
+      "evidence": [
+        "scale"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "id": "weighted-output",
+      "title": "3.2 片段：先看输出是什么",
+      "role": "在当前材料中，这句话给出输出的构成方式，为后续公式提供阅读入口。",
+      "points": [
+        {
+          "kind": "author",
+          "text": "输出通过 values 的加权求和计算。这里的摘录在逗号处结束，没有给出权重如何定义的完整文字说明。",
+          "evidence": [
+            "weighted"
+          ]
+        },
+        {
+          "kind": "inference",
+          "text": "结合公式读，左侧 Attention(Q, K, V) 是输出，右侧最后的 V 对应被加权组合的 values；这是对两处片段之间关系的解释。",
+          "evidence": [
+            "weighted",
+            "equation"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "attention-formula",
+      "title": "3.2.1 公式 (1)：顺着运算读",
+      "role": "公式把注意力计算写成连续运算，连接上一句的加权和与下一句的缩放。",
+      "points": [
+        {
+          "kind": "author",
+          "text": "按公式顺序，先形成 QK^T，除以 sqrt(d_k)，再经过 softmax，最后乘 V。缩放因子位于 softmax 之前。",
+          "evidence": [
+            "equation"
+          ]
+        },
+        {
+          "kind": "background",
+          "text": "常用记号中，Q、K、V 分别表示查询（query）、键（key）和值（value）；K^T 表示 K 的转置，d_k 表示键向量的维度。这些符号定义作为补充背景提供，当前摘录没有给出完整定义。",
+          "evidence": []
+        },
+        {
+          "kind": "inference",
+          "text": "可把 softmax(QK^T / sqrt(d_k)) 读作权重，再把与 V 的乘法联系到加权求和。片段没有给出矩阵尺寸或 softmax 的作用轴，不宜从摘录独立确定全部实现细节。",
+          "evidence": [
+            "weighted",
+            "equation"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "scaling-limit",
+      "title": "3.2.1 末段片段：缩放及解释边界",
+      "role": "这句把缩放与一个被省略的效应联系起来，也标出导读的上下文缺口。",
+      "points": [
+        {
+          "kind": "author",
+          "text": "缩放量是 1/sqrt(d_k)，与公式中的除以 sqrt(d_k) 一致。作者将此操作的目的表述为抵消 this effect。",
+          "evidence": [
+            "scale",
+            "equation"
+          ]
+        },
+        {
+          "kind": "inference",
+          "text": "this effect 的指代依赖前文；当前输入省略该段，所以其具体含义、完整推导与任何实验效果都不能从这句话确认。",
+          "evidence": [
+            "scale"
+          ]
+        }
+      ]
+    }
+  ],
+  "terms": [
+    {
+      "original": "weighted sum",
+      "name": "加权和",
+      "essential": true,
+      "explanation": {
+        "kind": "background",
+        "text": "把每个值乘以相应权重后相加；用于理解多个 values 如何组合成一个输出。",
+        "evidence": []
+      }
+    },
+    {
+      "original": "Q, K, V",
+      "name": "查询、键、值",
+      "essential": true,
+      "explanation": {
+        "kind": "background",
+        "text": "注意力中的常用记号：query 用来提出匹配需求，key 用来参与匹配，value 是最终组合的内容。这里是辅助读公式的背景定义。",
+        "evidence": []
+      }
+    },
+    {
+      "original": "softmax",
+      "name": "归一化运算",
+      "essential": true,
+      "explanation": {
+        "kind": "background",
+        "text": "将一组实数经指数变换并除以指数总和，得到非负且和为 1 的权重；具体作用轴需结合矩阵定义与上下文。",
+        "evidence": []
+      }
+    },
+    {
+      "original": "1/sqrt(d_k)",
+      "name": "点积缩放因子",
+      "essential": true,
+      "explanation": {
+        "kind": "author",
+        "text": "原文明确用这个因子缩放点积；公式将它写在 softmax 之前。",
+        "evidence": [
+          "scale",
+          "equation"
+        ]
+      }
+    },
+    {
+      "original": "K^T",
+      "name": "转置记号",
+      "essential": false,
+      "explanation": {
+        "kind": "background",
+        "text": "上标 T 通常表示转置，即交换矩阵的行与列；这里帮助阅读 QK^T 这一乘法记号。",
+        "evidence": []
+      }
+    }
+  ]
+}

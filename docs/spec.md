@@ -1,6 +1,6 @@
 # PaperUnfold: paper guides and guided learning
 
-Date: 2026-10-04. This specification synthesizes the confirmed product decisions. The project is at the design stage; the skills and examples are not implemented. The user has confirmed the entrypoint-level testing boundary. Issue publication is pending project-tracker configuration.
+Date: 2026-10-04. This specification synthesizes the confirmed product decisions. This is the design baseline. Tickets01/02 are now implemented; see [their validation record](validation/tickets-01-02.md). The user has confirmed the entrypoint-level testing boundary. The ten implementation tickets are published in the local Markdown tracker.
 
 ## Problem Statement
 
