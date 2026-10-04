@@ -1,0 +1,12 @@
+# Third-party materials
+
+The project [MIT license](LICENSE) applies to original PaperUnfold code, instructions and documentation. It does not relicense the following materials.
+
+- **KaTeX:** the vendored renderer, styles and fonts in `skills/paper-guide/assets/katex/` retain the [KaTeX MIT license](skills/paper-guide/assets/katex/LICENSE), copyright Khan Academy and other contributors. Mathematical HTML output embeds that notice alongside the bundled assets. Skill installation preserves this file.
+- **PLOS papers:** source extracts, readable text and derived source figures retain the Creative Commons Attribution terms stated by the respective papers. Li et al. (2024), *Challenging the N-Heuristic*, DOI10.1371/journal.pone.0306911; John P. A. Ioannidis (2005), *Why Most Published Research Findings Are False*, DOI10.1371/journal.pmed.0020124. Attribution, exact versions, extraction changes and reading limits appear in [release provenance](examples/release09/generation-provenance.json), [source review](examples/release09/source-audit.md) and the corresponding source files.
+- **Attention Is All You Need:** copyright remains with its authors/rightsholders. Minimal technical anchors and a separately permitted Figure2 caption are retained; no full paper is redistributed. See [source review](examples/release09/source-audit.md). The project's teaching reconstructions are distinct from the paper's original results and figures.
+- **Nature abstract fragment:** the short source excerpt in `tests/fixtures/adaptive-abstract-only-excerpt.txt` retains its original copyright; no open reuse license was observed. It records the limited preview route, not a licensed full-text distribution.
+- **Original teaching prompt:** `docs/source/socratic-ddd-prompt.txt` is retained as user-supplied source material; the project MIT license does not assert ownership of it. Reusable project behavior is defined in the authored skill instructions and design documentation.
+- **pypdf:** installed separately through `requirements.txt`, not vendored or relicensed by PaperUnfold. Its own distribution carries its license.
+
+Preserve applicable notices and provenance when sharing guides. Newly supplied papers and images need their own appropriate attribution and reuse basis; project code licensing does not change source-paper rights. ASD-STE100 and `asd-ste100-skill` are design references, not bundled runtime dependencies or a certification claim.

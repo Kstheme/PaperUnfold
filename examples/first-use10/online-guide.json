@@ -1,0 +1,150 @@
+{
+  "title": "What does statistical significance tell us about truth?",
+  "language": "en",
+  "source": {
+    "name": "Ioannidis (2005), Why Most Published Research Findings Are False; DOI 10.1371/journal.pmed.0020124; © 2005 John P. A. Ioannidis, Creative Commons Attribution License (publisher PDF).",
+    "text": "[PDF page 1]\nPLoS Medicine  |  www.plosmedicine.org 0696\nEssay\nOpen access, freely available online\nAugust 2005  |  Volume 2  |  Issue 8  |  e124\nP\nublished research ﬁ ndings are \nsometimes refuted by subsequent \nevidence, with ensuing confusion \nand disappointment. Refutation and \ncontroversy is seen across the range of \nresearch designs, from clinical trials \nand traditional epidemiological studies \n[1–3] to the most modern molecular \nresearch [4,5]. There is increasing \nconcern that in modern research, false \nﬁ ndings may be the majority or even \nthe vast majority of published research \nclaims [6–8]. However, this should \nnot be surprising. It can be proven \nthat most claimed research ﬁ ndings \nare false. Here I will examine the key \nfactors that inﬂ uence this problem and \nsome corollaries thereof. \nModeling the Framework for False \nPositive Findings \nSeveral methodologists have \npointed out [9–11] that the high \nrate of nonreplication (lack of \nconﬁ rmation) of research discoveries \nis a consequence of the convenient, \nyet ill-founded strategy of claiming \nconclusive research ﬁ ndings solely on \nthe basis of a single study assessed by \nformal statistical signiﬁ cance, typically \nfor a p-value less than 0.05. Research \nis not most appropriately represented \nand summarized by p-values, but, \nunfortunately, there is a widespread \nnotion that medical research articles \nshould be interpreted based only on \np-values. Research ﬁ ndings are deﬁ ned \nhere as any relationship reaching \nformal statistical signiﬁ cance, e.g., \neffective interventions, informative \npredictors, risk factors, or associations. \n“Negative” research is also very useful. \n“Negative” is actually a misnomer, and \nthe misinterpretation is widespread. \nHowever, here we will target \nrelationships that investigators claim \nexist, rather than null ﬁ ndings. \nAs has been shown previously, the \nprobability that a research ﬁ nding \nis indeed true depends on the prior \nprobability of it being true (before \ndoing the study), the statistical power \nof the study, and the level of statistical \nsigniﬁ cance [10,11]. Consider a 2 × 2 \ntable in which research ﬁ ndings are \ncompared against the gold standard \nof true relationships in a scientiﬁ c \nﬁ eld. In a research ﬁ eld both true and \nfalse hypotheses can be made about \nthe presence of relationships. Let R \nbe the ratio of the number of “true \nrelationships” to “no relationships” \namong those tested in the ﬁ eld. R \nis characteristic of the ﬁ eld and can \nvary a lot depending on whether the \nﬁ eld targets highly likely relationships \nor searches for only one or a few \ntrue relationships among thousands \nand millions of hypotheses that may \nbe postulated. Let us also consider, \nfor computational simplicity, \ncircumscribed ﬁ elds where either there \nis only one true relationship (among \nmany that can be hypothesized) or \nthe power is similar to ﬁ nd any of the \nseveral existing true relationships. The \npre-study probability of a relationship \nbeing true is R⁄(R + 1). The probability \nof a study ﬁ nding a true relationship \nreﬂ ects the power 1 − β (one minus \nthe Type II error rate). The probability \nof claiming a relationship when none \ntruly exists reﬂ ects the Type I error \nrate, α. Assuming that c relationships \nare being probed in the ﬁ eld, the \nexpected values of the 2 × 2 table are \ngiven in Table 1. After a research \nﬁ nding has been claimed based on \nachieving formal statistical signiﬁ cance, \nthe post-study probability that it is true \nis the positive predictive value, PPV. \nThe PPV is also the complementary \nprobability of what Wacholder et al. \nhave called the false positive report \nprobability [10]. According to the 2 \n× 2 table, one gets PPV = (1 − β)R⁄(R \n− βR + α). A research ﬁ nding is thus \nThe Essay section contains opinion pieces on topics \nof broad interest to a general medical audience. \nWhy Most Published Research Findings \nAre False \nJohn P . A. Ioannidis\nCitation: Ioannidis JPA (2005) Why most published \nresearch ﬁ ndings are false. PLoS Med 2(8): e124.\nCopyright: © 2005 John P . A. Ioannidis. This is an \nopen-access article distributed under the terms \nof the Creative Commons Attribution License, \nwhich permits unrestricted use, distribution, and \nreproduction in any medium, provided the original \nwork is properly cited. \nAbbreviation: PPV, positive predictive value\nJohn P . A. Ioannidis is in the Department of Hygiene \nand Epidemiology, University of Ioannina School of \nMedicine, Ioannina, Greece, and Institute for Clinical \nResearch and Health Policy Studies, Department of \nMedicine, Tufts-New England Medical Center, Tufts \nUniversity School of Medicine, Boston, Massachusetts, \nUnited States of America. E-mail: jioannid@cc.uoi.gr\nCompeting Interests: The author has declared that \nno competing interests exist.\nDOI: 10.1371/journal.pmed.0020124\nSummary\nThere is increasing concern that most \ncurrent published research ﬁ ndings are \nfalse. The probability that a research claim \nis true may depend on study power and \nbias, the number of other studies on the \nsame question, and, importantly, the ratio \nof true to no relationships among the \nrelationships probed in each scientiﬁ c \nﬁ eld. In this framework, a research ﬁ nding \nis less likely to be true when the studies \nconducted in a ﬁ eld are smaller; when \neffect sizes are smaller; when there is a \ngreater number and lesser preselection \nof tested relationships; where there is \ngreater ﬂ exibility in designs, deﬁ nitions, \noutcomes, and analytical modes; when \nthere is greater ﬁ nancial and other \ninterest and prejudice; and when more \nteams are involved in a scientiﬁ c ﬁ eld \nin chase of statistical signiﬁ cance. \nSimulations show that for most study \ndesigns and settings, it is more likely for \na research claim to be false than true. \nMoreover, for many current scientiﬁ c \nﬁ elds, claimed research ﬁ ndings may \noften be simply accurate measures of the \nprevailing bias. In this essay, I discuss the \nimplications of these problems for the \nconduct and interpretation of research.\nIt can be proven that \nmost claimed research \nﬁ ndings are false.\n\n[PDF page 2]\nPLoS Medicine  |  www.plosmedicine.org 0697\nmore likely true than false if (1 − β)R \n> α. Since usually the vast majority of \ninvestigators depend on α = 0.05, this \nmeans that a research ﬁ nding is more \nlikely true than false if (1 − β)R > 0.05.\nWhat is less well appreciated is \nthat bias and the extent of repeated \nindependent testing by different teams \nof investigators around the globe may \nfurther distort this picture and may \nlead to even smaller probabilities of the \nresearch ﬁ ndings being indeed true. \nWe will try to model these two factors in \nthe context of similar 2 × 2 tables.\nBias\nFirst, let us deﬁ ne bias as the \ncombination of various design, data, \nanalysis, and presentation factors that \ntend to produce research ﬁ ndings \nwhen they should not be produced. \nLet u be the proportion of probed \nanalyses that would not have been \n“research ﬁ ndings,” but nevertheless \nend up presented and reported as \nsuch, because of bias. Bias should not \nbe confused with chance variability \nthat causes some ﬁ ndings to be false by \nchance even though the study design, \ndata, analysis, and presentation are \nperfect. Bias can entail manipulation \nin the analysis or reporting of ﬁ ndings. \nSelective or distorted reporting is a \ntypical form of such bias. We may \nassume that u does not depend on \nwhether a true relationship exists \nor not. This is not an unreasonable \nassumption, since typically it is \nimpossible to know which relationships \nare indeed true. In the presence of bias \n(Table 2), one gets PPV = ([1 − β]R + \nuβR)⁄(R + α − βR + u − uα + uβR), and \nPPV decreases with increasing u, unless \n1 − β ≤ α, i.e., 1 − β ≤ 0.05 for most \nsituations. Thus, with increasing bias, \nthe chances that a research ﬁ nding \nis true diminish considerably. This is \nshown for different levels of power and \nfor different pre-study odds in Figure 1. \nConversely, true research ﬁ ndings \nmay occasionally be annulled because \nof reverse bias. For example, with large \nmeasurement errors relationships \nare lost in noise [12], or investigators \nuse data inefﬁ ciently or fail to notice \nstatistically signiﬁ cant relationships, or \nthere may be conﬂ icts of interest that \ntend to “bury” signiﬁ cant ﬁ ndings [13]. \nThere is no good large-scale empirical \nevidence on how frequently such \nreverse bias may occur across diverse \nresearch ﬁ elds. However, it is probably \nfair to say that reverse bias is not as \ncommon. Moreover measurement \nerrors and inefﬁ cient use of data are \nprobably becoming less frequent \nproblems, since measurement error has \ndecreased with technological advances \nin the molecular era and investigators \nare becoming increasingly sophisticated \nabout their data. Regardless, reverse \nbias may be modeled in the same way as \nbias above. Also reverse bias should not \nbe confused with chance variability that \nmay lead to missing a true relationship \nbecause of chance.\nTesting by Several Independent \nTeams\nSeveral independent teams may be \naddressing the same sets of research \nquestions. As research efforts are \nglobalized, it is practically the rule \nthat several research teams, often \ndozens of them, may probe the same \nor similar questions. Unfortunately, in \nsome areas, the prevailing mentality \nuntil now has been to focus on \nisolated discoveries by single teams \nand interpret research experiments \nin isolation. An increasing number \nof questions have at least one study \nclaiming a research ﬁ nding, and \nthis receives unilateral attention. \nThe probability that at least one \nstudy, among several done on the \nsame question, claims a statistically \nsigniﬁ cant research ﬁ nding is easy to \nestimate. For n independent studies of \nequal power, the 2 × 2 table is shown in \nTable 3: PPV = R(1 − βn)⁄(R + 1 − [1 − \nα]n − Rβn) (not considering bias). With \nincreasing number of independent \nstudies, PPV tends to decrease, unless \n1 − β < α, i.e., typically 1 − β < 0.05. \nThis is shown for different levels of \npower and for different pre-study odds \nin Figure 2. For n studies of different \npower, the term βn is replaced by the \nproduct of the terms βi for i = 1 to n, \nbut inferences are similar.\nCorollaries\nA practical example is shown in Box \n1. Based on the above considerations, \none may deduce several interesting \ncorollaries about the probability that a \nresearch ﬁ nding is indeed true. \nCorollary 1: The smaller the studies \nconducted in a scientiﬁ c ﬁ eld, the less \nlikely the research ﬁ ndings are to be \ntrue. Small sample size means smaller \npower and, for all functions above, \nthe PPV for a true research ﬁ nding \ndecreases as power decreases towards \n1 − β = 0.05. Thus, other factors being \nequal, research ﬁ ndings are more likely \ntrue in scientiﬁ c ﬁ elds that undertake \nlarge studies, such as randomized \ncontrolled trials in cardiology (several \nthousand subjects randomized) [14] \nthan in scientiﬁ c ﬁ elds with small \nstudies, such as most research of \nmolecular predictors (sample sizes 100-\nfold smaller) [15]. \nCorollary 2: The smaller the effect \nsizes in a scientiﬁ c ﬁ eld, the less likely \nthe research ﬁ ndings are to be true. \nPower is also related to the effect \nsize. Thus research ﬁ ndings are more \nlikely true in scientiﬁ c ﬁ elds with large \neffects, such as the impact of smoking \non cancer or cardiovascular disease \n(relative risks 3–20), than in scientiﬁ c \nﬁ elds where postulated effects are \nsmall, such as genetic risk factors for \nmultigenetic diseases (relative risks \n1.1–1.5) [7]. Modern epidemiology is \nincreasingly obliged to target smaller \nTable 1. Research Findings and True Relationships \nResearch \nFinding\nTrue Relationship\nY es No Total\nYes c(1 − β)R/(R + 1) cα/(R + 1) c(R + α − βR)/(R + 1)\nNo cβR/(R + 1) c(1 − α)/(R + 1) c(1 − α + βR)/(R + 1)\nTotal cR/(R + 1) c/(R + 1) c\nDOI: 10.1371/journal.pmed.0020124.t001 \nTable 2. Research Findings and True Relationships in the Presence of Bias\nResearch \nFinding\nTrue Relationship\nY es No Total\nYes ( c[1 − β]R + ucβR)/(R + 1) cα + uc(1 − α)/(R + 1) c(R + α − βR + u − uα + uβR)/(R + 1)\nNo (1 − u)cβR/(R + 1) (1 − u)c(1 − α)/(R + 1) c(1 − u)(1 − α + βR)/(R + 1)\nTotal cR/(R + 1) c/(R + 1) c\nDOI: 10.1371/journal.pmed.0020124.t002\nAugust 2005  |  Volume 2  |  Issue 8  |  e124",
+    "coverage": "Selected baseline model on physical pages 1–2 of the original 2005 PDF; the extractor read six pages, but this guide does not explain the whole paper. Original page 1 layout and formula inspected.",
+    "missing": [
+      "Bias, multiple-team testing, later corollaries and the 2022 correction are outside this explanation. Original Table 1 was not inspected."
+    ]
+  },
+  "evidence": [
+    {
+      "id": "odds",
+      "location": "PDF page 1, Modeling the Framework for False Positive Findings",
+      "quote": "Let R \nbe the ratio of the number of “true \nrelationships” to “no relationships” \namong those tested in the ﬁ eld."
+    },
+    {
+      "id": "prior",
+      "location": "PDF page 1, same section",
+      "quote": "pre-study probability of a relationship \nbeing true is R⁄(R + 1)."
+    },
+    {
+      "id": "power",
+      "location": "PDF page 1, same section",
+      "quote": "The probability \nof a study ﬁ nding a true relationship \nreﬂ ects the power 1 − β (one minus \nthe Type II error rate)."
+    },
+    {
+      "id": "alpha",
+      "location": "PDF page 1, same section",
+      "quote": "The probability \nof claiming a relationship when none \ntruly exists reﬂ ects the Type I error \nrate, α."
+    },
+    {
+      "id": "ppv",
+      "location": "PDF page 1, same section, text before page break",
+      "quote": "According to the 2 \n× 2 table, one gets PPV = (1 − β)R⁄(R \n− βR + α)."
+    },
+    {
+      "id": "scope",
+      "location": "PDF page 1, same section",
+      "quote": "Let us also consider, \nfor computational simplicity, \ncircumscribed ﬁ elds where either there \nis only one true relationship (among \nmany that can be hypothesized) or \nthe power is similar to ﬁ nd any of the \nseveral existing true relationships."
+    },
+    {
+      "id": "posterior",
+      "location": "PDF page 1, Modeling the Framework for False Positive Findings",
+      "quote": "After a research \nﬁ nding has been claimed based on \nachieving formal statistical signiﬁ cance, \nthe post-study probability that it is true \nis the positive predictive value, PPV."
+    }
+  ],
+  "thread": [
+    {
+      "kind": "inference",
+      "text": "The baseline model combines pre-study odds, power and false-positive rate to obtain PPV: the conditional probability that a claimed significant relationship is true.",
+      "evidence": [
+        "odds",
+        "power",
+        "alpha",
+        "ppv",
+        "posterior"
+      ]
+    },
+    {
+      "kind": "inference",
+      "text": "This is a conditional model, not a truth label for an arbitrary paper.",
+      "evidence": [
+        "scope",
+        "ppv"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "id": "prior",
+      "title": "Distinguish odds from probability",
+      "role": "Read the inputs before interpreting the model.",
+      "learning_goal": "Explain why R is not the pre-study probability",
+      "points": [
+        {
+          "kind": "author",
+          "text": "\\(R\\) is the ratio of true to absent relationships; the pre-study probability is \\(R/(R+1)\\).",
+          "evidence": [
+            "odds",
+            "prior"
+          ]
+        },
+        {
+          "kind": "author",
+          "text": "Power is \\(1-\\beta\\); the false-positive probability for an absent relationship is \\(\\alpha\\).",
+          "evidence": [
+            "power",
+            "alpha"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ppv",
+      "title": "Read PPV among significant results",
+      "role": "Connect pre-study inputs to a post-study assessment.",
+      "points": [
+        {
+          "kind": "author",
+          "text": "\\[PPV=\\frac{(1-\\beta)R}{(1-\\beta)R+\\alpha}\\] The source denominator is \\(R-\\beta R+\\alpha\\); this is an algebraic rearrangement.",
+          "evidence": [
+            "ppv"
+          ]
+        },
+        {
+          "kind": "inference",
+          "text": "The denominator includes true-positive and false-positive contributions, so significance does not automatically establish truth.",
+          "evidence": [
+            "ppv"
+          ]
+        },
+        {
+          "kind": "author",
+          "text": "The simplifying model considers fields with one true relationship, or similar power to find the existing true relationships.",
+          "evidence": [
+            "scope"
+          ]
+        }
+      ]
+    }
+  ],
+  "terms": [
+    {
+      "original": "PPV",
+      "name": "Positive predictive value",
+      "essential": true,
+      "explanation": {
+        "kind": "author",
+        "text": "The probability that a research finding is true after a claim based on formal statistical significance.",
+        "evidence": [
+          "posterior"
+        ]
+      }
+    },
+    {
+      "original": "R",
+      "name": "Pre-study odds",
+      "essential": true,
+      "explanation": {
+        "kind": "author",
+        "text": "The number of true relationships divided by the number of absent relationships; not a probability.",
+        "evidence": [
+          "odds"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "source": {
+    "title": "Ioannidis (2005), Why Most Published Research Findings Are False",
+    "path": "source.txt",
+    "coverage": "Selected baseline model, original 2005 PDF pages 1–2; not the bias extensions or 2022 correction."
+  },
+  "position": {
+    "target": "Explain PPV directly",
+    "location": "PDF page 1, Modeling the Framework for False Positive Findings"
+  },
+  "explained": [
+    "PPV is conditional on a claimed statistically significant finding."
+  ],
+  "understanding": [
+    {
+      "point": "Meaning of PPV",
+      "status": "explained_unverified",
+      "answer": "",
+      "reason": "Direct explanation requested; no reasoning answer supplied."
+    }
+  ],
+  "gaps": [
+    "Interpretation of PPV has not been checked."
+  ],
+  "next_entry": "Check which event PPV conditions on if the researcher wants to continue."
+}

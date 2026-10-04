@@ -6,7 +6,7 @@
 
 PaperUnfold develops a shared paper-reading methodology for researchers in all disciplines worldwide. It adapts explanations to each paper's research question, argument, methods, and evidence. The experience starts with a lightweight HTML guide, then offers focused teaching when you want to go deeper.
 
-**Status: tickets01–09 implemented.** Pasted text, local PDFs, accessible webpages, online PDFs, and DOI locators can produce HTML guides with source coverage and copyable teaching prompts. Explanations and optional visuals adapt to the paper's method, empirical evidence, or argument. The independent tutor can save and resume learning progress with readable source material. An optional bounded softmax demonstration and representative release examples are available. Verified installation, platform support, and licensing remain in ticket10. See [the latest validation record](docs/validation/tickets-08-09.md).
+**Status: tickets01–10 implemented.** Generate source-grounded HTML guides from pasted text, local PDFs, accessible webpages, online PDFs and DOI locators; teach directly or from copied guide prompts; save and resume progress with readable source. Optional interaction is limited to a bounded softmax teaching example. Fresh local installation has been exercised in Codex desktop on Windows with explicit installed-entry invocation. CLI and other platforms remain unverified. See [installation](docs/installation.md) and [first-use validation](docs/validation/ticket-10.md).
 
 ## Reading experience
 
@@ -28,18 +28,28 @@ The guide starts with the paper's main thread and adds background where it helps
 
 You can start teaching directly from a paper. Generating a guide first is optional. Teaching happens in your agent chat. Copy a chapter or term prompt from the HTML guide, or start directly from the original paper. At chapter completion or pause, the tutor saves a progress record. Supply that record and readable source text in a new conversation to resume; the record does not replace paper evidence.
 
-## Try the current skills
+## Install and try
 
-In an agent with filesystem and command access, explicitly ask it to read [paper-guide](skills/paper-guide/SKILL.md) or [paper-tutor](skills/paper-tutor/SKILL.md), then supply readable paper material or a locator. The HTML renderer, HTTP acquisition helper, and progress helper require Python 3.10+ and use the standard library. Local or downloaded PDF extraction additionally requires `pypdf` 6.x: `python -m pip install -r skills/paper-guide/requirements.txt`. The verified PDF environment used Python 3.12.14 and pypdf 6.10.0. The extractor performs no OCR; visual tables and equations still require source-page inspection. The HTTP helper follows redirects and publisher-declared PDF links; it does not run webpage JavaScript or sign in. Abstract-only previews receive a limited guide, and unavailable body material requires a readable PDF or pasted text. See [remote input behavior](skills/paper-guide/references/remote-input.md). A skill is an instruction package for your agent, not a standalone paper-analysis command.
+From the checkout root in PowerShell, install into your chosen sibling project:
+
+```powershell
+python -m venv ..\my-paper-project\.venv
+& ..\my-paper-project\.venv\Scripts\python.exe -m pip install -r skills/paper-guide/requirements.txt
+& ..\my-paper-project\.venv\Scripts\python.exe scripts/install_skills.py --dest ..\my-paper-project\.agents\skills
+```
+
+Append `--skill paper-guide` or `--skill paper-tutor` for an independent installation. Existing packages are preserved: the installer refuses to overwrite them. Open the target project in Codex and explicitly ask it to read `.agents/skills/paper-guide/SKILL.md` or `.agents/skills/paper-tutor/SKILL.md`; use that project's `.venv/Scripts/python.exe` when needed. The [bilingual installation guide](docs/installation.md) covers teaching, fresh-conversation resumption, dependencies and failure alternatives.
+
+Verified: Codex desktop Agent on Windows, Python 3.12.14 and pypdf 6.19.0, with explicit entry-file invocation. A blocked Codex CLI invocation did not verify automatic discovery or CLI first use. Other hosts and operating systems are unverified. HTML generation and text teaching helpers use Python 3.10+ standard library; PDF extraction additionally needs pypdf 6.x and performs no OCR. Figures and equations need source-page inspection. URL acquisition requires network access and does not sign in or execute webpage JavaScript; abstract-only material produces a limited guide. Saved HTML embeds math assets and needs no network. Without JavaScript, notation and static/keyboard alternatives remain visible. Skills are instruction packages for your Agent, not standalone paper-analysis commands.
 
 Example requests:
 
-- “Use the paper-guide skill in this repository. Explain this paper URL, DOI, pasted section, or local PDF in English and save the HTML guide.”
-- “Use paper-tutor with this pasted section. Help me understand how the evidence supports the conclusion.”
+- “Read the installed .agents/skills/paper-guide/SKILL.md and follow it. Explain this paper URL, DOI, pasted section, or local PDF in English and save the HTML guide.”
+- “Read the installed .agents/skills/paper-tutor/SKILL.md and follow it with this pasted section. Help me understand how the evidence supports the conclusion.”
 
 Open the [actual Chinese agent-generated guide](examples/paper-guide/agent-invocation-zh.html), inspect its [source and renderer input](examples/paper-guide/agent-invocation-zh.json), or read the [recorded tutor checks](examples/paper-tutor/actual-session.md). See the [actual paused progress](examples/paper-tutor/ticket07-actual-progress.json) and [guide-to-teaching-to-resumption record](examples/paper-tutor/ticket06-07-actual-session.md).
 
-Adaptive validation examples use selected source excerpts: [Attention calculation steps](examples/paper-guide/adaptive-method-zh.html), [empirical survey evidence](examples/paper-guide/adaptive-empirical-zh.html), and a theoretical model in [Chinese](examples/paper-guide/adaptive-theory-zh.html) and [English](examples/paper-guide/adaptive-theory-en.html). Their [source notes](examples/paper-guide/adaptive-source-notes.md) record coverage and attribution. These excerpt examples validate different reasoning structures. The [release examples](examples/release09/README.md) add whole-main-paper reading guides: an algorithm paper in Chinese, an empirical study in English, and a theoretical argument in English and Chinese. They include real screenshots, source audits, scripted researcher inputs to actual tutor sessions, saved progress and fresh-session resumption, and a [same-passage comparison](examples/release09/conventional-comparison.md). These cases do not establish quality across every discipline or measure learning gains. Agent discovery and installation differ by host and remain to be verified in ticket10.
+Adaptive validation examples use selected source excerpts: [Attention calculation steps](examples/paper-guide/adaptive-method-zh.html), [empirical survey evidence](examples/paper-guide/adaptive-empirical-zh.html), and a theoretical model in [Chinese](examples/paper-guide/adaptive-theory-zh.html) and [English](examples/paper-guide/adaptive-theory-en.html). Their [source notes](examples/paper-guide/adaptive-source-notes.md) record coverage and attribution. These excerpt examples validate different reasoning structures. The [release examples](examples/release09/README.md) add whole-main-paper reading guides: an algorithm paper in Chinese, an empirical study in English, and a theoretical argument in English and Chinese. They include real screenshots, source audits, scripted researcher inputs to actual tutor sessions, saved progress and fresh-session resumption, and a [same-passage comparison](examples/release09/conventional-comparison.md). These cases do not establish quality across every discipline or measure learning gains. The [fresh-install examples](examples/first-use10/README.md) add a local PDF guide, a live DOI guide, keyboard copying and independently installed tutoring; see their source and actual screenshot.
 
 The [optional mechanism examples](examples/mechanism08/run.md) show a [bounded softmax temperature experiment](examples/mechanism08/attention-guide.html) with explicit teaching values and a [static empirical explanation](examples/mechanism08/empirical-guide.html) where a requested probability predictor is unsupported by the source. Other mechanisms receive source-guided static explanations; arbitrary interactive simulations are not implemented.
 
@@ -64,7 +74,7 @@ The [optional mechanism examples](examples/mechanism08/run.md) show a [bounded s
 - [x] Publish representative release examples combining guides, teaching, and resumption across an algorithm paper, an empirical study, and a theoretical or humanities argument, including English and Chinese outputs.
 - [x] Add real output screenshots and source references.
 - [x] Provide an optional bounded mechanism demonstration with a static fallback.
-- [ ] Verify installation steps, platform support, and licensing for first use (ticket10).
+- [x] Verify local installation, explicit invocation in Codex desktop on Windows, first use and licensing (ticket10).
 - [x] Publish a short comparison of a conventional text explanation and a PaperUnfold guide using the same source material.
 
 ## Inspiration
@@ -81,3 +91,7 @@ PaperUnfold applies consistent terminology, explicit actors, and meaning-preserv
 - [Glossary](CONTEXT.md): shared domain terms (Chinese).
 - [Project review](docs/project-review.md): confirmed positioning and release priorities (Chinese).
 - [Original teaching prompt](docs/source/socratic-ddd-prompt.txt): source material retained for comparison. The design document defines the intended behavior.
+
+## License and contributions
+
+Original project code, skills and documentation use [MIT](LICENSE). Papers and bundled KaTeX retain their own [licenses and attribution](THIRD_PARTY_NOTICES.md). See [contribution acceptance steps](CONTRIBUTING.md).

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Paper Guide"
+  short_description: "Source-grounded paper guides with optional visuals"
+  default_prompt: "Use $paper-guide to turn my readable paper material into a clear HTML reading guide."

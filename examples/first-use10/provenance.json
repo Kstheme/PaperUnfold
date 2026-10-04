@@ -1,0 +1,20 @@
+{
+  "requested_url": "https://doi.org/10.1371/journal.pmed.0020124",
+  "resolved_url": "https://journals.plos.org/plosmedicine/article/file?id=10.1371/journal.pmed.0020124&type=printable",
+  "retrieved_at": "2026-10-04T12:52:31.937461+00:00",
+  "content_type": "application/pdf",
+  "locator": "1-based physical PDF page; inspect cached PDF before explaining visuals",
+  "landing_url": "https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.0020124",
+  "pdf_attempts": [
+    {
+      "url": "https://journals.plos.org/plosmedicine/article/file?id=10.1371/journal.pmed.0020124&type=printable",
+      "status": "readable"
+    }
+  ],
+  "paper": "Ioannidis (2005), Why Most Published Research Findings Are False",
+  "license": "© 2005 John P. A. Ioannidis. Creative Commons Attribution License, as stated in the original publisher PDF.",
+  "version": "Original 2005 six-page publisher PDF, not the 2022 correction.",
+  "coverage": "Guide explains selected baseline model from PDF pages 1–2; page 1 image inspected.",
+  "generation": "Current Codex desktop Agent followed freshly installed entry files explicitly; CLI discovery not validated.",
+  "changes": "Text extracted with pypdf 6.19.0; physical-page labels added; explanatory math reformatted in LaTeX. Source quotations preserved verbatim."
+}

@@ -1,6 +1,6 @@
 # PaperUnfold：论文导读与论文教学 Skill 设计
 
-本文记录需求访谈中已确认的设计。01–09 已实现；按需机制演示与代表性发布示例见[最新记录](validation/tickets-08-09.md)，链接/DOI 与内容自适应图示见[前轮记录](validation/tickets-04-05.md)。
+本文记录需求访谈中已确认的设计。01–10 已实现；安装、首次使用与许可见[最新记录](validation/ticket-10.md)，按需机制演示与代表性发布示例见[发布验收](validation/tickets-08-09.md)，链接/DOI 与内容自适应图示见[前轮记录](validation/tickets-04-05.md)。
 
 具体用户故事、能力契约与验收场景见 [实现规格](spec.md)。
 

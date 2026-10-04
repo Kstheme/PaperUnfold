@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "source": {
+    "title": "Ioannidis (2005), Why Most Published Research Findings Are False",
+    "path": "source.txt",
+    "coverage": "Selected baseline model, original 2005 PDF pages 1–2; not the bias extensions or 2022 correction."
+  },
+  "position": {
+    "target": "Distinguish pre-study odds R from probability",
+    "location": "PDF page 1, Modeling the Framework for False Positive Findings"
+  },
+  "explained": [
+    "R is true relationships divided by absent relationships; pre-study probability is R/(R+1).",
+    "PPV conditions on a claimed statistically significant finding."
+  ],
+  "understanding": [
+    {
+      "point": "Odds versus probability",
+      "status": "explained_unverified",
+      "answer": "",
+      "reason": "Scripted first-use request asked for a direct explanation and pause; no researcher reasoning answer was supplied."
+    }
+  ],
+  "gaps": [
+    "A concrete odds-to-probability conversion has not been checked."
+  ],
+  "next_entry": "Ask for the pre-study probability when R=1/3, using a labeled teaching example."
+}
