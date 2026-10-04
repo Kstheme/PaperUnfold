@@ -10,6 +10,7 @@ Generated on 2026-10-04 by the current Codex desktop Agent following explicit fr
 - [Read source text / 已读取原文](source.txt), [source/version/license provenance / 来源版本许可](provenance.json).
 - [Keyboard-copied prompts / 键盘实际复制的提示词](copied-prompts.json).
 - [Scripted-input teaching acceptance / 脚本输入教学验收](teaching-session.md), [paused progress / 暂停进度](paused-progress.json), [independent direct-entry progress / 独立直接教学进度](direct-progress.json).
+- [Actual fresh-Agent resumption / 新 Agent 上下文实际续学](fresh-resumed-session.md): retained target and gap, source reread, no automatic mastery.
 
 Paper: John P. A. Ioannidis (2005), *Why Most Published Research Findings Are False*, DOI [10.1371/journal.pmed.0020124](https://doi.org/10.1371/journal.pmed.0020124). © 2005 John P. A. Ioannidis; Creative Commons Attribution License as stated by the publisher PDF. Text was extracted with pypdf, with physical-page labels added; quotations remain verbatim. The original PDF has six pages. The guides explain the baseline model on physical pages 1–2, with original page 1 inspected. Bias extensions, later corollaries, Table 1 interpretation and the 2022 correction are outside this explanation. The live DOI resolved to the original printable 2005 version, matching the local PDF's selected text.
 

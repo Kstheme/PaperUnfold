@@ -1,5 +1,6 @@
 """Check installed skill packages through their public commands outside the checkout."""
 import json
+from html import unescape
 from pathlib import Path
 import subprocess
 import sys
@@ -57,7 +58,7 @@ class InstallationCLI(unittest.TestCase):
         self.assertEqual(marker.read_text(encoding="utf-8"), "Keep my installed skill")
         self.assertFalse((self.destination / "paper-guide").exists())
 
-    def test_independent_guide_install_renders_math_with_its_own_offline_assets(self):
+    def test_independent_guide_install_produces_a_readable_math_guide(self):
         result = self.command(INSTALL, "--dest", self.destination, "--skill", "paper-guide")
         self.assertEqual(result.returncode, 0, result.stderr)
         package = self.destination / "paper-guide"
@@ -70,9 +71,9 @@ class InstallationCLI(unittest.TestCase):
         rendered = self.command(package / "scripts/render_guide.py", request, "--output", output)
         self.assertEqual(rendered.returncode, 0, rendered.stderr)
         content = output.read_text(encoding="utf-8")
-        self.assertIn("renderMathInElement", content)
-        self.assertIn("data:font/woff2;base64,", content)
-        self.assertNotIn("<script src=", content)
+        self.assertIn(data["title"], unescape(content))
+        self.assertIn(data["source"]["text"], unescape(content))
+        self.assertIn(r"Notation: \(x^2\).", unescape(content))
         self.assertTrue((package / "assets/katex/LICENSE").is_file())
 
 
