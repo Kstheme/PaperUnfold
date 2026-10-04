@@ -40,6 +40,9 @@ Use `null` for pasted source not saved as a separate file. The researcher can
 supply it again in the next conversation. Coverage records what was actually
 read, including relevant missing portions. A PDF needs readable extracted text
 or a host's supported reading facility; this helper reads UTF-8 text only.
+Saving a draft in another directory preserves this declared path; the helper
+does not copy or relocate the paper. When moving a saved record, keep its source
+at the corresponding relative path or provide `--source` in the new session.
 
 Statuses are `explained_unverified`, `partial`, and `mastered`. Record a specific
 point and supporting answer excerpt plus your assessment. `partial` and `mastered`

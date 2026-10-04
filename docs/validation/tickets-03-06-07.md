@@ -112,3 +112,17 @@ Python compilation and Node syntax checks pass; no static typechecker is
 configured. Broader field coverage, URL/DOI retrieval, adaptive diagrams, and
 verified installation remain later tickets. PDF text-layer coverage alone cannot
 prove that an input includes every original page or preserves visual content.
+
+## Final checks and review
+
+The final full suite passed **23 tests**: 12 renderer, 6 PDF-input, and 5 progress
+CLI tests. Both skill package validators passed. The portable real-keyboard
+handoff check also passed after being saved in the repository.
+
+Two independent agents reviewed `git diff d0b861b...318a0c9` in parallel:
+Standards 0 actionable findings; Spec 0 material findings. A separate relative
+source-path concern was checked against the documented contract: relative paths
+refer to the saved record's directory, not the draft's directory. The reference
+now states explicitly that saving/moving progress does not relocate paper files;
+use a matching relative path or the public `--source` override. No code change
+was required.
