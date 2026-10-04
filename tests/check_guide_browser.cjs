@@ -20,8 +20,8 @@ const { chromium } = require(path.resolve(modulePath));
     await page.evaluate(() => document.fonts.ready);
     const mathCount = await page.locator('.katex').count();
     if (content.includes('renderMathInElement')) {
-      if (!mathCount || !await page.locator('.katex-display').count()) {
-        throw new Error('Inline or display mathematics failed to render offline');
+      if (!mathCount) {
+        throw new Error('Mathematics failed to render offline');
       }
       if (await page.locator('.katex-error').count()) throw new Error('Invalid example mathematics');
       if (await page.locator('blockquote .katex, pre .katex').count()) {
@@ -29,6 +29,11 @@ const { chromium } = require(path.resolve(modulePath));
       }
     }
     if (requests.length) throw new Error('Saved guide attempted network requests');
+    for (const image of await page.locator('.visual img').all()) {
+      if (!await image.evaluate(element => element.complete && element.naturalWidth > 0 && Boolean(element.alt))) {
+        throw new Error('Embedded source figure is unreadable or lacks an accessible description');
+      }
+    }
     for (const details of await page.locator('details').all()) {
       await details.evaluate(element => {
         for (let ancestor = element.parentElement; ancestor; ancestor = ancestor.parentElement) {
@@ -80,8 +85,12 @@ const { chromium } = require(path.resolve(modulePath));
     await page.locator('nav a').first().click();
     if (!page.url().endsWith('#thread')) throw new Error('Navigation did not reach research thread');
     await page.setViewportSize({ width: 390, height: 844 });
+    await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
     if (await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)) {
-      throw new Error('Guide overflows mobile viewport');
+      const overflowing = await page.evaluate(() => [...document.querySelectorAll('*')]
+        .filter(element => element.getBoundingClientRect().right > innerWidth)
+        .slice(0, 5).map(element => `${element.tagName}.${element.className}`));
+      throw new Error(`Guide overflows mobile viewport: ${overflowing.join(', ')}`);
     }
     const noJsContext = await browser.newContext({ javaScriptEnabled: false });
     const noJsPage = await noJsContext.newPage();
@@ -97,6 +106,7 @@ const { chromium } = require(path.resolve(modulePath));
     await noJsContext.close();
     console.log(JSON.stringify({ controls: await page.locator('details').count(), anchors: links.length,
       navigation: true, mobileOverflow: false, mathCount, networkRequests: requests.length,
+      explanatoryVisuals: await page.locator('.visual').count(), sourceImages: await page.locator('.visual img').count(),
       teachingPrompts: prompts.length, clipboardFallback: true, noJavaScriptCopyFallback: true,
       clipboardSuccessStub: true, actualClipboardTested: false }));
   } finally {

@@ -99,3 +99,69 @@ no fabricated target-specific location in either fallback.
 The guide coverage describes what was available when generating the guide. The
 copied prompt instructs the tutor to limit teaching to material actually included
 or independently accessed, so a selected excerpt never implies full-paper access.
+
+## Optional explanatory visuals
+
+Add `visuals` at guide level (research map) or inside a section (local explanation).
+Omit it or use an empty list when a visual would add no understanding. See
+[visual-explanations.md](visual-explanations.md) for selection and fidelity guidance.
+These are declarative objects, never raw HTML, SVG, JavaScript, or Mermaid code.
+
+Every visual has `type`, `title`, and three explanation objects: `purpose`,
+`reading`, `contribution`. Explanation objects use the same `kind`, `text`,
+`evidence` contract as a normal point. Put conditions, uncertainty, and limits in
+the relevant cells/nodes/steps, not only in a distant disclaimer. The purpose and
+payload are visible; reading and contribution details can be expanded.
+
+| Type | Additional fields | Meaning |
+| --- | --- | --- |
+| `map`, `process`, `concepts` | `nodes: [{id, label: explanation}]`, `edges: [{from, to, relation: explanation}]` | Numbered cards and explicitly described directed relationships. Node IDs are unique within this visual; each edge names actual nodes. An arrow only means the stated relationship, not necessarily causality or time. |
+| `table` | `columns: [text]`, `rows: [[explanation, ...]]` | Nonempty comparison/evidence table; every row matches the column count. |
+| `formula` | `steps: [explanation]` | Nonempty sequence of formula-reading or derivation steps; use the supported LaTeX delimiters. |
+| `source_figure` | `original_label`, `source_evidence: [evidence ID]`; optional `image_path`, `image_alt` | Interpretation of a figure or table actually observed in the supplied source. Original label and nonempty evidence references are required. |
+
+Example of an argument relationship, with source-supported conditions retained:
+
+```json
+{
+  "visuals": [{
+    "type": "concepts", "title": "Why the limit matters",
+    "purpose": {"kind": "inference", "text": "Separate condition from conclusion.", "evidence": ["e1"]},
+    "reading": {"kind": "background", "text": "The arrow represents the conditional relationship stated here.", "evidence": []},
+    "contribution": {"kind": "inference", "text": "This is not an unconditional conclusion.", "evidence": ["e1"]},
+    "nodes": [
+      {"id": "condition", "label": {"kind": "author", "text": "If the sample is small", "evidence": ["e1"]}},
+      {"id": "claim", "label": {"kind": "author", "text": "The estimate may change", "evidence": ["e1"]}}
+    ],
+    "edges": [{"from": "condition", "to": "claim", "relation": {"kind": "author", "text": "May change under this condition, not must change.", "evidence": ["e1"]}}]
+  }]
+}
+```
+
+All types except `source_figure` display **Teaching diagram / editorial
+reconstruction**, even when their individual statements faithfully restate the
+author. Constructed data or analogies must use `kind: analogy` and explicitly say
+they are teaching examples. A formula from the source can be restated in a
+teaching breakdown, with its literal evidence and equation locator preserved.
+
+For `source_figure`, `image_path` must point to an actually observed local PNG or
+JPEG crop. Relative paths resolve against the input JSON directory. Images of up
+to 10 MB are embedded as data URIs; remote URLs, SVG, and active markup are not
+accepted. Supply an accurate, localized `image_alt`. If the crop is absent, the
+page says the source image is not reproduced and links its observed source
+location; never invent an image or imply that an unavailable figure was read.
+The renderer validates file signature, not scientific provenance: check the
+actual crop, caption, legend, axes, units, and claim against the original.
+
+When visuals use a language other than English or Chinese, include these extra
+translated `labels` alongside the existing controls:
+
+```json
+{
+  "teaching_visual": "Teaching diagram / editorial reconstruction",
+  "source_visual": "Source figure reading", "purpose": "Purpose",
+  "reading": "How to read", "contribution": "Contribution and limits",
+  "relation": "Relationship",
+  "source_not_reproduced": "Source image not reproduced; consult the supplied source at the linked location."
+}
+```

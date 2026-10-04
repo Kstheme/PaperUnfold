@@ -1,0 +1,408 @@
+{
+  "title": "为什么统计显著不等于结论为真：局部理论导读",
+  "language": "zh",
+  "source": {
+    "name": "John P. A. Ioannidis (2005), Why Most Published Research Findings Are False — supplied selected excerpt",
+    "text": "Title: Why Most Published Research Findings Are False\nAuthor: John P. A. Ioannidis (2005)\nArticle type: Scholarly journal essay, PLOS Medicine 2(8): e124\nDOI: 10.1371/journal.pmed.0020124\nSource: https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.0020124\nLicense: Copyright 2005 John P. A. Ioannidis; Creative Commons Attribution License, as stated on the publisher page. Original work must be properly cited.\nCoverage: Selected sentences and mathematical expressions from Modeling the Framework for False Positive Findings only; not the full essay, Bias section, simulations, or the six corollaries.\nLocations: Modeling the Framework for False Positive Findings (PDF pages 1-2/6; printed journal pages 0696-0697), Table 1 referenced but omitted.\n\n[Modeling the Framework for False Positive Findings — definitions and simplifying assumption, selected sentences]\nLet R be the ratio of the number of “true relationships” to “no relationships” among those tested in the field.\nLet us also consider, for computational simplicity, circumscribed fields where either there is only one true relationship (among many that can be hypothesized) or the power is similar to find any of the several existing true relationships.\nThe pre-study probability of a relationship being true is R/(R + 1).\nThe probability of a study finding a true relationship reflects the power 1 - β (one minus the Type II error rate).\nThe probability of claiming a relationship when none truly exists reflects the Type I error rate, α.\n\n[Modeling the Framework for False Positive Findings — posterior, selected sentence]\nAfter a research finding has been claimed based on achieving formal statistical significance, the post-study probability that it is true is the positive predictive value, PPV.\n\n[Modeling the Framework for False Positive Findings — mathematical notation transcribed from text adjacent to Table 1]\nPPV = (1 - β)R/(R - βR + α).\nA research finding is thus more likely true than false if (1 - β)R > α.\n\n[Coverage note written by the fixture author]\nThe supplied argument is conditional on the stated model. This baseline formula precedes the paper’s extensions for bias and multiple teams. It does not demonstrate that every published result is false or independently measure a real field’s false-discovery rate. R is prior odds, not prior probability; R/(R+1) is prior probability. A 2×2 teaching table, algebraic decomposition, or illustrative numbers are explanatory constructions, not observed experiments or copied author tables. No numbered equation label appears here in the source. The publisher page links a 2022 correction; this excerpt does not include the corrected Box 1 numerical example.\n",
+    "coverage": "输出语言：中文。只阅读用户提供的局部文字与转录公式；主题为 Modeling the Framework for False Positive Findings。所给定位为 PDF 第 1–2/6 页、期刊第 0696–0697 页；未核验 PDF。本文不是整篇论文导读。",
+    "missing": [
+      "完整论文、Bias 部分、模拟和六条推论。",
+      "提及但未提供的 Table 1；未提供原始图表。",
+      "2022 年更正及更正后的 Box 1 数值例子；只知道材料中提及，未读取。"
+    ]
+  },
+  "evidence": [
+    {
+      "id": "ratio",
+      "location": "Modeling the Framework for False Positive Findings — definitions and simplifying assumption, selected sentence 1",
+      "quote": "Let R be the ratio of the number of “true relationships” to “no relationships” among those tested in the field."
+    },
+    {
+      "id": "scope",
+      "location": "Modeling the Framework for False Positive Findings — definitions and simplifying assumption, selected sentence 2",
+      "quote": "Let us also consider, for computational simplicity, circumscribed fields where either there is only one true relationship (among many that can be hypothesized) or the power is similar to find any of the several existing true relationships."
+    },
+    {
+      "id": "prior",
+      "location": "Modeling the Framework for False Positive Findings — definitions and simplifying assumption, selected sentence 3",
+      "quote": "The pre-study probability of a relationship being true is R/(R + 1)."
+    },
+    {
+      "id": "power",
+      "location": "Modeling the Framework for False Positive Findings — definitions and simplifying assumption, selected sentence 4",
+      "quote": "The probability of a study finding a true relationship reflects the power 1 - β (one minus the Type II error rate)."
+    },
+    {
+      "id": "alpha",
+      "location": "Modeling the Framework for False Positive Findings — definitions and simplifying assumption, selected sentence 5",
+      "quote": "The probability of claiming a relationship when none truly exists reflects the Type I error rate, α."
+    },
+    {
+      "id": "posterior",
+      "location": "Modeling the Framework for False Positive Findings — posterior, selected sentence",
+      "quote": "After a research finding has been claimed based on achieving formal statistical significance, the post-study probability that it is true is the positive predictive value, PPV."
+    },
+    {
+      "id": "formula",
+      "location": "Modeling the Framework for False Positive Findings — mathematical notation transcribed adjacent to Table 1, first expression (no numbered equation label supplied)",
+      "quote": "PPV = (1 - β)R/(R - βR + α)."
+    },
+    {
+      "id": "threshold",
+      "location": "Modeling the Framework for False Positive Findings — mathematical notation transcribed adjacent to Table 1, second expression (no numbered equation label supplied)",
+      "quote": "A research finding is thus more likely true than false if (1 - β)R > α."
+    },
+    {
+      "id": "limit",
+      "location": "Coverage note written by the fixture author, sentences 1–3",
+      "quote": "The supplied argument is conditional on the stated model. This baseline formula precedes the paper’s extensions for bias and multiple teams. It does not demonstrate that every published result is false or independently measure a real field’s false-discovery rate."
+    },
+    {
+      "id": "omitted",
+      "location": "Fixture metadata: Coverage",
+      "quote": "Coverage: Selected sentences and mathematical expressions from Modeling the Framework for False Positive Findings only; not the full essay, Bias section, simulations, or the six corollaries."
+    },
+    {
+      "id": "correction",
+      "location": "Coverage note written by the fixture author, final two sentences",
+      "quote": "No numbered equation label appears here in the source. The publisher page links a 2022 correction; this excerpt does not include the corrected Box 1 numerical example."
+    }
+  ],
+  "thread": [
+    {
+      "kind": "author",
+      "text": "这段回答：在已声称统计显著之后，研究关系为真的概率是多少？作者用 PPV 表达这一研究后概率。",
+      "evidence": [
+        "posterior"
+      ]
+    },
+    {
+      "kind": "author",
+      "text": "先限定简化模型：一个真实关系，或多个真实关系有相近检验功效。R 是真关系数与无关系数之比；研究前概率是 R/(R+1)。",
+      "evidence": [
+        "scope",
+        "ratio",
+        "prior"
+      ]
+    },
+    {
+      "kind": "author",
+      "text": "在这个基线模型中，PPV 取决于 R、功效 1−β 与 I 类错误率 α；“更可能为真”要求 (1−β)R>α。它不是对全部已发表研究的无条件判定。",
+      "evidence": [
+        "formula",
+        "threshold",
+        "limit"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "id": "premises",
+      "title": "前提：结论在哪个模型内成立？",
+      "role": "先交代简化前提，避免把基线公式外推到未提供的扩展。",
+      "points": [
+        {
+          "kind": "author",
+          "text": "作者为计算简便考虑受限领域：或者只有一个真实关系（可假设的关系很多），或者发现多个既有真实关系的功效相近。该相近功效前提属于模型，不是片段报告的经验测量。",
+          "evidence": [
+            "scope"
+          ]
+        },
+        {
+          "kind": "inference",
+          "text": "材料编写者的覆盖说明指出：这是偏倚与多团队扩展之前的基线公式。片段不足以重建那些扩展。",
+          "evidence": [
+            "limit"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "definitions",
+      "title": "定义：不要把 R 当成概率",
+      "role": "拆开总体构成、检验性能和研究后可信度。",
+      "points": [
+        {
+          "kind": "author",
+          "text": "R 是被检验关系中“真实关系”数量与“无关系”数量的比值，即先验赔率；概率需转换为 \\(R/(R+1)\\)。",
+          "evidence": [
+            "ratio",
+            "prior"
+          ]
+        },
+        {
+          "kind": "author",
+          "text": "功效 \\(1-\\beta\\) 表示真实关系被研究发现的概率；\\(\\beta\\) 是 II 类错误率。\\(\\alpha\\) 表示无真实关系时却声称有关系的 I 类错误率。",
+          "evidence": [
+            "power",
+            "alpha"
+          ]
+        },
+        {
+          "kind": "inference",
+          "text": "PPV 则以已经声称统计显著为条件，询问所声称关系为真的研究后概率；它与发现真实关系的功效是不同的条件概率。",
+          "evidence": [
+            "posterior",
+            "power"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "reasoning",
+      "title": "推理：显著声称由哪些部分组成？",
+      "role": "通过代数分解连接模型定义与 PPV。",
+      "points": [
+        {
+          "kind": "author",
+          "text": "原文给出 \\[PPV=\\frac{(1-\\beta)R}{R-\\beta R+\\alpha}.\\] 这是片段转录的表达式，没有编号方程标签。",
+          "evidence": [
+            "formula",
+            "correction"
+          ]
+        }
+      ],
+      "visuals": [
+        {
+          "type": "formula",
+          "title": "为何分母有真阳性项和假阳性项？",
+          "purpose": {
+            "kind": "inference",
+            "text": "把原文公式拆成可读的条件概率结构。",
+            "evidence": [
+              "formula",
+              "posterior"
+            ]
+          },
+          "reading": {
+            "kind": "inference",
+            "text": "以下是讲解者的代数重组，不是原文 Table 1，也不是观测数据；以“无关系”总量为相对单位。",
+            "evidence": [
+              "ratio",
+              "formula"
+            ]
+          },
+          "contribution": {
+            "kind": "inference",
+            "text": "在原有简化模型内，PPV 是所有阳性声称中真阳性的份额；该拆解不估计任何真实领域的参数。",
+            "evidence": [
+              "scope",
+              "formula",
+              "limit"
+            ]
+          },
+          "steps": [
+            {
+              "kind": "inference",
+              "text": "按 R 的定义，相对的真实关系量为 R，无关系量为 1。这只是归一化单位，不是新增样本量。",
+              "evidence": [
+                "ratio"
+              ]
+            },
+            {
+              "kind": "inference",
+              "text": "由功效得到真阳性相对量 \\((1-\\beta)R\\)；由 I 类错误率得到假阳性相对量 \\(\\alpha\\)。",
+              "evidence": [
+                "ratio",
+                "power",
+                "alpha"
+              ]
+            },
+            {
+              "kind": "inference",
+              "text": "分母 \\(R-\\beta R+\\alpha=(1-\\beta)R+\\alpha\\)。因此 \\[PPV=\\frac{(1-\\beta)R}{(1-\\beta)R+\\alpha}.\\]",
+              "evidence": [
+                "formula"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "conclusion",
+      "title": "有条件结论：超过一半，仍非确定",
+      "role": "说明阈值的严格性及其适用条件。",
+      "points": [
+        {
+          "kind": "inference",
+          "text": "原文的条件是严格不等式 \\((1-\\beta)R>\\alpha\\)。按公式，在正分母下它等价于 \\(PPV>1/2\\)。",
+          "evidence": [
+            "threshold",
+            "formula"
+          ]
+        },
+        {
+          "kind": "inference",
+          "text": "同样在正分母下，等号给出 \\(PPV=1/2\\)，小于则给出 \\(PPV<1/2\\)。这些是公式推导；若分母为零，这个 PPV 条件概率表达式无定义。",
+          "evidence": [
+            "formula"
+          ]
+        }
+      ],
+      "visuals": [
+        {
+          "type": "concepts",
+          "title": "“更可能为真”的条件链",
+          "purpose": {
+            "kind": "inference",
+            "text": "把模型范围与概率阈值放在同一条解释链中。",
+            "evidence": [
+              "scope",
+              "threshold"
+            ]
+          },
+          "reading": {
+            "kind": "background",
+            "text": "箭头表示带条件的推导关系，不表示经验因果或实验证明。",
+            "evidence": []
+          },
+          "contribution": {
+            "kind": "inference",
+            "text": "“更可能为真”是超过一半，不是确定为真；等号对应一半。",
+            "evidence": [
+              "formula",
+              "threshold"
+            ]
+          },
+          "nodes": [
+            {
+              "id": "model",
+              "label": {
+                "kind": "inference",
+                "text": "原有简化模型；PPV 分母为正，条件概率有定义。",
+                "evidence": [
+                  "scope",
+                  "formula"
+                ]
+              }
+            },
+            {
+              "id": "balance",
+              "label": {
+                "kind": "inference",
+                "text": "\\((1-\\beta)R>\\alpha\\)：真阳性相对量大于假阳性相对量。",
+                "evidence": [
+                  "threshold",
+                  "formula"
+                ]
+              }
+            },
+            {
+              "id": "claim",
+              "label": {
+                "kind": "inference",
+                "text": "\\(PPV>1/2\\)：该模型内显著发现更可能为真而非假。",
+                "evidence": [
+                  "posterior",
+                  "threshold",
+                  "formula"
+                ]
+              }
+            }
+          ],
+          "edges": [
+            {
+              "from": "model",
+              "to": "balance",
+              "relation": {
+                "kind": "inference",
+                "text": "在此范围内比较两项；不是对所有领域已验证的条件。",
+                "evidence": [
+                  "scope",
+                  "limit"
+                ]
+              }
+            },
+            {
+              "from": "balance",
+              "to": "claim",
+              "relation": {
+                "kind": "inference",
+                "text": "正分母下代数等价，推出概率超过一半。",
+                "evidence": [
+                  "formula",
+                  "threshold"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "limits",
+      "title": "阅读边界：片段不能证明什么？",
+      "role": "区分公式推导、原文证据与未提供材料。",
+      "points": [
+        {
+          "kind": "inference",
+          "text": "本导读没有读取整篇文章；片段不独立测量某领域的假发现率，也不证明每个发表结果都为假。",
+          "evidence": [
+            "limit",
+            "omitted"
+          ]
+        },
+        {
+          "kind": "inference",
+          "text": "这里没有原文 Table 1、实验结果或更正后的 Box 1 例子。两个图示仅重组片段中的公式与条件，没有新增数值案例。",
+          "evidence": [
+            "omitted",
+            "correction"
+          ]
+        }
+      ]
+    }
+  ],
+  "terms": [
+    {
+      "original": "R",
+      "name": "先验赔率",
+      "essential": true,
+      "explanation": {
+        "kind": "inference",
+        "text": "真关系数与无关系数之比；不是概率。先验概率为 \\(R/(R+1)\\)。",
+        "evidence": [
+          "ratio",
+          "prior"
+        ]
+      }
+    },
+    {
+      "original": "power 1 - β",
+      "name": "检验功效",
+      "essential": true,
+      "explanation": {
+        "kind": "inference",
+        "text": "发现真实关系的概率 \\(1-\\beta\\)；\\(\\beta\\) 是 II 类错误率。",
+        "evidence": [
+          "power"
+        ]
+      }
+    },
+    {
+      "original": "Type I error rate, α",
+      "name": "I 类错误率",
+      "essential": true,
+      "explanation": {
+        "kind": "inference",
+        "text": "没有真实关系时却声称有关系的概率。",
+        "evidence": [
+          "alpha"
+        ]
+      }
+    },
+    {
+      "original": "positive predictive value, PPV",
+      "name": "阳性预测值",
+      "essential": true,
+      "explanation": {
+        "kind": "inference",
+        "text": "以已声称统计显著为条件，关系为真的研究后概率。",
+        "evidence": [
+          "posterior"
+        ]
+      }
+    }
+  ]
+}

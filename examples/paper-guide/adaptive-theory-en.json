@@ -1,0 +1,408 @@
+{
+  "title": "Why statistical significance does not establish truth: a selected theoretical passage",
+  "language": "en",
+  "source": {
+    "name": "John P. A. Ioannidis (2005), Why Most Published Research Findings Are False — supplied selected excerpt",
+    "text": "Title: Why Most Published Research Findings Are False\nAuthor: John P. A. Ioannidis (2005)\nArticle type: Scholarly journal essay, PLOS Medicine 2(8): e124\nDOI: 10.1371/journal.pmed.0020124\nSource: https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.0020124\nLicense: Copyright 2005 John P. A. Ioannidis; Creative Commons Attribution License, as stated on the publisher page. Original work must be properly cited.\nCoverage: Selected sentences and mathematical expressions from Modeling the Framework for False Positive Findings only; not the full essay, Bias section, simulations, or the six corollaries.\nLocations: Modeling the Framework for False Positive Findings (PDF pages 1-2/6; printed journal pages 0696-0697), Table 1 referenced but omitted.\n\n[Modeling the Framework for False Positive Findings — definitions and simplifying assumption, selected sentences]\nLet R be the ratio of the number of “true relationships” to “no relationships” among those tested in the field.\nLet us also consider, for computational simplicity, circumscribed fields where either there is only one true relationship (among many that can be hypothesized) or the power is similar to find any of the several existing true relationships.\nThe pre-study probability of a relationship being true is R/(R + 1).\nThe probability of a study finding a true relationship reflects the power 1 - β (one minus the Type II error rate).\nThe probability of claiming a relationship when none truly exists reflects the Type I error rate, α.\n\n[Modeling the Framework for False Positive Findings — posterior, selected sentence]\nAfter a research finding has been claimed based on achieving formal statistical significance, the post-study probability that it is true is the positive predictive value, PPV.\n\n[Modeling the Framework for False Positive Findings — mathematical notation transcribed from text adjacent to Table 1]\nPPV = (1 - β)R/(R - βR + α).\nA research finding is thus more likely true than false if (1 - β)R > α.\n\n[Coverage note written by the fixture author]\nThe supplied argument is conditional on the stated model. This baseline formula precedes the paper’s extensions for bias and multiple teams. It does not demonstrate that every published result is false or independently measure a real field’s false-discovery rate. R is prior odds, not prior probability; R/(R+1) is prior probability. A 2×2 teaching table, algebraic decomposition, or illustrative numbers are explanatory constructions, not observed experiments or copied author tables. No numbered equation label appears here in the source. The publisher page links a 2022 correction; this excerpt does not include the corrected Box 1 numerical example.\n",
+    "coverage": "Output language: English. Only the supplied selected text and transcribed formulas were read, from Modeling the Framework for False Positive Findings. The fixture supplies PDF pages 1–2/6 and journal pages 0696–0697; the PDF was not inspected. This guide covers the passage, not the whole essay.",
+    "missing": [
+      "The full essay, Bias section, simulations, and six corollaries.",
+      "Table 1 is referenced but omitted; no original figure or table is supplied.",
+      "The 2022 correction and corrected Box 1 numerical example; these are mentioned in the fixture but were not read."
+    ]
+  },
+  "evidence": [
+    {
+      "id": "ratio",
+      "location": "Modeling the Framework for False Positive Findings — definitions and simplifying assumption, selected sentence 1",
+      "quote": "Let R be the ratio of the number of “true relationships” to “no relationships” among those tested in the field."
+    },
+    {
+      "id": "scope",
+      "location": "Modeling the Framework for False Positive Findings — definitions and simplifying assumption, selected sentence 2",
+      "quote": "Let us also consider, for computational simplicity, circumscribed fields where either there is only one true relationship (among many that can be hypothesized) or the power is similar to find any of the several existing true relationships."
+    },
+    {
+      "id": "prior",
+      "location": "Modeling the Framework for False Positive Findings — definitions and simplifying assumption, selected sentence 3",
+      "quote": "The pre-study probability of a relationship being true is R/(R + 1)."
+    },
+    {
+      "id": "power",
+      "location": "Modeling the Framework for False Positive Findings — definitions and simplifying assumption, selected sentence 4",
+      "quote": "The probability of a study finding a true relationship reflects the power 1 - β (one minus the Type II error rate)."
+    },
+    {
+      "id": "alpha",
+      "location": "Modeling the Framework for False Positive Findings — definitions and simplifying assumption, selected sentence 5",
+      "quote": "The probability of claiming a relationship when none truly exists reflects the Type I error rate, α."
+    },
+    {
+      "id": "posterior",
+      "location": "Modeling the Framework for False Positive Findings — posterior, selected sentence",
+      "quote": "After a research finding has been claimed based on achieving formal statistical significance, the post-study probability that it is true is the positive predictive value, PPV."
+    },
+    {
+      "id": "formula",
+      "location": "Modeling the Framework for False Positive Findings — mathematical notation transcribed adjacent to Table 1, first expression (no numbered equation label supplied)",
+      "quote": "PPV = (1 - β)R/(R - βR + α)."
+    },
+    {
+      "id": "threshold",
+      "location": "Modeling the Framework for False Positive Findings — mathematical notation transcribed adjacent to Table 1, second expression (no numbered equation label supplied)",
+      "quote": "A research finding is thus more likely true than false if (1 - β)R > α."
+    },
+    {
+      "id": "limit",
+      "location": "Coverage note written by the fixture author, sentences 1–3",
+      "quote": "The supplied argument is conditional on the stated model. This baseline formula precedes the paper’s extensions for bias and multiple teams. It does not demonstrate that every published result is false or independently measure a real field’s false-discovery rate."
+    },
+    {
+      "id": "omitted",
+      "location": "Fixture metadata: Coverage",
+      "quote": "Coverage: Selected sentences and mathematical expressions from Modeling the Framework for False Positive Findings only; not the full essay, Bias section, simulations, or the six corollaries."
+    },
+    {
+      "id": "correction",
+      "location": "Coverage note written by the fixture author, final two sentences",
+      "quote": "No numbered equation label appears here in the source. The publisher page links a 2022 correction; this excerpt does not include the corrected Box 1 numerical example."
+    }
+  ],
+  "thread": [
+    {
+      "kind": "author",
+      "text": "The passage asks how probable a claimed relationship is to be true after formal statistical significance. The author identifies this post-study probability as PPV.",
+      "evidence": [
+        "posterior"
+      ]
+    },
+    {
+      "kind": "author",
+      "text": "The simplified model first restricts the field to one true relationship, or several true relationships with similar power. R is the ratio of true to absent relationships; the pre-study probability is R/(R+1).",
+      "evidence": [
+        "scope",
+        "ratio",
+        "prior"
+      ]
+    },
+    {
+      "kind": "author",
+      "text": "Within this baseline model, PPV depends on R, power 1−β, and the Type I error rate α. A finding is more likely true than false if (1−β)R>α; this is not an unconditional verdict on all published research.",
+      "evidence": [
+        "formula",
+        "threshold",
+        "limit"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "id": "premises",
+      "title": "Premises: where does the claim apply?",
+      "role": "Establish the simplifying premise before interpreting the baseline formula or extending its scope.",
+      "points": [
+        {
+          "kind": "author",
+          "text": "For computational simplicity, the author considers a circumscribed field with either one true relationship among many hypotheses, or similar power for detecting the several existing true relationships. Similar power is a modeling premise, not an empirical measurement reported in this excerpt.",
+          "evidence": [
+            "scope"
+          ]
+        },
+        {
+          "kind": "inference",
+          "text": "The fixture author’s coverage note identifies the formula as a baseline preceding extensions for bias and multiple teams. The supplied passage does not support reconstructing those extensions.",
+          "evidence": [
+            "limit"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "definitions",
+      "title": "Definitions: R is odds, not probability",
+      "role": "Separate the field’s composition, test performance, and post-study credibility.",
+      "points": [
+        {
+          "kind": "author",
+          "text": "R compares the number of true relationships with the number of absent relationships among those tested: prior odds. Convert it to the pre-study probability using \\(R/(R+1)\\).",
+          "evidence": [
+            "ratio",
+            "prior"
+          ]
+        },
+        {
+          "kind": "author",
+          "text": "Power \\(1-\\beta\\) is the probability of detecting a true relationship; \\(\\beta\\) is the Type II error rate. \\(\\alpha\\) is the Type I error rate: claiming a relationship when none exists.",
+          "evidence": [
+            "power",
+            "alpha"
+          ]
+        },
+        {
+          "kind": "inference",
+          "text": "PPV conditions on a finding already being claimed on the basis of statistical significance and asks whether it is true. It is a different conditional probability from power.",
+          "evidence": [
+            "posterior",
+            "power"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "reasoning",
+      "title": "Reasoning: what makes up positive claims?",
+      "role": "Connect the model definitions to PPV through algebraic decomposition.",
+      "points": [
+        {
+          "kind": "author",
+          "text": "The supplied expression is \\[PPV=\\frac{(1-\\beta)R}{R-\\beta R+\\alpha}.\\] It is transcribed in the excerpt without a numbered equation label.",
+          "evidence": [
+            "formula",
+            "correction"
+          ]
+        }
+      ],
+      "visuals": [
+        {
+          "type": "formula",
+          "title": "Why does the denominator contain true-positive and false-positive terms?",
+          "purpose": {
+            "kind": "inference",
+            "text": "Read the source formula as a conditional-probability structure.",
+            "evidence": [
+              "formula",
+              "posterior"
+            ]
+          },
+          "reading": {
+            "kind": "inference",
+            "text": "This is an editorial algebraic reconstruction, not the omitted Table 1 or observed data. Use the total of absent relationships as the relative unit.",
+            "evidence": [
+              "ratio",
+              "formula"
+            ]
+          },
+          "contribution": {
+            "kind": "inference",
+            "text": "Within the stated simplified model, PPV is the true-positive share of positive claims; this decomposition does not estimate any real field’s parameters.",
+            "evidence": [
+              "scope",
+              "formula",
+              "limit"
+            ]
+          },
+          "steps": [
+            {
+              "kind": "inference",
+              "text": "By the definition of R, the relative amount of true relationships is R and of absent relationships is 1. This is a normalization unit, not an added sample size.",
+              "evidence": [
+                "ratio"
+              ]
+            },
+            {
+              "kind": "inference",
+              "text": "Power gives a relative true-positive amount of \\((1-\\beta)R\\); the Type I error rate gives a relative false-positive amount of \\(\\alpha\\).",
+              "evidence": [
+                "ratio",
+                "power",
+                "alpha"
+              ]
+            },
+            {
+              "kind": "inference",
+              "text": "The denominator is \\(R-\\beta R+\\alpha=(1-\\beta)R+\\alpha\\). Hence \\[PPV=\\frac{(1-\\beta)R}{(1-\\beta)R+\\alpha}.\\]",
+              "evidence": [
+                "formula"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "conclusion",
+      "title": "Qualified conclusion: above one half is not certainty",
+      "role": "Explain the strict threshold and the conditions that support it.",
+      "points": [
+        {
+          "kind": "inference",
+          "text": "The source condition is the strict inequality \\((1-\\beta)R>\\alpha\\). With a positive denominator, the formula makes it equivalent to \\(PPV>1/2\\).",
+          "evidence": [
+            "threshold",
+            "formula"
+          ]
+        },
+        {
+          "kind": "inference",
+          "text": "Also with a positive denominator, equality gives \\(PPV=1/2\\), and a smaller true-positive term gives \\(PPV<1/2\\). These are deductions from the formula; if the denominator is zero, this PPV conditional-probability expression is undefined.",
+          "evidence": [
+            "formula"
+          ]
+        }
+      ],
+      "visuals": [
+        {
+          "type": "concepts",
+          "title": "The condition for “more likely true than false”",
+          "purpose": {
+            "kind": "inference",
+            "text": "Keep the model’s scope alongside the probability threshold.",
+            "evidence": [
+              "scope",
+              "threshold"
+            ]
+          },
+          "reading": {
+            "kind": "background",
+            "text": "Arrows denote conditional inference, not empirical causation or experimental proof.",
+            "evidence": []
+          },
+          "contribution": {
+            "kind": "inference",
+            "text": "“More likely true” means exceeding one half, not certainty; equality corresponds to one half.",
+            "evidence": [
+              "formula",
+              "threshold"
+            ]
+          },
+          "nodes": [
+            {
+              "id": "model",
+              "label": {
+                "kind": "inference",
+                "text": "The stated simplified model; a positive PPV denominator so the conditional probability is defined.",
+                "evidence": [
+                  "scope",
+                  "formula"
+                ]
+              }
+            },
+            {
+              "id": "balance",
+              "label": {
+                "kind": "inference",
+                "text": "\\((1-\\beta)R>\\alpha\\): the relative true-positive amount exceeds the false-positive amount.",
+                "evidence": [
+                  "threshold",
+                  "formula"
+                ]
+              }
+            },
+            {
+              "id": "claim",
+              "label": {
+                "kind": "inference",
+                "text": "\\(PPV>1/2\\): within the model, a significant finding is more likely true than false.",
+                "evidence": [
+                  "posterior",
+                  "threshold",
+                  "formula"
+                ]
+              }
+            }
+          ],
+          "edges": [
+            {
+              "from": "model",
+              "to": "balance",
+              "relation": {
+                "kind": "inference",
+                "text": "Compare the two terms within this scope; this is not a verified condition for every field.",
+                "evidence": [
+                  "scope",
+                  "limit"
+                ]
+              }
+            },
+            {
+              "from": "balance",
+              "to": "claim",
+              "relation": {
+                "kind": "inference",
+                "text": "Algebraic equivalence with a positive denominator gives probability above one half.",
+                "evidence": [
+                  "formula",
+                  "threshold"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "limits",
+      "title": "Reading limits: what can this excerpt not establish?",
+      "role": "Distinguish deductions from the formula, supplied evidence, and unavailable material.",
+      "points": [
+        {
+          "kind": "inference",
+          "text": "This guide does not claim to have read the whole essay. The excerpt does not independently measure a field’s false-discovery rate or demonstrate that every published result is false.",
+          "evidence": [
+            "limit",
+            "omitted"
+          ]
+        },
+        {
+          "kind": "inference",
+          "text": "The supplied material lacks Table 1, experimental results, and the corrected Box 1 example. The two teaching visuals reconstruct only the passage’s formula and conditions, with no added numerical case.",
+          "evidence": [
+            "omitted",
+            "correction"
+          ]
+        }
+      ]
+    }
+  ],
+  "terms": [
+    {
+      "original": "R",
+      "name": "Prior odds",
+      "essential": true,
+      "explanation": {
+        "kind": "inference",
+        "text": "The ratio of true to absent relationships, not a probability. The prior probability is \\(R/(R+1)\\).",
+        "evidence": [
+          "ratio",
+          "prior"
+        ]
+      }
+    },
+    {
+      "original": "power 1 - β",
+      "name": "Statistical power",
+      "essential": true,
+      "explanation": {
+        "kind": "inference",
+        "text": "The probability \\(1-\\beta\\) of detecting a true relationship; \\(\\beta\\) is the Type II error rate.",
+        "evidence": [
+          "power"
+        ]
+      }
+    },
+    {
+      "original": "Type I error rate, α",
+      "name": "Type I error rate",
+      "essential": true,
+      "explanation": {
+        "kind": "inference",
+        "text": "The probability of claiming a relationship when none truly exists.",
+        "evidence": [
+          "alpha"
+        ]
+      }
+    },
+    {
+      "original": "positive predictive value, PPV",
+      "name": "Positive predictive value",
+      "essential": true,
+      "explanation": {
+        "kind": "inference",
+        "text": "The post-study probability that a relationship is true, conditional on a finding claimed on the basis of formal statistical significance.",
+        "evidence": [
+          "posterior"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,321 @@
+{
+  "title": "研究者如何判断可重复性？两项重要性评分的局部导读",
+  "language": "zh",
+  "source": {
+    "name": "Challenging the N-Heuristic: Effect size, not sample size, predicts the replicability of psychological science — Xingyu Li, Jiting Liu, Weijia Gao, Geoffrey L. Cohen (2024)；DOI: 10.1371/journal.pone.0306911",
+    "text": "Title: Challenging the N-Heuristic: Effect size, not sample size, predicts the replicability of psychological science\nAuthors: Xingyu Li, Jiting Liu, Weijia Gao, Geoffrey L. Cohen (2024)\nDOI: 10.1371/journal.pone.0306911\nSource: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0306911\nLicense: Copyright 2024 Li et al.; Creative Commons Attribution License, as stated on the publisher page. Original author and source must be credited.\nCoverage: Selected sentences from Survey study, Fig 5 caption, and Discussion only; not the full paper or the replication-pair analysis.\nLocations: Survey study (PDF page 10/15); Fig 5 caption (PDF page 11/15); Discussion limitations (PDF page 12/15).\n\n[Survey study — recruitment and exclusion, selected sentences]\nTo address this question, we surveyed psychological scientists, broadly defined, by sending out invitation links to a survey about “replicability in psychological research” through social media platforms and the Society for Personality and Social Psychology listserv.\nTen undergraduate students replied to the survey and were excluded from all analyses, resulting in a final sample size of 215 psychological scientists.\n\n[Survey study — randomized presentation and outcome, selected sentences]\nWe randomized the order of presentation of nine study criteria between participants, and for each one, they rated the extent to which they thought it predicted a study’s replicability on a 5-point scale, with higher numbers signifying greater importance.\nRespondents rated “large sample size” as the most important criterion (M = 3.84), judging it to be significantly more important than the second most important factor, “large effect size” (M = 3.61), t(214) = 3.21, p = 0.002.\n\n[Fig 5 — selected caption sentence]\nError bars represent ±1 SE.\n\n[Discussion — selected limitation sentence]\nFirst, the studies subjected to replication and our surveyed respondents were not representative samples.\n\n[Coverage note written by the fixture author]\nThis survey measures researchers’ judgments, not actual replication outcomes or the causal effect of sample size. Randomization concerns criterion presentation order, not assignment to sample-size interventions. The means, t statistic, and p value belong to respondents’ importance ratings. Do not infer causation, population representativeness, nine complete means, or replication rates from these excerpts. The original Fig 5 image is omitted; a teaching comparison must be labeled as a reconstruction from the two reported means, without invented error-bar values.\n",
+    "coverage": "仅阅读 Survey study 的选句、Fig 5 的一句图注与 Discussion 的一句限制；输入标注 PDF 第 10/15、11/15、12/15 页。不是全文，也未阅读 replication-pair analysis。未访问原网页。原作者与来源保留在本页及原文附录；输入声明为 Creative Commons Attribution License。",
+    "missing": [
+      "论文其余部分及 replication-pair analysis，无法用本调查片段检验标题中的实证主张。",
+      "九个标准的完整列表与全部均值。",
+      "Fig 5 原图、坐标轴、图例和各误差条数值；仅提供一句图注。"
+    ]
+  },
+  "evidence": [
+    {
+      "id": "recruit",
+      "location": "Survey study — recruitment（输入标注 PDF 第 10/15 页）",
+      "quote": "To address this question, we surveyed psychological scientists, broadly defined, by sending out invitation links to a survey about “replicability in psychological research” through social media platforms and the Society for Personality and Social Psychology listserv."
+    },
+    {
+      "id": "sample",
+      "location": "Survey study — exclusion（输入标注 PDF 第 10/15 页）",
+      "quote": "Ten undergraduate students replied to the survey and were excluded from all analyses, resulting in a final sample size of 215 psychological scientists."
+    },
+    {
+      "id": "measure",
+      "location": "Survey study — randomized presentation and outcome（输入标注 PDF 第 10/15 页）",
+      "quote": "We randomized the order of presentation of nine study criteria between participants, and for each one, they rated the extent to which they thought it predicted a study’s replicability on a 5-point scale, with higher numbers signifying greater importance."
+    },
+    {
+      "id": "comparison",
+      "location": "Survey study — ratings comparison（输入标注 PDF 第 10/15 页）",
+      "quote": "Respondents rated “large sample size” as the most important criterion (M = 3.84), judging it to be significantly more important than the second most important factor, “large effect size” (M = 3.61), t(214) = 3.21, p = 0.002."
+    },
+    {
+      "id": "caption",
+      "location": "Fig 5 — selected caption sentence（输入标注 PDF 第 11/15 页）",
+      "quote": "Error bars represent ±1 SE."
+    },
+    {
+      "id": "limit",
+      "location": "Discussion — selected limitation sentence（输入标注 PDF 第 12/15 页）",
+      "quote": "First, the studies subjected to replication and our surveyed respondents were not representative samples."
+    }
+  ],
+  "thread": [
+    {
+      "kind": "inference",
+      "text": "局部问题是研究者认为哪些标准能够预测研究可重复性，而不是实际研究重复成功的比例。",
+      "evidence": [
+        "measure"
+      ]
+    },
+    {
+      "kind": "author",
+      "text": "最终纳入 215 名心理学研究者，对九个标准作 5 点重要性评分；随机化的是标准呈现顺序。",
+      "evidence": [
+        "sample",
+        "measure"
+      ]
+    },
+    {
+      "kind": "author",
+      "text": "“large sample size”的平均重要性评分 3.84 高于“large effect size”的 3.61；作者报告 t(214) = 3.21，p = 0.002。受访者不是代表性样本。",
+      "evidence": [
+        "comparison",
+        "limit"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "id": "design",
+      "title": "这项调查究竟测量了什么？",
+      "role": "先确定招募、分析样本、随机化对象和结局，限定后续数字的解释。",
+      "points": [
+        {
+          "kind": "author",
+          "text": "通过社交媒体与 Society for Personality and Social Psychology 邮件列表发送调查邀请，研究对象被广义定义为心理学研究者。",
+          "evidence": [
+            "recruit"
+          ]
+        },
+        {
+          "kind": "author",
+          "text": "十名本科生回答后被排除出所有分析，最终样本为 215 名心理学研究者。",
+          "evidence": [
+            "sample"
+          ]
+        },
+        {
+          "kind": "author",
+          "text": "参与者评价九个标准预测可重复性的程度，使用 5 点量表，数值越高表示越重要。随机化只涉及标准的呈现顺序。",
+          "evidence": [
+            "measure"
+          ]
+        },
+        {
+          "kind": "inference",
+          "text": "因此不能把这里的随机化解释成操纵研究样本量的干预；测到的是判断，而不是实际重复结果。",
+          "evidence": [
+            "measure"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ratings",
+      "title": "3.84 与 3.61 回答哪一种比较？",
+      "role": "把评分、作者的显著性报告及其解释边界放在同一个比较中。",
+      "points": [
+        {
+          "kind": "author",
+          "text": "作者将 large sample size 评为最高、large effect size 评为次高，并报告两者评分差异显著：t(214) = 3.21，p = 0.002。",
+          "evidence": [
+            "comparison"
+          ]
+        },
+        {
+          "kind": "inference",
+          "text": "这支持受访者赋予样本量更高重要性的判断；不支持样本量使重复成功率提高的因果结论，也不能从这两个均值还原其余七个标准。",
+          "evidence": [
+            "comparison",
+            "measure"
+          ]
+        }
+      ],
+      "visuals": [
+        {
+          "type": "table",
+          "title": "两项评分：重要性高低，而非重复成功率",
+          "purpose": {
+            "kind": "inference",
+            "text": "把两个已报告均值的比较对象与测量单位对齐。",
+            "evidence": [
+              "comparison",
+              "measure"
+            ]
+          },
+          "reading": {
+            "kind": "inference",
+            "text": "这是按两个报告均值重组的教学比较，不是 Fig 5 的复现。5 点量表高分表示更重要；没有绘制或估算误差条。",
+            "evidence": [
+              "measure",
+              "comparison",
+              "caption"
+            ]
+          },
+          "contribution": {
+            "kind": "inference",
+            "text": "只显示受访者的重要性判断及作者报告的排序；其余七项评分和实际重复结果未提供。",
+            "evidence": [
+              "comparison",
+              "measure"
+            ]
+          },
+          "columns": [
+            "所评标准（保留原词）",
+            "平均重要性评分 M",
+            "作者报告的排序"
+          ],
+          "rows": [
+            [
+              {
+                "kind": "author",
+                "text": "large sample size（大样本量）",
+                "evidence": [
+                  "comparison"
+                ]
+              },
+              {
+                "kind": "author",
+                "text": "3.84（5 点重要性量表）",
+                "evidence": [
+                  "comparison",
+                  "measure"
+                ]
+              },
+              {
+                "kind": "author",
+                "text": "最高",
+                "evidence": [
+                  "comparison"
+                ]
+              }
+            ],
+            [
+              {
+                "kind": "author",
+                "text": "large effect size（大效应量）",
+                "evidence": [
+                  "comparison"
+                ]
+              },
+              {
+                "kind": "author",
+                "text": "3.61（5 点重要性量表）",
+                "evidence": [
+                  "comparison",
+                  "measure"
+                ]
+              },
+              {
+                "kind": "author",
+                "text": "次高",
+                "evidence": [
+                  "comparison"
+                ]
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "limits",
+      "title": "Fig 5 与样本限制允许我们说到哪里？",
+      "role": "保留图注的实际信息，同时限制从缺失图像及非代表性样本作出的推论。",
+      "points": [
+        {
+          "kind": "author",
+          "text": "Discussion 明确指出，被重复的研究与调查受访者均非代表性样本。这里未读重复研究分析，只保留作者这条限制。",
+          "evidence": [
+            "limit"
+          ]
+        },
+        {
+          "kind": "inference",
+          "text": "不能据此把调查结论直接推广到全部心理学研究者。",
+          "evidence": [
+            "limit"
+          ]
+        }
+      ],
+      "visuals": [
+        {
+          "type": "source_figure",
+          "title": "Fig 5：只读到了误差条说明",
+          "purpose": {
+            "kind": "inference",
+            "text": "保留原图标签与现有图注信息，说明为何不能补画误差条。",
+            "evidence": [
+              "caption"
+            ]
+          },
+          "reading": {
+            "kind": "inference",
+            "text": "已提供图注只说明误差条为 ±1 SE。原图缺失，无法核对坐标轴、单位、图例或误差条长度；上述均值来自调查结果句。",
+            "evidence": [
+              "caption",
+              "comparison"
+            ]
+          },
+          "contribution": {
+            "kind": "inference",
+            "text": "该句能识别误差条表示的统计量，却没有提供任何 SE 数值，因此不能复现原图或计算区间。",
+            "evidence": [
+              "caption"
+            ]
+          },
+          "original_label": "Fig 5",
+          "source_evidence": [
+            "caption"
+          ]
+        }
+      ]
+    }
+  ],
+  "terms": [
+    {
+      "original": "importance rating",
+      "name": "重要性评分",
+      "essential": true,
+      "explanation": {
+        "kind": "author",
+        "text": "参与者对标准预测可重复性程度的主观评价；采用 5 点量表，高分表示更重要。",
+        "evidence": [
+          "measure"
+        ]
+      }
+    },
+    {
+      "original": "M",
+      "name": "均值",
+      "essential": true,
+      "source_evidence": [
+        "comparison"
+      ],
+      "explanation": {
+        "kind": "background",
+        "text": "补充背景：M 表示平均数；本处是重要性评分的平均数，而非重复率。",
+        "evidence": []
+      }
+    },
+    {
+      "original": "SE",
+      "name": "标准误",
+      "essential": false,
+      "source_evidence": [
+        "caption"
+      ],
+      "explanation": {
+        "kind": "background",
+        "text": "补充背景：标准误描述估计量的抽样不确定性，与个体评分的标准差不同。图注称误差条为 ±1 SE，但没有给出数值。",
+        "evidence": []
+      }
+    },
+    {
+      "original": "non-representative samples",
+      "name": "非代表性样本",
+      "essential": true,
+      "explanation": {
+        "kind": "author",
+        "text": "作者明确将这一限制同时用于重复研究样本和本调查受访者。",
+        "evidence": [
+          "limit"
+        ]
+      }
+    }
+  ]
+}

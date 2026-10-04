@@ -6,11 +6,11 @@
 
 PaperUnfold develops a shared paper-reading methodology for researchers in all disciplines worldwide. It adapts explanations to each paper's research question, argument, methods, and evidence. The experience starts with a lightweight HTML guide, then offers focused teaching when you want to go deeper.
 
-**Status: tickets01/02/03/06/07 implemented.** Pasted text and local PDFs can produce HTML guides with copyable teaching prompts. The independent tutor can save and resume learning progress with readable source material. URL/DOI acquisition and verified installation remain on the roadmap. See [the latest validation record](docs/validation/tickets-03-06-07.md).
+**Status: tickets01–07 implemented.** Pasted text, local PDFs, accessible webpages, online PDFs, and DOI locators can produce HTML guides with source coverage and copyable teaching prompts. Explanations and optional visuals adapt to the paper's method, empirical evidence, or argument. The independent tutor can save and resume learning progress with readable source material. Representative release examples and verified installation remain on the roadmap. See [the latest validation record](docs/validation/tickets-04-05.md).
 
 ## Reading experience
 
-1. Provide a pasted paper section or local PDF. URL and DOI retrieval are planned.
+1. Provide a pasted paper section, local PDF, accessible webpage, online PDF, or DOI.
 2. Get a single-file HTML guide with a map of the supplied material, section explanations, essential terms, and relevant diagrams.
 3. Check key explanations against locations in the source paper.
 4. Choose a chapter, formula, or question for guided learning in your agent chat.
@@ -30,14 +30,16 @@ You can start teaching directly from a paper. Generating a guide first is option
 
 ## Try the current skills
 
-In an agent with filesystem and command access, explicitly ask it to read [paper-guide](skills/paper-guide/SKILL.md) or [paper-tutor](skills/paper-tutor/SKILL.md), then supply readable paper text. The HTML renderer and progress helper require Python 3.10+ and use the standard library. Local PDF extraction additionally requires `pypdf` 6.x: `python -m pip install -r skills/paper-guide/requirements.txt`. The verified PDF environment used Python 3.12.14 and pypdf 6.10.0. The extractor performs no OCR; visual tables and equations still require source-page inspection. A skill is an instruction package for your agent, not a standalone paper-analysis command.
+In an agent with filesystem and command access, explicitly ask it to read [paper-guide](skills/paper-guide/SKILL.md) or [paper-tutor](skills/paper-tutor/SKILL.md), then supply readable paper material or a locator. The HTML renderer, HTTP acquisition helper, and progress helper require Python 3.10+ and use the standard library. Local or downloaded PDF extraction additionally requires `pypdf` 6.x: `python -m pip install -r skills/paper-guide/requirements.txt`. The verified PDF environment used Python 3.12.14 and pypdf 6.10.0. The extractor performs no OCR; visual tables and equations still require source-page inspection. The HTTP helper follows redirects and publisher-declared PDF links; it does not run webpage JavaScript or sign in. Abstract-only previews receive a limited guide, and unavailable body material requires a readable PDF or pasted text. See [remote input behavior](skills/paper-guide/references/remote-input.md). A skill is an instruction package for your agent, not a standalone paper-analysis command.
 
 Example requests:
 
-- “Use the paper-guide skill in this repository. Explain this pasted section or local PDF in English and save the HTML guide.”
+- “Use the paper-guide skill in this repository. Explain this paper URL, DOI, pasted section, or local PDF in English and save the HTML guide.”
 - “Use paper-tutor with this pasted section. Help me understand how the evidence supports the conclusion.”
 
-Open the [actual Chinese agent-generated guide](examples/paper-guide/agent-invocation-zh.html), inspect its [source and renderer input](examples/paper-guide/agent-invocation-zh.json), or read the [recorded tutor checks](examples/paper-tutor/actual-session.md). See the [actual paused progress](examples/paper-tutor/ticket07-actual-progress.json) and [guide-to-teaching-to-resumption record](examples/paper-tutor/ticket06-07-actual-session.md). Full local PDF and unreadable-input checks are recorded separately. Broader discipline examples belong to ticket09. Agent discovery and installation differ by host and remain to be verified in ticket10.
+Open the [actual Chinese agent-generated guide](examples/paper-guide/agent-invocation-zh.html), inspect its [source and renderer input](examples/paper-guide/agent-invocation-zh.json), or read the [recorded tutor checks](examples/paper-tutor/actual-session.md). See the [actual paused progress](examples/paper-tutor/ticket07-actual-progress.json) and [guide-to-teaching-to-resumption record](examples/paper-tutor/ticket06-07-actual-session.md).
+
+Adaptive validation examples use selected source excerpts: [Attention calculation steps](examples/paper-guide/adaptive-method-zh.html), [empirical survey evidence](examples/paper-guide/adaptive-empirical-zh.html), and a theoretical model in [Chinese](examples/paper-guide/adaptive-theory-zh.html) and [English](examples/paper-guide/adaptive-theory-en.html). Their [source notes](examples/paper-guide/adaptive-source-notes.md) record coverage and attribution. These examples validate different reasoning structures; they do not establish support across every discipline. Ticket09 still covers representative release examples combining guides, teaching, and resumption. Agent discovery and installation differ by host and remain to be verified in ticket10.
 
 ## Design principles
 
@@ -53,9 +55,11 @@ Open the [actual Chinese agent-generated guide](examples/paper-guide/agent-invoc
 - [x] Implement `paper-guide` for pasted text and its HTML renderer.
 - [x] Implement independent `paper-tutor` teaching.
 - [x] Read local PDFs with page provenance and explicit extraction gaps.
+- [x] Acquire accessible webpages, online PDFs, and DOI-linked material with explicit coverage and access limits.
+- [x] Adapt research-logic explanations and optional visuals to methods, empirical evidence, and theoretical arguments.
 - [x] Copy chapter/term teaching prompts from HTML.
 - [x] Save learning progress and resume with source material.
-- [ ] Publish examples covering an algorithm paper, an empirical study, and a theoretical or humanities argument, including English and Chinese outputs.
+- [ ] Publish representative release examples combining guides, teaching, and resumption across an algorithm paper, an empirical study, and a theoretical or humanities argument, including English and Chinese outputs.
 - [ ] Add real output screenshots, source references, verified installation steps, and a license.
 - [ ] Publish a short comparison of a conventional text explanation and a PaperUnfold guide using the same source material.
 

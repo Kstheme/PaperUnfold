@@ -1,0 +1,253 @@
+{
+  "title": "Attention Is All You Need：权重怎样变成输出？",
+  "language": "zh",
+  "source": {
+    "name": "Attention Is All You Need — Vaswani et al.；用户提供的方法片段",
+    "text": "Title: Attention Is All You Need\nAuthors: Vaswani et al.\nSource: https://arxiv.org/html/1706.03762v7\nCoverage: Two short source excerpts and Equation (1) only. This is not the full paper.\nLocations: Section 3.2; Section 3.2.1, Equation (1) and final paragraph.\n\n[Section 3.2 — short excerpt]\nThe output is computed as a weighted sum of the values,\n\n[Section 3.2.1 — Equation (1), mathematical notation transcribed]\nAttention(Q, K, V) = softmax(QK^T / sqrt(d_k)) V\n\n[Section 3.2.1 — final paragraph, short excerpt]\nTo counteract this effect, we scale the dot products by 1/sqrt(d_k).\n\n[Coverage note written by the fixture author]\nThe surrounding discussion of the effect is omitted. The fixture supplies neither full-paper results nor the full argument for scaling. An explanation of omitted context must be marked as background, or the agent must obtain the missing source before attributing it to the authors. No paper page number is supplied.\n",
+    "coverage": "仅阅读 Section 3.2 的一句短摘录、Section 3.2.1 的转录 Equation (1) 与末段一句短摘录；不是整篇论文导读。未访问原网页。",
+    "missing": [
+      "缩放所针对的 effect 的前文及完整论证。",
+      "论文其他方法、实验与结果。",
+      "原始页面和图像；未提供论文页码。"
+    ]
+  },
+  "evidence": [
+    {
+      "id": "weighted",
+      "location": "Section 3.2 — short excerpt（输入标注，无论文页码）",
+      "quote": "The output is computed as a weighted sum of the values,"
+    },
+    {
+      "id": "equation",
+      "location": "Section 3.2.1 — Equation (1)（输入转录的数学记号）",
+      "quote": "Attention(Q, K, V) = softmax(QK^T / sqrt(d_k)) V"
+    },
+    {
+      "id": "scale",
+      "location": "Section 3.2.1 — final paragraph, short excerpt（输入标注）",
+      "quote": "To counteract this effect, we scale the dot products by 1/sqrt(d_k)."
+    }
+  ],
+  "thread": [
+    {
+      "kind": "inference",
+      "text": "本片段回答一个局部方法问题：Attention 的输出怎样由 values 的加权和形成？",
+      "evidence": [
+        "weighted"
+      ]
+    },
+    {
+      "kind": "author",
+      "text": "Equation (1) 把这条计算链写为：点积 → 缩放 → softmax → 与 V 相乘。",
+      "evidence": [
+        "equation"
+      ]
+    },
+    {
+      "kind": "inference",
+      "text": "作者说缩放是为了抵消某个 effect，但该 effect 的上下文没有提供，不能据此复述作者的完整理由。",
+      "evidence": [
+        "scale"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "id": "weights-output",
+      "title": "权重与输出分别在哪里？",
+      "role": "把一句加权和描述与公式连接，避免把 softmax 权重直接当作最终输出。",
+      "points": [
+        {
+          "kind": "author",
+          "text": "Section 3.2 将输出描述为 values 的加权和。",
+          "evidence": [
+            "weighted"
+          ]
+        },
+        {
+          "kind": "inference",
+          "text": "按 Equation (1) 的运算顺序，\\(\\operatorname{softmax}(QK^\\top/\\sqrt{d_k})\\) 提供用于加权的量，随后与 \\(V\\) 相乘才得到 Attention 输出。",
+          "evidence": [
+            "equation"
+          ]
+        }
+      ],
+      "learning_goal": "沿 Equation (1) 区分 softmax 权重和 Attention 的加权输出。",
+      "visuals": [
+        {
+          "type": "process",
+          "title": "从点积到加权输出：哪一步产生权重？",
+          "purpose": {
+            "kind": "inference",
+            "text": "拆开公式中的依赖关系，定位权重与输出。",
+            "evidence": [
+              "equation",
+              "weighted"
+            ]
+          },
+          "reading": {
+            "kind": "background",
+            "text": "箭头只表示本公式的计算依赖。每个节点是公式重组，不是原文图。",
+            "evidence": []
+          },
+          "contribution": {
+            "kind": "inference",
+            "text": "最后一步对应 values 的加权和；这条链不提供实验效果或完整缩放论证。",
+            "evidence": [
+              "weighted",
+              "equation",
+              "scale"
+            ]
+          },
+          "nodes": [
+            {
+              "id": "dot",
+              "label": {
+                "kind": "author",
+                "text": "点积项：\\(QK^\\top\\)",
+                "evidence": [
+                  "equation"
+                ]
+              }
+            },
+            {
+              "id": "scaled",
+              "label": {
+                "kind": "author",
+                "text": "缩放项：\\(QK^\\top/\\sqrt{d_k}\\)",
+                "evidence": [
+                  "equation"
+                ]
+              }
+            },
+            {
+              "id": "weights",
+              "label": {
+                "kind": "inference",
+                "text": "权重：\\(\\operatorname{softmax}(QK^\\top/\\sqrt{d_k})\\)",
+                "evidence": [
+                  "equation"
+                ]
+              }
+            },
+            {
+              "id": "output",
+              "label": {
+                "kind": "author",
+                "text": "输出：上述权重与 \\(V\\) 相乘",
+                "evidence": [
+                  "equation",
+                  "weighted"
+                ]
+              }
+            }
+          ],
+          "edges": [
+            {
+              "from": "dot",
+              "to": "scaled",
+              "relation": {
+                "kind": "author",
+                "text": "除以 \\(\\sqrt{d_k}\\)",
+                "evidence": [
+                  "equation"
+                ]
+              }
+            },
+            {
+              "from": "scaled",
+              "to": "weights",
+              "relation": {
+                "kind": "author",
+                "text": "对缩放项应用 softmax",
+                "evidence": [
+                  "equation"
+                ]
+              }
+            },
+            {
+              "from": "weights",
+              "to": "output",
+              "relation": {
+                "kind": "author",
+                "text": "再与 V 相乘，形成 values 的加权和",
+                "evidence": [
+                  "equation",
+                  "weighted"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "scaling-limit",
+      "title": "缩放做了什么，为什么仍有解释边界？",
+      "role": "区分公式可直接观察的运算与被省略的设计论证。",
+      "points": [
+        {
+          "kind": "author",
+          "text": "作者明确说明把点积乘以 \\(1/\\sqrt{d_k}\\)，与 Equation (1) 中的除法写法一致。",
+          "evidence": [
+            "scale",
+            "equation"
+          ]
+        },
+        {
+          "kind": "inference",
+          "text": "“To counteract this effect”指回省略的前文。这里只能保留作者说要抵消某种效应，不能确定该效应的完整定义、推导或证据。",
+          "evidence": [
+            "scale"
+          ]
+        },
+        {
+          "kind": "background",
+          "text": "补充记号背景：\\(Q,K,V\\) 通常分别称为 queries、keys、values，\\(d_k\\) 通常指 key 的维度；这些定义未在所提供的原文句子中展开。",
+          "evidence": []
+        }
+      ]
+    }
+  ],
+  "terms": [
+    {
+      "original": "softmax",
+      "name": "归一化函数",
+      "essential": true,
+      "source_evidence": [
+        "equation"
+      ],
+      "explanation": {
+        "kind": "background",
+        "text": "补充背景：softmax 将一组数通过指数与归一化转成非负、和为 1 的权重；本片段只给出它在公式中的位置。",
+        "evidence": []
+      }
+    },
+    {
+      "original": "weighted sum of the values",
+      "name": "values 的加权和",
+      "essential": true,
+      "explanation": {
+        "kind": "author",
+        "text": "作者对输出的描述；结合公式，需要经过权重与 V 相乘这一步。",
+        "evidence": [
+          "weighted",
+          "equation"
+        ]
+      }
+    },
+    {
+      "original": "d_k",
+      "name": "缩放项中的维度记号",
+      "essential": false,
+      "source_evidence": [
+        "equation"
+      ],
+      "explanation": {
+        "kind": "background",
+        "text": "补充背景：通常表示 key 的维度。当前摘录没有给出其完整定义或缩放推导。",
+        "evidence": []
+      }
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 """Check the public renderer CLI and the saved reading artifact."""
 import json
+import base64
 from html.parser import HTMLParser
 from pathlib import Path
 import subprocess
@@ -52,12 +53,14 @@ def guide():
 
 
 class GuideCLI(unittest.TestCase):
-    def render(self, data):
+    def render(self, data, image_bytes=None):
         temp = tempfile.TemporaryDirectory()
         self.addCleanup(temp.cleanup)
         directory = Path(temp.name)
         data_file, output = directory / "guide.json", directory / "guide.html"
         data_file.write_text(json.dumps(data), encoding="utf-8")
+        if image_bytes is not None:
+            (directory / "figure.png").write_bytes(image_bytes)
         result = subprocess.run([sys.executable, str(SCRIPT), str(data_file), "--output", str(output)],
                                 capture_output=True, text=True, encoding="utf-8")
         return result, output
@@ -137,6 +140,85 @@ class GuideCLI(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertFalse(output.exists())
         self.assertIn("source.text", result.stderr)
+
+    def test_optional_visuals_show_relations_conditions_and_source_provenance(self):
+        data = guide()
+        claim = data["thread"][0]
+        data["visuals"] = [{"type": "concepts", "title": "Conditional reasoning", "purpose": claim,
+            "reading": claim, "contribution": claim,
+            "nodes": [{"id": "sample", "label": claim}, {"id": "estimate", "label": claim}],
+            "edges": [{"from": "sample", "to": "estimate", "relation": claim}]}]
+        data["sections"][0]["visuals"] = [{"type": "table", "title": "Comparison", "purpose": claim,
+            "reading": claim, "contribution": claim, "columns": ["Condition", "Claim"],
+            "rows": [[claim, {"kind": "analogy", "text": "Toy example, not an observed result", "evidence": []}]]}]
+        result, output = self.render(data)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        content = output.read_text(encoding="utf-8")
+        self.assertIn("Teaching diagram", content)
+        self.assertIn("Conditional reasoning", content)
+        self.assertIn("Toy example, not an observed result", content)
+        self.assertIn('<table>', content)
+        self.assertIn('class="visual"', content)
+        artifact = Artifact(); artifact.feed(content)
+        for link in artifact.links:
+            self.assertIn(link[1:], artifact.ids)
+
+    def test_visual_cannot_claim_missing_source_or_an_unknown_relation_target(self):
+        data = guide(); claim = data["thread"][0]
+        visual = {"type": "process", "title": "Process", "purpose": claim, "reading": claim,
+            "contribution": claim, "nodes": [{"id": "one", "label": claim}],
+            "edges": [{"from": "one", "to": "missing", "relation": claim}]}
+        data["visuals"] = [visual]
+        result, output = self.render(data)
+        self.assertNotEqual(result.returncode, 0); self.assertFalse(output.exists())
+        visual.update(type="source_figure", original_label="Figure 1", source_evidence=["invented"])
+        result, output = self.render(data)
+        self.assertNotEqual(result.returncode, 0); self.assertFalse(output.exists())
+
+    def test_formula_steps_and_source_figure_reading_do_not_fabricate_image(self):
+        data = guide(); claim = data["thread"][0]
+        data["sections"][0]["visuals"] = [
+            {"type": "formula", "title": "Algebra background", "purpose": claim, "reading": claim,
+             "contribution": claim, "steps": [{"kind": "background", "text": r'\[x/2\]', "evidence": []}]},
+            {"type": "source_figure", "title": "Read the supplied figure", "original_label": "Figure 1",
+             "source_evidence": ["e1"], "purpose": claim, "reading": claim, "contribution": claim}]
+        result, output = self.render(data)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        content = output.read_text(encoding="utf-8")
+        self.assertIn("Source figure reading", content)
+        self.assertIn("not reproduced", content)
+        self.assertIn("renderMathInElement", content)
+        artifact = Artifact(); artifact.feed(content)
+        self.assertNotIn("img", artifact.tags)
+
+    def test_source_image_is_bundled_relative_to_json_and_not_loaded_as_active_markup(self):
+        data = guide(); claim = data["thread"][0]
+        data["visuals"] = [{"type": "source_figure", "title": "Figure reading", "original_label": "Figure 1",
+            "source_evidence": ["e1"], "purpose": claim, "reading": claim, "contribution": claim,
+            "image_path": "figure.png", "image_alt": "Sample limitation"}]
+        png = base64.b64decode("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aS1sAAAAASUVORK5CYII=")
+        result, output = self.render(data, png)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn('src="data:image/png;base64,', output.read_text(encoding="utf-8"))
+        result, output = self.render(data, b'<svg onload="alert(1)"></svg>')
+        self.assertNotEqual(result.returncode, 0); self.assertFalse(output.exists())
+
+    def test_visual_text_is_escaped_and_author_cells_need_source_evidence(self):
+        data = guide(); claim = data["thread"][0].copy()
+        data["visuals"] = [{"type": "formula", "title": "<script>bad()</script>", "purpose": claim,
+            "reading": claim, "contribution": claim, "steps": [claim]}]
+        result, output = self.render(data)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertNotIn("<script>bad()", output.read_text(encoding="utf-8"))
+        claim["evidence"] = []
+        result, output = self.render(data)
+        self.assertNotEqual(result.returncode, 0); self.assertFalse(output.exists())
+
+    def test_visuals_are_optional_and_do_not_create_empty_modules(self):
+        data = guide(); data["visuals"] = []; data["sections"][0]["visuals"] = []
+        result, output = self.render(data)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertNotIn('class="visual"', output.read_text(encoding="utf-8"))
 
     def test_math_guide_embeds_offline_renderer_but_keeps_source_verbatim(self):
         data = guide()

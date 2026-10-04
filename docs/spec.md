@@ -1,6 +1,6 @@
 # PaperUnfold: paper guides and guided learning
 
-Date: 2026-10-04. This specification synthesizes the confirmed product decisions. This is the design baseline. Tickets01/02/03/06/07 are now implemented; see [the latest validation record](validation/tickets-03-06-07.md). The user has confirmed the entrypoint-level testing boundary. The ten implementation tickets are published in the local Markdown tracker.
+Date: 2026-10-04. This specification synthesizes the confirmed product decisions. This is the design baseline. Tickets01–07 are now implemented; see [the latest validation record](validation/tickets-04-05.md) for remote acquisition and adaptive explanations, and [the previous record](validation/tickets-03-06-07.md) for teaching and resumption. The user has confirmed the entrypoint-level testing boundary. The ten implementation tickets are published in the local Markdown tracker.
 
 ## Problem Statement
 
@@ -181,7 +181,9 @@ A release should include real-paper guide evaluations across the chosen argument
 
 The confirmed design and domain vocabulary are documented in the [design](design.md) and [glossary](../CONTEXT.md). This specification organizes their implementation behavior and acceptance requirements. The [project review](project-review.md) records naming, positioning, and publication priorities.
 
-The current checkout contains runnable instruction packages for guides and teaching; local PDF reading, HTML teaching prompts, and progress save/resume are implemented. The implementation order is guide and template, teaching and progress, representative examples, then verified release documentation and a comparison using the same source material.
+The current checkout contains runnable instruction packages for guides and teaching. Pasted text, local PDFs, accessible webpages, online PDFs, and DOI-linked material can feed guides; HTML teaching prompts and progress save/resume are implemented. The HTTP helper records actual responses and redirects, reuses PDF extraction, and leaves HTML coverage partial until assessed. It does not run webpage scripts, sign in, or perform OCR. Preview-only material remains explicitly limited.
+
+Optional maps, process and concept relationships, comparison tables, formula breakdowns, and source-figure explanations adapt to the material. Method, empirical, and theoretical excerpts have actual HTML validation examples; the same theoretical source has English and Chinese outputs preserving terms, conditions, and source locations. These cases do not establish all-discipline performance. Ticket09 still requires representative release examples combining guides, teaching, and resumption. Ticket10 covers verified installation and first use; ticket08's mechanism demonstrations remain optional.
 
 Implementation work must establish and document the supported agent environment, reading dependencies, HTML resource choices, and license. The validation records identify the concrete choices already exercised; broader host installation remains a later ticket.
 
