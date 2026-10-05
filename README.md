@@ -26,9 +26,9 @@ Use either skill independently, or copy a learning prompt from a guide into your
 - **Focused teaching.** Ask a specific question, request a direct explanation, pause, or resume with your progress record and readable source.
 - **Portable guides.** Saved HTML embeds its resources, including mathematical rendering, for offline viewing and sharing.
 
-![Example of a generated paper guide](examples/release09/screenshots/algorithm-zh.png)
+![Example of a generated English paper guide](examples/release09/screenshots/empirical-en.png)
 
-*Actual saved guide for Attention Is All You Need. See the [example and source notes](examples/release09/README.md).*
+*Actual English guide for Challenging the N-Heuristic. See the [example and source notes](examples/release09/README.md).*
 
 ## Installation
 

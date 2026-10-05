@@ -26,9 +26,9 @@ PaperUnfold 是面向全球各学科研究人员的一组 Agent Skill。它将�
 - **按需教学。** 围绕具体问题讲解，可要求直接解释、暂停，或结合进度记录与原文在新对话中续学。
 - **离线分享。** 导读 HTML 内嵌资源和数学渲染，可离线打开与分享。
 
-![实际生成的论文导读](examples/release09/screenshots/algorithm-zh.png)
+![实际生成的英文论文导读](examples/release09/screenshots/empirical-en.png)
 
-*Attention Is All You Need 的实际导读页面。参见[示例与来源说明](examples/release09/README.md)。*
+*Challenging the N-Heuristic 的实际英文导读页面。参见[示例与来源说明](examples/release09/README.md)。*
 
 ## 安装
 
