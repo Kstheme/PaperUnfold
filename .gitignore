@@ -5,5 +5,5 @@ outputs/
 tests/
 CONTEXT.md
 THIRD_PARTY_NOTICES.md
-.scratch/
+.scratch/*
 
