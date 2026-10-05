@@ -1,97 +1,157 @@
 # PaperUnfold
 
-**把论文的逻辑展开，把难懂的地方讲清楚。**
+**读清论文主线，拆解核心机制，按需深入理解。**
 
-[English](README.md) · [简体中文](README.zh-CN.md)
+[English](README.md) · [简体中文](README.zh-CN.md) · [示例](#示例) · [安装](#安装) · [项目文档](#项目文档)
 
-PaperUnfold 基于一套通用论文阅读方法，面向全球各学科研究人员，根据每篇论文的研究问题、论证、方法与证据调整讲解。阅读体验先提供轻量 HTML 导读，再按需通过对话深入学习。
+PaperUnfold 是面向全球各学科研究人员的一组 Agent Skill。它将可读论文转为可视化 HTML 导读，并通过对话帮助你深入理解具体问题。讲解跟随对话语言，关键术语保留原文名称。
 
-**ticket01–10 已实现。** 支持粘贴原文、本地 PDF、可访问网页、在线 PDF 与 DOI 定位材料生成有原文依据的 HTML 导读；可直接教学或复制导读提示词进入教学，并结合可读原文保存、续接进度。可选交互仅为限定范围的 softmax 教学示例。已在 Windows 的 Codex 桌面 Agent 中完成全新本地安装与明确读取已安装入口的调用验收。CLI 与其他平台尚未验证。见[安装说明](docs/installation.md)和[首次使用验收](docs/validation/ticket-10.md)。
+## 为什么使用 PaperUnfold？
 
-## 阅读体验
+论文摘要可能列出方法名称，却没有解释方法怎样运作。PaperUnfold 将研究问题、中间步骤、证据和结论连起来：先呈现全貌，再展开核心机制或论证，让你知道每一步做什么，以及哪里值得继续深读。
 
-1. 粘贴论文章节，或提供本地 PDF、可访问网页、在线 PDF 或 DOI。
-2. 获得单文件 HTML 导读：所提供材料的地图、章节解释、必需术语和必要图示。
-3. 根据原文位置核对关键解释。
-4. 选择一个章节、公式或问题，在 Agent 对话中深入学习。
-
-讲解默认跟随用户的对话语言，用户可以指定其他语言。关键术语保留原文名称。DOI 用于定位论文，导读只覆盖实际读取到的材料。
-
-导读直接呈现论文主线，在有助于理解时补充背景。用户无需先选择学科模板或接受基础知识测试。深入教学时，再检查当前问题必需的前置知识。
-
-## 两个独立 Skill
-
-| 能力 | 使用场景 | 输出 |
+| Skill | 用途 | 输出 |
 | --- | --- | --- |
-| `paper-guide`：论文导读 | 先了解全貌，讲清从研究问题到结论的路径。 | 轻量 HTML 阅读页面。 |
-| `paper-tutor`：论文教学 | 深入理解一个概念、机制或论证。 | 聚焦问题的教学与可携带的学习进度文件。 |
+| [`paper-guide`](skills/paper-guide/SKILL.md) | 理解论文主线、机制与证据。 | 单文件 HTML 导读，包含图示、公式与原文定位。 |
+| [`paper-tutor`](skills/paper-tutor/SKILL.md) | 深入理解选定概念、机制或论证。 | 聚焦问题的教学对话与学习进度记录。 |
 
-教学可以直接从原论文开始，也可以接续导读。教学在 Agent 对话中进行。可以复制 HTML 中的章节或术语提示词，也可以直接从原文开始。章节结束或暂停时保存进度；在新对话中提供进度和可读原文即可续学，进度记录不能代替论文证据。
+两个 Skill 可以独立使用，也可以从导读中复制学习提示词，进入 Agent 对话继续学习。
 
-## 安装与试用
+## 核心功能
 
-在仓库根目录打开 PowerShell，安装到选定的相邻项目：
+- **机制拆解。** 讲清核心步骤的输入、操作、输出、条件，以及它怎样衔接下一步。
+- **可视化阅读。** 方法论文提供带箭头的 pipeline；实证和理论论文按内容提供研究设计图或论证图，并结合必要公式和结果表。
+- **原文可追溯。** 关键陈述附实际观察到的原文位置。证据摘录默认折叠，点击引用自动展开对应内容。
+- **覆盖范围明确。** 支持粘贴原文、本地 PDF、可访问论文网页、在线 PDF 和 DOI 定位，注明实际读取范围及缺失材料。
+- **按需教学。** 围绕具体问题讲解，可要求直接解释、暂停，或结合进度记录与原文在新对话中续学。
+- **离线分享。** 导读 HTML 内嵌资源和数学渲染，可离线打开与分享。
+
+![实际生成的论文导读](examples/release09/screenshots/algorithm-zh.png)
+
+*Attention Is All You Need 的实际导读页面。参见[示例与来源说明](examples/release09/README.md)。*
+
+## 安装
+
+### 环境要求
+
+- 能读取 Skill 文件、访问论文并执行助手脚本的 Agent。目前已验证 **Windows 上的 Codex 桌面版**明确读取入口文件的方式。
+- 使用 [Skills CLI](https://github.com/vercel-labs/skills) 安装时，需要 **Node.js/npm**。
+- 助手脚本需要 **Python 3.10+**；提取 PDF 文本另需 **pypdf 6.x**。
+
+### 从本地仓库安装
+
+在本仓库根目录执行，将两个 Skill 安装到当前项目：
 
 ```powershell
-python -m venv ..\my-paper-project\.venv
-& ..\my-paper-project\.venv\Scripts\python.exe -m pip install -r skills/paper-guide/requirements.txt
-& ..\my-paper-project\.venv\Scripts\python.exe scripts/install_skills.py --dest ..\my-paper-project\.agents\skills
+npx skills add . --skill paper-guide paper-tutor --agent codex --copy --yes
 ```
 
-只安装一个技能时，加 `--skill paper-guide` 或 `--skill paper-tutor`。安装器拒绝覆盖已有包，保留定制内容。在 Codex 打开目标项目，明确要求读取 `.agents/skills/paper-guide/SKILL.md` 或 `.agents/skills/paper-tutor/SKILL.md`；必要时指定该项目的 `.venv/Scripts/python.exe`。[双语安装说明](docs/installation.md)包含教学、新对话续学、依赖与失败替代路径。
+安装目录为 `.agents/skills/`。安装到其他项目时，在目标项目执行命令，把 `.` 换成仓库绝对路径；只安装一个 Skill 时，在 `--skill` 后仅保留它的名称。
 
-已验证环境为 Windows 的 Codex 桌面 Agent、Python 3.12.14、pypdf 6.19.0，采用明确读取入口文件的调用。Codex CLI 调用被模型兼容错误挡住，未验证自动发现或 CLI 首次使用。其他宿主与系统未验证。HTML 与文本教学助手使用 Python 3.10+ 标准库；PDF 提取另需 pypdf 6.x，不提供 OCR。图表与公式需查看原始页面。远程获取需要网络，不登录、不执行网页 JavaScript；仅有摘要时限定导读覆盖范围。已保存 HTML 内嵌数学资源，无需网络；禁用 JS 时保留公式源码与静态、键盘替代。Skill 是 Agent 的指令包，论文分析由 Agent 执行。
+使用 PDF 输入时，通过 Agent 将使用的 Python 解释器安装依赖：
 
-示例请求：
+```powershell
+python -m pip install -r .agents/skills/paper-guide/requirements.txt
+```
 
-- “读取已安装的 .agents/skills/paper-guide/SKILL.md 并执行，根据这个论文链接、DOI、粘贴原文或本地 PDF 用中文讲解并保存 HTML 导读。”
-- “读取已安装的 .agents/skills/paper-tutor/SKILL.md 并执行，帮我理解这段论文的证据如何支持结论。”
+### 更新
 
-可以查看[实际 Agent 生成的中文导读](examples/paper-guide/agent-invocation-zh.html)、[原文与 renderer 输入](examples/paper-guide/agent-invocation-zh.json)及[教学对话验收片段](examples/paper-tutor/actual-session.md)。另有[实际暂停记录](examples/paper-tutor/ticket07-actual-progress.json)和[导读到教学再到续学的验收对话](examples/paper-tutor/ticket06-07-actual-session.md)。
+本地源文件修改后，重新运行同一条 `npx skills add` 命令即可刷新。它会替换安装副本，因此请将定制保存在源目录。
 
-内容自适应验收采用选取的原文片段：[Attention 计算步骤](examples/paper-guide/adaptive-method-zh.html)、[实证调查证据](examples/paper-guide/adaptive-empirical-zh.html)，以及同一理论模型的[中文](examples/paper-guide/adaptive-theory-zh.html)与[英文](examples/paper-guide/adaptive-theory-en.html)导读。[来源记录](examples/paper-guide/adaptive-source-notes.md)说明覆盖范围与归属。这些片段示例验证不同推理结构。[发布示例](examples/release09/README.md)进一步提供完整主文阅读后的导读：中文算法论文、英文实证研究，以及同一理论论证的英文与中文版本。包括真实截图、原文对照评审、脚本化研究者回答驱动的实际教学、保存进度后新会话续学，以及[相同段落的表达对照](examples/release09/conventional-comparison.md)。这些案例不代表所有学科的质量验证，也未测量学习效果。[全新安装示例](examples/first-use10/README.md)补充本地 PDF 导读、实时 DOI 导读、键盘复制与独立安装的教学，包含原文与真实截图。
+<details>
+<summary>仓库发布后的 GitHub 安装与更新</summary>
 
-[可选机制示例](examples/mechanism08/run.md)提供使用明确教学数值的[限定范围 softmax 温度实验](examples/mechanism08/attention-guide.html)；当原文不足以支持所请求的单篇论文复现概率预测时，提供[静态实证解释](examples/mechanism08/empirical-guide.html)。其他机制按原文提供静态讲解，尚未实现任意机制的交互模拟。
+将 `OWNER/REPO` 替换为实际发布地址。本项目的远程安装路径尚未验证。
 
-## 设计原则
+```powershell
+npx skills add OWNER/REPO --skill paper-guide paper-tutor --agent codex --copy --yes
+npx skills update paper-guide paper-tutor --project
+```
 
-- **先理清研究逻辑。** 解释每章的作用，以及证据如何支持结论。根据论文的研究与论证方式组织讲解，按实际需要呈现方法步骤、图表或公式。
-- **按问题选择图示。** 流程用流程图，差异用对照表，公式按步骤拆解。
-- **首次导读保持轻量。** 主线优先，细节按需展开。用户主动要求，或交互确实有助于解释机制时，再提供小实验。
-- **讲解可回到原文。** 保留数字、条件和不确定性，区分作者陈述、补充背景、讲解者推断与类比。
-- **通过回答判断理解。** 识别知识缺口，卡住时提供解释；用户可以直接问答案、跳过、暂停或结束。
+</details>
 
-## 后续计划
+项目也提供 Python 副本安装器。其他安装方式、用户级安装、依赖与更新行为见[完整安装说明](docs/installation.md)。
 
-- [x] 明确受众、阅读路径、语言策略与教学原则。
-- [x] 实现粘贴原文的 `paper-guide` 与 HTML renderer。
-- [x] 实现独立的 `paper-tutor` 对话教学。
-- [x] 读取本地 PDF，保留页位置与提取缺口。
-- [x] 获取可访问网页、在线 PDF 与 DOI 定位材料，说明实际覆盖范围及访问限制。
-- [x] 根据方法、实证证据与理论论证调整研究逻辑讲解和按需图示。
-- [x] 从 HTML 复制章节与术语教学提示词。
-- [x] 保存学习进度并结合原文续学。
-- [x] 发布串联导读、教学与续学的算法、实证研究、理论或人文论证代表性示例，包含英文与中文输出。
-- [x] 提供真实截图与原文来源。
-- [x] 提供可选的限定机制演示与静态替代。
-- [x] 验证本地安装、Windows Codex 桌面明确读取入口调用、首次使用与许可证（ticket10）。
-- [x] 使用相同原文材料，展示普通文字解释与 PaperUnfold 导读的差异。
+## 使用
 
-## 灵感来源
+在 Codex 中打开目标项目并提供可读论文。以下提示词会明确加载已安装的入口文件。
 
-项目参考清晰技术写作，以及为复杂内容生成定制视觉产物的思路。相关讨论见 [Karpathy 的帖子](https://x.com/karpathy/status/2105819303471976479) 与 [asd-ste100-skill](https://github.com/danyuchn/asd-ste100-skill)。
+### 生成导读
 
-PaperUnfold 采用术语一致、主体明确与保留原意的讲解原则。本项目独立开发，参考仓库不是运行依赖。
+```text
+读取 .agents/skills/paper-guide/SKILL.md 并按其执行。
+用中文解读 inputs/paper.pdf，讲清核心机制或论证、可视化结构、关键证据和局限。
+将 HTML 导读保存到 outputs/guide.html。
+```
+
+可以把 PDF 路径换成可访问论文链接、DOI 或粘贴片段。讲解默认跟随对话语言，也可显式指定。导读先给主线，再展开核心步骤；完整附录审计按需进行。
+
+### 深入一个问题
+
+```text
+读取 .agents/skills/paper-tutor/SKILL.md 并按其执行。
+基于 inputs/paper.pdf，帮助我理解主要证据如何支持论文结论。
+每轮推进一个问题，等待我的回答后继续。
+```
+
+从 HTML 导读进入教学时，展开章节或术语的教学面板，复制提示词到 Agent 对话中。页面提供交接提示词，教学在 Agent 中进行。
+
+### 暂停与续学
+
+```text
+暂停，并将学习进度保存到 outputs/learning-progress.json。
+```
+
+在新对话中提供进度文件和可读原文：
+
+```text
+读取 .agents/skills/paper-tutor/SKILL.md 并按其执行。
+结合 inputs/paper.pdf，从 outputs/learning-progress.json 续学。
+```
+
+进度记录保留学习位置与已体现的理解状态，不能替代论文原文，也不会仅因生成记录就判定掌握。
+
+## 示例
+
+下载或在本地打开 HTML 查看。各示例包含覆盖范围与原文来源说明。
+
+| 研究结构 | 论文 | 导读 |
+| --- | --- | --- |
+| 算法与机制 | Attention Is All You Need | [中文 HTML](examples/release09/algorithm-zh.html) |
+| 实证证据 | Challenging the N-Heuristic | [英文 HTML](examples/release09/empirical-en.html) |
+| 理论论证 | Why Most Published Research Findings Are False | [中文 HTML](examples/release09/theory-zh.html) · [英文 HTML](examples/release09/theory-en.html) |
+
+另有[示例集合](examples/release09/README.md)、[教学与续学记录](examples/release09/teaching-session.md)和[相同片段的呈现对照](examples/release09/conventional-comparison.md)。这些示例展示工作流程，不代表已测量真实学习效果或验证所有学科的质量。
+
+## 适用范围与限制
+
+PaperUnfold 为 Agent 提供指令包与助手脚本，解读和教学效果取决于 Agent 与可读原文。
+
+- DOI 或摘要不代表取得完整论文；缺失或不可读材料会限制导读范围。
+- PDF 提取不提供 OCR；图表与存在歧义的公式需要查看原始材料。
+- 本项目尚未验证自动发现、Codex CLI 执行，以及其他 Agent 和系统组合。
+- 交互实验目前支持限定范围的 softmax 教学示例；其他机制使用有原文依据的图示或分步示例。
+- 通过复用原文与针对性核对减少重复工作，但不保证固定端到端耗时或学习增益。
 
 ## 项目文档
 
-- [实现任务](.scratch/paperunfold/README.md)：10 项已批准任务、依赖关系与验收条件。
-- [实现规格](docs/spec.md)：用户故事、能力契约与验收场景（英文）。
-- [设计方案](docs/design.md)：已确认的范围、导读结构、教学流程与输出检查。
-- [术语表](CONTEXT.md)：统一的领域概念。
-- [项目评审](docs/project-review.md)：已确认定位与发布优先级。
-- [原始教学 prompt](docs/source/socratic-ddd-prompt.txt)：保留原始材料供对照，实际行为以设计方案为准。
+| 文档 | 内容 |
+| --- | --- |
+| [安装说明](docs/installation.md) | 本地与远程安装、依赖、更新及替代路径。 |
+| [npx 验证](docs/validation/npx-installation.md) | 实际包发现、本地安装与刷新检查。 |
+| [导读流程](docs/validation/quick-guide.md) | 解释深度、pipeline 与性能验证边界。 |
+| [规格](docs/spec.md) | 行为约定与验收场景。 |
+| [设计](docs/design.md) | 阅读与教学方法论。 |
+| [术语表](CONTEXT.md) | 项目的统一术语。 |
 
-## 许可证与贡献
+## 参与贡献
 
-项目原创代码、技能与文档采用 [MIT](LICENSE)。论文与内嵌 KaTeX 保留各自[许可及署名](THIRD_PARTY_NOTICES.md)。贡献前请查看[验收步骤](CONTRIBUTING.md)。
+欢迎改进讲解质量、图示、原文处理与 Agent 兼容性。提交前请阅读 [CONTRIBUTING.md](CONTRIBUTING.md)，核对可见行为与原文忠实度。反馈问题时，附上原文版本、Agent 环境、预期行为和实际结果。
+
+## 致谢
+
+项目受到 [Karpathy 关于清晰讲解与定制产物的讨论](https://x.com/karpathy/status/2105819303471976479)及 [asd-ste100-skill](https://github.com/danyuchn/asd-ste100-skill) 启发，将术语一致、步骤明确和保留原意的原则用于论文阅读。这些项目是参考来源，不是运行依赖，也不代表它们为本项目背书。
+
+## 许可证
+
+原创代码、技能与文档采用 [MIT](LICENSE)。论文和内嵌 KaTeX 保留各自[许可证与署名](THIRD_PARTY_NOTICES.md)。

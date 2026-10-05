@@ -194,6 +194,39 @@ class GuideCLI(unittest.TestCase):
         for link in artifact.links:
             self.assertIn(link[1:], artifact.ids)
 
+    def test_pipeline_connectors_follow_real_edges_not_edge_array_order(self):
+        data = guide(); claim = data["thread"][0]
+        data["visuals"] = [{"type": "process", "title": "Pipeline", "purpose": claim,
+            "reading": claim, "contribution": claim,
+            "nodes": [{"id": n, "label": {"kind": "background", "text": n, "evidence": []}}
+                      for n in ("input", "proposal", "answer")],
+            "edges": [{"from": "proposal", "to": "answer", "relation":
+                       {"kind": "background", "text": "verified crop", "evidence": []}},
+                      {"from": "input", "to": "proposal", "relation":
+                       {"kind": "background", "text": "candidate map", "evidence": []}}]}]
+        result, output = self.render(data)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        content = output.read_text(encoding="utf-8")
+        self.assertIn('<ol class="pipeline">', content)
+        self.assertEqual(content.count('class="pipeline-arrow"'), 2)
+        self.assertLess(content.index('candidate map'), content.index('verified crop'))
+        artifact = Artifact(); artifact.feed(content)
+        for link in artifact.links:
+            self.assertIn(link[1:], artifact.ids)
+
+    def test_branching_process_does_not_invent_linear_dependencies(self):
+        data = guide(); claim = data["thread"][0]
+        data["visuals"] = [{"type": "process", "title": "Branches", "purpose": claim,
+            "reading": claim, "contribution": claim,
+            "nodes": [{"id": n, "label": claim} for n in ("input", "left", "right")],
+            "edges": [{"from": "input", "to": n, "relation": claim} for n in ("left", "right")]}]
+        result, output = self.render(data)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        content = output.read_text(encoding="utf-8")
+        self.assertNotIn('<ol class="pipeline">', content)
+        self.assertIn('1 → 2', content); self.assertIn('1 → 3', content)
+        self.assertNotIn('2 → 3', content)
+
     def test_visual_cannot_claim_missing_source_or_an_unknown_relation_target(self):
         data = guide(); claim = data["thread"][0]
         visual = {"type": "process", "title": "Process", "purpose": claim, "reading": claim,

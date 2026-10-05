@@ -201,6 +201,7 @@ details{border:1px solid #d5ded9;border-radius:8px;padding:15px 20px;margin:14px
 blockquote{margin:8px 0;padding:10px 18px;border-left:3px solid #b2c7bc;white-space:pre-wrap}pre{font:14px/1.7 ui-monospace,monospace;white-space:pre-wrap;overflow-wrap:anywhere}.term-original{font-weight:400;color:var(--muted)}
 .teaching-prompt textarea{display:block;width:100%;height:220px;resize:vertical;font:14px/1.6 ui-monospace,monospace;border:1px solid #cdd8d2;border-radius:4px;padding:12px;margin:12px 0}.teaching-prompt button{font:inherit;color:white;background:var(--accent);border:0;border-radius:4px;padding:8px 14px;cursor:pointer}.teaching-prompt button:focus-visible,textarea:focus-visible{outline:3px solid #db9234;outline-offset:4px}.copy-status{font-size:14px;color:var(--muted)}
 .visual{margin:24px 0;padding:20px;border:1px solid #cdd8d2;border-radius:8px;background:#f1f5f1}.visual h3{margin-top:0}.visual .point{margin:8px 0}.visual img{display:block;max-width:100%;height:auto}.visual-nodes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px;padding:0;list-style:none}.visual-nodes li{border:1px solid #b2c7bc;border-radius:6px;padding:12px;background:white}.visual-node-number{font-size:13px;color:var(--accent)}.table-scroll{max-width:100%;overflow:auto}table{border-collapse:collapse;width:100%;background:white}th,td{border:1px solid #cdd8d2;padding:10px;text-align:left;vertical-align:top}.visual details{background:transparent}.visual-relations{padding-left:24px}
+.pipeline{list-style:none;padding:0;max-width:720px;margin:20px auto}.pipeline-stage{padding:14px 18px;border:1px solid #b2c7bc;border-left:4px solid var(--accent);border-radius:8px;background:white}.pipeline-connector{text-align:center;padding:4px 16px 10px}.pipeline-arrow{display:block;font-size:32px;line-height:1.1;color:var(--accent)}.pipeline-connector .point{margin:2px 0;font-size:14px}
 @media print{body{background:white}main{padding:0}details{break-inside:avoid}details>summary{list-style:none}details>*{display:block!important}nav{display:none}}
 """
 
@@ -220,6 +221,25 @@ document.querySelectorAll('.math-content').forEach(element => {
     maxSize: 20
   });
 });
+"""
+
+EVIDENCE_INIT = """
+function revealEvidence(hash) {
+  let id;
+  try { id = decodeURIComponent(hash.slice(1)); } catch (_) { return; }
+  const target = document.getElementById(id);
+  if (!target || !target.closest('#evidence')) return;
+  for (let parent = target; parent; parent = parent.parentElement) {
+    if (parent.tagName === 'DETAILS') parent.open = true;
+  }
+  target.scrollIntoView({block: 'start'});
+}
+document.addEventListener('click', event => {
+  const link = event.target.closest('a[href^="#"]');
+  if (link) revealEvidence(link.getAttribute('href'));
+});
+window.addEventListener('hashchange', () => revealEvidence(location.hash));
+revealEvidence(location.hash);
 """
 
 COPY_INIT = """
@@ -310,10 +330,24 @@ def render(data, labels, base_dir=None):
             output += '<strong>' + esc(labels["purpose"]) + '</strong>' + point(visual["purpose"])
             if kind in {"map", "process", "concepts"}:
                 numbers = {node["id"]: i + 1 for i, node in enumerate(visual["nodes"])}
-                output += '<ol class="visual-nodes">' + ''.join(
-                    f'<li><span class="visual-node-number">{numbers[node["id"]]}</span>{point(node["label"])}</li>' for node in visual["nodes"]) + '</ol>'
-                output += '<ol class="visual-relations">' + ''.join(
-                    f'<li><strong>{numbers[edge["from"]]} → {numbers[edge["to"]]} · {esc(labels["relation"])}</strong>{point(edge["relation"])}</li>' for edge in visual["edges"]) + '</ol>'
+                pairs = [(a["id"], b["id"]) for a, b in zip(visual["nodes"], visual["nodes"][1:])]
+                connections = {(edge["from"], edge["to"]): edge for edge in visual["edges"]}
+                linear = (kind == "process" and len(pairs) > 0
+                          and len(visual["edges"]) == len(pairs) and set(connections) == set(pairs))
+                if linear:
+                    output += '<ol class="pipeline">'
+                    for index, node in enumerate(visual["nodes"]):
+                        output += f'<li><div class="pipeline-stage"><span class="visual-node-number">{numbers[node["id"]]}</span>{point(node["label"])}</div>'
+                        if index < len(pairs):
+                            edge = connections[pairs[index]]
+                            output += '<div class="pipeline-connector"><span class="pipeline-arrow" aria-hidden="true">↓</span>' + point(edge["relation"]) + '</div>'
+                        output += '</li>'
+                    output += '</ol>'
+                else:
+                    output += '<ol class="visual-nodes">' + ''.join(
+                        f'<li><span class="visual-node-number">{numbers[node["id"]]}</span>{point(node["label"])}</li>' for node in visual["nodes"]) + '</ol>'
+                    output += '<ol class="visual-relations">' + ''.join(
+                        f'<li><strong>{numbers[edge["from"]]} → {numbers[edge["to"]]} · {esc(labels["relation"])}</strong>{point(edge["relation"])}</li>' for edge in visual["edges"]) + '</ol>'
             elif kind == "table":
                 output += '<div class="table-scroll"><table><thead><tr>' + ''.join('<th scope="col">' + esc(column) + '</th>' for column in visual["columns"]) + '</tr></thead><tbody>'
                 output += ''.join('<tr>' + ''.join('<td>' + point(cell) + '</td>' for cell in row) + '</tr>' for row in visual["rows"]) + '</tbody></table></div>'
@@ -428,13 +462,13 @@ def render(data, labels, base_dir=None):
             terms += f'<details{" open" if term["essential"] else ""}><summary>{math_text(term["name"])}{original} · {esc(category)}</summary>{point(term["explanation"])}'
             terms += handoff(target, references, f"teach-term-{index}") + '</details>'
         terms += '</section>'
-    evidence = f'<section id="evidence"><h2>{esc(labels["evidence"])}</h2>'
+    evidence = f'<section id="evidence"><details class="evidence-list"><summary>{esc(labels["evidence"])}</summary>'
     for item in data["evidence"]:
-        evidence += f'<article id="evidence-{esc(item["id"])}"><h3>{esc(item["location"])}</h3><blockquote>{esc(item["quote"])}</blockquote></article>'
-    evidence += f'<details><summary>{esc(labels["source"])}</summary><pre>{esc(data["source"]["text"])}</pre></details></section>'
+        evidence += f'<details id="evidence-{esc(item["id"])}" class="evidence-entry"><summary>{esc(item["location"])}</summary><blockquote>{esc(item["quote"])}</blockquote></details>'
+    evidence += f'<details><summary>{esc(labels["source"])}</summary><pre>{esc(data["source"]["text"])}</pre></details></details></section>'
     math_css, math_scripts = math_assets() if math_needed else ("", "")
     mechanism_script = '<script>' + MECHANISM_INIT + '</script>' if mechanism_needed else ''
-    return f'<!doctype html><html lang="{esc(data["language"])}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(data["title"])}</title><style>{CSS}</style>{math_css}</head><body><main><header><p class="muted">PaperUnfold</p><h1>{esc(data["title"])}</h1>{coverage}</header><nav aria-label="{esc(labels["contents"])}"><ul>{nav}</ul></nav>{thread}{sections}{terms}{evidence}</main></body>{math_scripts}<script>{COPY_INIT}</script>{mechanism_script}</html>'
+    return f'<!doctype html><html lang="{esc(data["language"])}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(data["title"])}</title><style>{CSS}</style>{math_css}</head><body><main><header><p class="muted">PaperUnfold</p><h1>{esc(data["title"])}</h1>{coverage}</header><nav aria-label="{esc(labels["contents"])}"><ul>{nav}</ul></nav>{thread}{sections}{terms}{evidence}</main></body>{math_scripts}<script>{COPY_INIT}{EVIDENCE_INIT}</script>{mechanism_script}</html>'
 
 
 def main():

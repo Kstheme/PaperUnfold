@@ -2,7 +2,8 @@
 
 Use one reading method across disciplines: identify the question, trace the
 reasoning or evidence that answers it, and preserve the conditions of the claim.
-Select the smallest explanation that resolves the reader's likely confusion.
+Resolve the reader's likely confusion. The central structure needs a rendered
+visual whenever the source contains meaningful dependencies or inference relations.
 The user does not need to select a discipline or a template.
 
 ## Adapt the research thread
@@ -32,9 +33,11 @@ conditions must stay with the visible claim.
 Use a guide-level `map` for a genuinely observed broad thread; use a local map
 for an excerpt and label its scope. Choose `process` for meaningful step
 dependencies, `concepts` for premises or relationships, `table` for comparisons,
-and `formula` for difficult notation or transformations. A visual is unnecessary
-when it simply repeats an already clear sentence. No empty charts or mandatory
-visual per chapter. Format details are in [guide-format.md](guide-format.md).
+and `formula` for difficult notation or transformations. Executable methods need
+a central `process` pipeline with directed edges and intermediate outputs.
+Add local diagrams, formulas or evidence tables for separate understanding
+questions; there is no one-visual cap. Isolated facts need no diagram. No empty
+charts or mandatory visual per chapter. Format details are in [guide-format.md](guide-format.md).
 
 Describe edge meaning explicitly. “Supports,” “assumes,” “contrasts with,” and
 “is followed by” express different relations. Never let an unlabeled arrow

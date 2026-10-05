@@ -1,2 +1,9 @@
 __pycache__/
 *.py[cod]
+docs/
+outputs/
+tests/
+CONTEXT.md
+THIRD_PARTY_NOTICES.md
+.scratch/
+

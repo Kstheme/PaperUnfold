@@ -27,6 +27,7 @@ class RemoteInputCLI(unittest.TestCase):
                 pass
 
             def do_GET(self):
+                cls.requests.append(self.path)
                 if self.path == "/redirect":
                     self.send_response(302)
                     self.send_header("Location", "/article")
@@ -38,6 +39,8 @@ class RemoteInputCLI(unittest.TestCase):
                          "/abstract": b'<html><title>Synthetic abstract only</title><meta name="citation_pdf_url" content="/blocked.pdf"><article><h1>Abstract</h1><p>Only a synthetic abstract is accessible.</p></article></html>',
                          "/title-only": b'<html><title>Unseen full paper title</title></html>',
                          "/bad-linked": b'<html><meta name="citation_pdf_url" content="/scan.pdf"><article><h1>Abstract</h1><p>Accessible abstract despite unreadable PDF.</p></article></html>',
+                         "/multiple": b'<html><article><p>Accessible body.</p><a href="/blocked.pdf">PDF 1</a><a href="/paper.pdf">PDF 2</a></article></html>',
+                         "/broken.pdf": b'%PDF-1.7\ntruncated file',
                          "/scan.pdf": cls.scanned_bytes,
                          "/paper.pdf": cls.pdf_bytes}
                 if self.path not in pages:
@@ -47,6 +50,7 @@ class RemoteInputCLI(unittest.TestCase):
                 self.send_header("Content-Type", "application/pdf" if self.path.endswith(".pdf") else "text/html; charset=utf-8")
                 self.end_headers()
                 self.wfile.write(pages[self.path])
+        cls.requests = []
         cls.server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
         cls.thread = threading.Thread(target=cls.server.serve_forever, daemon=True)
         cls.thread.start()
@@ -58,12 +62,12 @@ class RemoteInputCLI(unittest.TestCase):
         cls.server.server_close()
         cls.thread.join()
 
-    def run_fetch(self, path):
+    def run_fetch(self, path, *options):
         temporary = tempfile.TemporaryDirectory()
         self.addCleanup(temporary.cleanup)
         output = Path(temporary.name) / "material.json"
         result = subprocess.run([sys.executable, str(SCRIPT), self.base + path,
-                                 "--output", str(output)], capture_output=True,
+                                 "--output", str(output), *options], capture_output=True,
                                 text=True, encoding="utf-8")
         self.assertTrue(output.exists(), result.stderr)
         return result, json.loads(output.read_text(encoding="utf-8")), output
@@ -133,6 +137,33 @@ class RemoteInputCLI(unittest.TestCase):
         self.assertEqual(material["provenance"]["resolved_url"], self.base + "/bad-linked")
         self.assertEqual(material["provenance"]["pdf_attempts"][0]["status"], "unreadable")
         self.assertIn("OCR", material["provenance"]["pdf_attempts"][0]["error"])
+
+    def test_html_only_mode_avoids_linked_download_without_claiming_pdf_coverage(self):
+        start = len(self.requests)
+        result, material, output = self.run_fetch("/landing", "--max-pdf-links", "0")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(self.requests[start:], ["/landing"])
+        self.assertIn("Abstract of", material["source"]["text"])
+        self.assertEqual(material["status"], "partial")
+        self.assertEqual(material["provenance"]["pdf_attempts"], [])
+        self.assertFalse(output.with_name(output.stem + ".source.pdf").exists())
+        self.assertTrue(any("not fetched" in x for x in material["source"]["missing"]))
+
+    def test_one_link_budget_stops_before_second_pdf(self):
+        start = len(self.requests)
+        result, material, _ = self.run_fetch("/multiple", "--max-pdf-links", "1")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(self.requests[start:], ["/multiple", "/blocked.pdf"])
+        self.assertIn("Accessible body.", material["source"]["text"])
+        self.assertEqual(len(material["provenance"]["pdf_attempts"]), 1)
+        self.assertNotIn("pages", material)
+
+    def test_truncated_direct_pdf_saves_failure_report(self):
+        result, material, _ = self.run_fetch("/broken.pdf")
+        self.assertEqual(result.returncode, 2)
+        self.assertEqual(material["status"], "unreadable")
+        self.assertIn("Could not open/read the PDF", material["error"])
+        self.assertEqual(material["source"]["text"], "")
 
 
 if __name__ == "__main__":

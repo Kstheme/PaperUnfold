@@ -83,7 +83,7 @@ def read_url(url):
         return data, response.geturl(), response.headers.get_content_type(), response.headers.get_content_charset() or "utf-8"
 
 
-def acquire(value, output):
+def acquire(value, output, max_pdf_links=3):
     value = value.strip()
     doi = re.sub(r"^doi:\s*", "", value, flags=re.I).strip()
     url = "https://doi.org/" + quote(doi, safe="/") if re.fullmatch(r"10\.\d{4,9}/\S+", doi) else value
@@ -113,7 +113,10 @@ def acquire(value, output):
             if page:
                 report["provenance"]["landing_url"] = resolved
                 report["provenance"]["pdf_attempts"] = []
-                candidates = list(dict.fromkeys(urljoin(resolved, link) for link in page.links if link))[:3]
+                declared = list(dict.fromkeys(urljoin(resolved, link) for link in page.links if link))
+                candidates = declared[:max_pdf_links]
+                if declared and max_pdf_links == 0:
+                    report["source"]["missing"].append("Linked PDFs were not fetched; only the returned webpage was acquired.")
                 for candidate in candidates:
                     attempt = {"url": candidate}
                     report["provenance"]["pdf_attempts"].append(attempt)
@@ -145,10 +148,12 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("input", help="HTTP(S) URL, DOI, or doi:10... locator")
     parser.add_argument("--output", required=True, type=Path, help="Material/coverage JSON")
+    parser.add_argument("--max-pdf-links", type=int, choices=range(4), default=3,
+                        help="Maximum declared PDF links to try (0 keeps HTML; default: 3)")
     args = parser.parse_args()
     try:
         args.output.parent.mkdir(parents=True, exist_ok=True)
-        report = acquire(args.input, args.output)
+        report = acquire(args.input, args.output, args.max_pdf_links)
         args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     except OSError as exc:
         print(str(exc), file=sys.stderr)

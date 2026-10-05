@@ -20,7 +20,7 @@ PaperUnfold provides two independent skills built around a shared paper-reading 
 
 The shared method connects the research question, concepts, method or argument, evidence, and conclusion. Each paper's actual content determines the explanation structure. Researchers do not select a discipline template before reading. Explanations follow the conversation language, with explicit language requests taking priority and key terms retaining their original names.
 
-The default experience is a lightweight guide, necessary diagrams, and optional teaching. Small interactive demonstrations are optional when requested or materially useful for a particular mechanism. They do not block the basic guide.
+The default experience is a concise overview plus a complete explanation of the central mechanism or argument, meaningful diagrams, and optional teaching. First-pass scope and execution targets are defined in `skills/paper-guide/SKILL.md`: explain central steps with inputs/support, operations/inferences, outputs and purpose; preserve essential evidence and limits; then render and deliver. Method papers require a connected pipeline; empirical and argumentative work use appropriate relationship maps. There is no fixed word count or one-visual cap. Comprehensive appendix/object audits require an explicit deep-reading request. Browser regression suites are development checks, not a per-paper delivery requirement. Small interactive demonstrations remain optional and do not block the guide.
 
 ## User Stories
 

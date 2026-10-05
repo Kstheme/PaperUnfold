@@ -3,8 +3,23 @@
 Use the supplied locator to obtain material, then assess the material actually read.
 DOI, title and citation metadata locate a paper; they do not establish body access.
 
+Reuse already readable full-text HTML or a matching cached extraction first.
+When acquisition is needed, choose one primary route and one lawful fallback.
+For a known full-text HTML page, keep HTML without also downloading its PDFs:
+
+```sh
+python <skill-dir>/scripts/fetch_remote.py "<full-text-html-url>" --max-pdf-links 0 --output <material.json>
+```
+
+For a landing page/DOI that needs a PDF to reach body text, use
+`--max-pdf-links 1` in quick mode. Inspect the result; a readable abstract is still
+abstract-only coverage. A failed route can fall back to an accessible full-text
+page or a local copy after identity/version verification. Already readable body
+text needs no second acquisition route. Deep mode can request more attempts.
+
 The standard-library HTTP helper follows redirects, reads HTML/text or PDF,
-and tries up to three publisher-declared PDF links. It does not run page code,
+and by default tries up to three publisher-declared PDF links for compatibility.
+It does not run page code,
 log in, perform OCR, or bypass access restrictions. PDF input requires the
 skill's existing `requirements.txt` dependency.
 
@@ -20,7 +35,7 @@ Use that cached version for physical-page inspection and evidence positions;
 read [pdf-input.md](pdf-input.md) before explaining its figures, equations or tables.
 The helper prepares material, not a finished guide.
 
-For HTML, compare the extracted text with the actual returned page. Use section
+For HTML, check the passages selected for explanation against the returned page. Use section
 headings, paragraph context and literal excerpts as locators. Generated paragraph
 positions are not printed paper page numbers. Inspect source visuals or use an
 available browser to read content lost by extraction, including dynamic content

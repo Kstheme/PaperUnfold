@@ -10,7 +10,82 @@ The helpers require Python 3.10+. Other Agent hosts and operating systems have n
 
 助手需要 Python 3.10+。其他 Agent 宿主与操作系统尚未完成安装验收。Codex CLI 0.154.0 曾尝试调用，但账户在技能执行前返回模型不支持，CLI 首次使用**未验证**。本项目无需单独的模型 API key；宿主 Agent 需要已能正常使用，并能读取文件、执行命令。
 
-## Local installation / 本地安装
+## npx installation and updates / npx 安装与更新
+
+The [Vercel Skills CLI](https://github.com/vercel-labs/skills) discovers both packages
+under `skills/` from their `SKILL.md` frontmatter. No custom npm package is needed.
+Install Node.js/npm first; `npx` obtains the third-party CLI. The commands below
+were checked with `skills` 1.7.0 on Windows on 2026-10-05. Use
+`npx skills@1.7.0` instead of `npx skills` to repeat that CLI version.
+
+[Vercel Skills CLI](https://github.com/vercel-labs/skills) 根据 `SKILL.md` 发现仓库
+`skills/` 中的两个包，无需我们额外发布 npm 包。先安装 Node.js/npm，`npx` 会获取
+该第三方 CLI。2026-10-05 在 Windows 使用 skills 1.7.0 完成了本地安装验证；需要
+复用相同 CLI 版本时，将命令前缀改成 `npx skills@1.7.0`。
+
+### Local checkout / 本地仓库
+
+From this checkout root, install into the current project:
+在本仓库根目录安装到当前项目：
+
+```powershell
+npx skills add . --list
+npx skills add . --skill paper-guide paper-tutor --agent codex --copy --yes
+```
+
+To install into another project, open a terminal there and replace `.` with the
+absolute checkout path (quote paths containing spaces). `--agent codex` targets
+Codex and the packages appear under `.agents/skills/`. `--copy` avoids requiring
+symlink permissions on Windows; `--yes` skips the selection dialog. Omit it for
+interactive selection. Add `--global` to choose a user-wide installation.
+
+安装到其他项目时，在目标项目运行命令，把 `.` 换成仓库绝对路径，有空格的路径
+加引号。`--agent codex` 指定 Codex，技能包位于 `.agents/skills/`；`--copy` 使用
+副本，无需 Windows 符号链接权限。`--yes` 跳过选择对话框，省略可交互选择；加
+`--global` 可选择用户级安装。
+
+For a **local-source update**, rerun the same `add` command from the target
+project after editing the source. It replaces installed copies. The tested CLI's
+`update --project` did not match the local-source entries, so it is not the local
+refresh path. Keep customizations in the source, and preserve `skills-lock.json`
+with the target project; the CLI records source type and hashes there.
+
+**本地来源更新**：修改源文件后，在目标项目重新运行同一条 `add` 命令，会替换
+已安装副本。实测 `update --project` 未匹配本地来源记录，因此本地刷新使用 `add`。
+把定制保存在源目录，并保留目标项目的 `skills-lock.json`，其中记录来源类型与哈希。
+
+### GitHub source / GitHub 来源
+
+After publishing the repository, substitute the actual `OWNER/REPO`:
+仓库发布后，将占位符替换为实际地址：
+
+```powershell
+npx skills add OWNER/REPO --skill paper-guide paper-tutor --agent codex --copy --yes
+npx skills update paper-guide paper-tutor --project
+```
+
+The update command follows the installed remote source; it requires published
+changes. Use `--global` instead of `--project` for globally installed skills.
+The repository currently has no configured remote, so PaperUnfold's GitHub
+install/update path has not yet been exercised. Local install and re-add refresh
+are recorded in [npx validation](validation/npx-installation.md).
+
+更新命令跟随已记录的远程来源，源仓库需要已发布新修改；用户级安装使用
+`--global` 替代 `--project`。当前项目尚无 Git remote，因此还没有执行本项目的
+GitHub 安装/更新；已验证本地安装与重新 `add` 刷新，见[npx 验证记录](validation/npx-installation.md)。
+
+These commands install instruction packages, scripts, references, offline math
+assets and package licenses. They do not run a paper-reading agent or install
+Python dependencies. For PDF extraction, run in the target project:
+
+这些命令只安装技能指令、脚本、参考文档、离线数学资源与许可证，不执行论文
+解读，也不安装 Python 依赖。读取 PDF 时，在目标项目执行：
+
+```powershell
+python -m pip install -r .agents/skills/paper-guide/requirements.txt
+```
+
+## Python copy installer / Python 副本安装器
 
 Download or obtain this checkout, open PowerShell at its root, and choose an empty sibling project directory. Replace `my-paper-project` with your chosen directory. These commands put the Python environment and both independent skill packages in that project:
 
