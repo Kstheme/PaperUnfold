@@ -38,15 +38,15 @@ PaperUnfold 是面向全球各学科研究人员的一组 Agent Skill。它将�
 - 使用 [Skills CLI](https://github.com/vercel-labs/skills) 安装时，需要 **Node.js/npm**。
 - 助手脚本需要 **Python 3.10+**；提取 PDF 文本另需 **pypdf 6.x**。
 
-### 从本地仓库安装
+### 从 GitHub 安装
 
-在本仓库根目录执行，将两个 Skill 安装到当前项目：
+在目标项目根目录执行：
 
 ```powershell
-npx skills add . --skill paper-guide paper-tutor --agent codex --copy --yes
+npx skills add Kstheme/PaperUnfold --skill paper-guide paper-tutor --agent codex --copy --yes
 ```
 
-安装目录为 `.agents/skills/`。安装到其他项目时，在目标项目执行命令，把 `.` 换成仓库绝对路径；只安装一个 Skill 时，在 `--skill` 后仅保留它的名称。
+安装目录为 `.agents/skills/`。只安装一个 Skill 时，在 `--skill` 后仅保留它的名称。
 
 使用 PDF 输入时，通过 Agent 将使用的 Python 解释器安装依赖：
 
@@ -56,19 +56,19 @@ python -m pip install -r .agents/skills/paper-guide/requirements.txt
 
 ### 更新
 
-本地源文件修改后，重新运行同一条 `npx skills add` 命令即可刷新。它会替换安装副本，因此请将定制保存在源目录。
-
-<details>
-<summary>仓库发布后的 GitHub 安装与更新</summary>
-
-将 `OWNER/REPO` 替换为实际发布地址。本项目的远程安装路径尚未验证。
-
 ```powershell
-npx skills add OWNER/REPO --skill paper-guide paper-tutor --agent codex --copy --yes
 npx skills update paper-guide paper-tutor --project
 ```
 
-</details>
+### 从本地仓库安装
+
+本地开发时，在仓库根目录执行：
+
+```powershell
+npx skills add . --skill paper-guide paper-tutor --agent codex --copy --yes
+```
+
+安装到其他项目时，在目标项目执行命令，把 `.` 换成仓库绝对路径。修改本地源文件后，重新运行同一条 `add` 命令即可刷新安装副本；它会替换副本，请将定制保存在源目录。
 
 项目也提供 Python 副本安装器。其他安装方式、用户级安装、依赖与更新行为见[完整安装说明](docs/installation.md)。
 

@@ -38,15 +38,15 @@ Use either skill independently, or copy a learning prompt from a guide into your
 - **Node.js/npm** for installation through the [Skills CLI](https://github.com/vercel-labs/skills).
 - **Python 3.10+** for the helpers; **pypdf 6.x** when extracting PDF text.
 
-### Install from a local checkout
+### Install from GitHub
 
-Run from this repository's root to install both skills into the current project:
+Run from your target project's root:
 
 ```powershell
-npx skills add . --skill paper-guide paper-tutor --agent codex --copy --yes
+npx skills add Kstheme/PaperUnfold --skill paper-guide paper-tutor --agent codex --copy --yes
 ```
 
-The installed packages are in `.agents/skills/`. To install into another project, run there and replace `.` with the absolute checkout path. To select one skill, pass only its name after `--skill`.
+The installed packages are in `.agents/skills/`. To select one skill, pass only its name after `--skill`.
 
 For PDF input, install the dependency with the Python interpreter your agent will use:
 
@@ -56,19 +56,19 @@ python -m pip install -r .agents/skills/paper-guide/requirements.txt
 
 ### Update
 
-For a local source, rerun the same `npx skills add` command after editing the source. This replaces the installed copies, so keep customizations in the source package.
-
-<details>
-<summary>Install and update from GitHub after publication</summary>
-
-Replace `OWNER/REPO` with the published repository address. The remote route is not yet verified for this project.
-
 ```powershell
-npx skills add OWNER/REPO --skill paper-guide paper-tutor --agent codex --copy --yes
 npx skills update paper-guide paper-tutor --project
 ```
 
-</details>
+### Install from a local checkout
+
+For local development, run from the checkout root:
+
+```powershell
+npx skills add . --skill paper-guide paper-tutor --agent codex --copy --yes
+```
+
+To install into another project, run there and replace `.` with the absolute checkout path. After changing the local source, rerun the same `add` command to refresh installed copies. Keep customizations in the source package, since refreshing replaces those copies.
 
 The Python copy installer is also available. See [installation details](docs/installation.md) for that route, global installs, dependencies and update behavior.
 
